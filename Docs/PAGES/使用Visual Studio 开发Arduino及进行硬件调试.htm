@@ -1,0 +1,3035 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><script id="_1481593395583_3155" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/detect.json"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>使用Visual Studio 开发Arduino及进行硬件调试-Arduino中文社区 </title>
+<meta property="og:type" content="webpage">
+<meta property="og:url" content="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=">
+<meta property="og:title" content="">
+<meta property="og:description" content="">
+<script type="text/javascript" async="" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/fm.js"></script><script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/wb.js" type="text/javascript" charset="utf-8"></script><link href="http://www.arduino.cn/thread-19413-1-1.html" rel="canonical">
+<script type="text/javascript">
+	(function(){
+	    _fmOpt = {
+	        partner: 'arduino_cn',
+	        appName: 'arduino_cn_web',
+	        token: '74hegttsap554bokq08gqv0uo4'
+	    };
+	    var cimg = new Image(1,1);
+	    cimg.onload = function() {
+	        _fmOpt.imgLoaded = true;
+	    };
+	    cimg.src = "https://fp.fraudmetrix.cn/fp/clear.png?partnerCode=arduino_cn&appName=arduino_cn_web&tokenId=" + _fmOpt.token;
+	    var fm = document.createElement('script'); fm.type = 'text/javascript'; fm.async = true;
+	    fm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'static.fraudmetrix.cn/fm.js?ver=0.1&t=' + (new Date().getTime()/3600000).toFixed(0);
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fm, s);
+	})();
+	</script>
+<meta name="keywords" content="使用Visual Studio 开发Arduino及进行硬件调试">
+<meta name="description" content=" 使用Visual Studio 开发Arduino及进行硬件调试 ">
+<meta name="generator" content="Discuz! X3.2">
+<meta name="author" content="Discuz! Team and Comsenz UI Team">
+<meta name="copyright" content="2001-2013 Comsenz Inc.">
+<meta name="MSSmartTagsPreventParsing" content="True">
+<meta http-equiv="MSThemeCompatible" content="Yes">
+<!-- base href="http://www.arduino.cn/" --><link rel="stylesheet" type="text/css" href="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/style_16_common.css"><link rel="stylesheet" type="text/css" href="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/style_16_forum_viewthread.css"><script type="text/javascript">var STYLEID = '16', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'dt9', charset = 'utf-8', discuz_uid = '0', cookiepre = 'b1Nm_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '2|金币|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3d3dy5hcmR1aW5vLmNuL3RocmVhZC0xOTQxMy0xLTEuaHRtbA==', SITEURL = 'http://www.arduino.cn/', JSPATH = 'data/cache/', DYNAMICURL = '';</script>
+<script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/common.js" type="text/javascript"></script>
+<script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/jquery.htm" type="text/javascript"></script>
+
+<script type="text/javascript">
+jQuery.noConflict();/* 避免js 与jQuery冲突 */
+</script>
+<script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/msclass.htm" type="text/javascript"></script>
+<!--[if lte IE 6]>
+<script src="template/time_1st_qiongyou2/src/js/DD_belatedPNG_0.0.8a.js" type="text/javascript" type="text/javascript"></script>
+    <script type="text/javascript">
+        DD_belatedPNG.fix('div, ul, img, li, input , a, .slideshow div h3,.wrap1 div b, .slideBox .bd em, .pic_list li span, .index_tit h3, .button-large, #shopping_cart span, .login_list .i_qq, .login_list .i_wb');
+    </script>
+<![endif]--> 
+
+<meta property="qc:admins" content="067546567761245167636">
+<meta name="application-name" content="Arduino中文社区">
+<meta name="msapplication-tooltip" content="Arduino中文社区">
+<meta name="msapplication-task" content="name=门户;action-uri=http://www.arduino.cn/portal.php;icon-uri=http://www.arduino.cn/static/image/common/portal.ico"><meta name="msapplication-task" content="name=论坛;action-uri=http://www.arduino.cn/forum.php;icon-uri=http://www.arduino.cn/static/image/common/bbs.ico">
+<link rel="archives" title="Arduino中文社区" href="http://www.arduino.cn/archiver/">
+<script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/forum.js" type="text/javascript"></script>
+  
+<style>@charset "utf-8";
+@font-face{font-family:'nc_iconfont';src:url("//at.alicdn.com/t/font_1465353706_4784257.eot");src:url("//at.alicdn.com/t/font_1465353706_4784257.eot?#iefix") format('embedded-opentype'),url("//at.alicdn.com/t/font_1465353706_4784257.woff") format('woff'),url("//at.alicdn.com/t/font_1465353706_4784257.ttf") format('truetype'),url("//at.alicdn.com/t/font_1465353706_4784257.svg#iconfont") format('svg')}.nc-container div#nc-loading-circle{background:transparent;width:20px;height:20px;display:inline-block;position:relative;vertical-align:middle}.nc-container div#nc-loading-circle .sk-circle{background:transparent;width:100%;height:100%;position:absolute;left:0;top:0}.nc-container #nc-loading-circle .sk-circle:before{content:'';display:block;margin:0 auto;width:15%;height:15%;background-color:#818181;border-radius:100%;-webkit-animation:sk-circleFadeDelay 1.2s infinite ease-in-out both;animation:sk-circleFadeDelay 1.2s infinite ease-in-out both}.nc-container #nc-loading-circle .sk-circle2{-webkit-transform:rotate(30deg);-ms-transform:rotate(30deg);transform:rotate(30deg)}.nc-container #nc-loading-circle .sk-circle3{-webkit-transform:rotate(60deg);-ms-transform:rotate(60deg);transform:rotate(60deg)}.nc-container #nc-loading-circle .sk-circle4{-webkit-transform:rotate(90deg);-ms-transform:rotate(90deg);transform:rotate(90deg)}.nc-container #nc-loading-circle .sk-circle5{-webkit-transform:rotate(120deg);-ms-transform:rotate(120deg);transform:rotate(120deg)}.nc-container #nc-loading-circle .sk-circle6{-webkit-transform:rotate(150deg);-ms-transform:rotate(150deg);transform:rotate(150deg)}.nc-container #nc-loading-circle .sk-circle7{-webkit-transform:rotate(180deg);-ms-transform:rotate(180deg);transform:rotate(180deg)}.nc-container #nc-loading-circle .sk-circle8{-webkit-transform:rotate(210deg);-ms-transform:rotate(210deg);transform:rotate(210deg)}.nc-container #nc-loading-circle .sk-circle9{-webkit-transform:rotate(240deg);-ms-transform:rotate(240deg);transform:rotate(240deg)}.nc-container #nc-loading-circle .sk-circle10{-webkit-transform:rotate(270deg);-ms-transform:rotate(270deg);transform:rotate(270deg)}.nc-container #nc-loading-circle .sk-circle11{-webkit-transform:rotate(300deg);-ms-transform:rotate(300deg);transform:rotate(300deg)}.nc-container #nc-loading-circle .sk-circle12{-webkit-transform:rotate(330deg);-ms-transform:rotate(330deg);transform:rotate(330deg)}.nc-container #nc-loading-circle .sk-circle2:before{-webkit-animation-delay:-1.1s;animation-delay:-1.1s}.nc-container #nc-loading-circle .sk-circle3:before{-webkit-animation-delay:-1s;animation-delay:-1s}.nc-container #nc-loading-circle .sk-circle4:before{-webkit-animation-delay:-.9s;animation-delay:-.9s}.nc-container #nc-loading-circle .sk-circle5:before{-webkit-animation-delay:-.8s;animation-delay:-.8s}.nc-container #nc-loading-circle .sk-circle6:before{-webkit-animation-delay:-.7s;animation-delay:-.7s}.nc-container #nc-loading-circle .sk-circle7:before{-webkit-animation-delay:-.6s;animation-delay:-.6s}.nc-container #nc-loading-circle .sk-circle8:before{-webkit-animation-delay:-.5s;animation-delay:-.5s}.nc-container #nc-loading-circle .sk-circle9:before{-webkit-animation-delay:-.4s;animation-delay:-.4s}.nc-container #nc-loading-circle .sk-circle10:before{-webkit-animation-delay:-.3s;animation-delay:-.3s}.nc-container #nc-loading-circle .sk-circle11:before{-webkit-animation-delay:-.2s;animation-delay:-.2s}.nc-container #nc-loading-circle .sk-circle12:before{-webkit-animation-delay:-.1s;animation-delay:-.1s}@-webkit-keyframes sk-circleFadeDelay{0%,39%,100%{opacity:0}40%{opacity:1}}@-webkit-keyframes sk-circleFadeDelay{0%,39%,100%{opacity:0}40%{opacity:1}}@keyframes sk-circleFadeDelay{0%,39%,100%{opacity:0}40%{opacity:1}}.nc-container .scale_text2 #nc-loading-circle .sk-circle:before{background-color:#fff}.nc_iconfont{font-family:"nc_iconfont";color:#ff3f08;font-size:16px;font-style:normal}.captcha-error .icon_ban{float:left;font-size:16px;padding-right:5px;line-height:14px}.clickCaptcha_text .btn_refresh{font-style:normal;cursor:pointer;background:#fff;color:#737383}.imgCaptcha .btn_refresh{font-size:20px;cursor:pointer;background:#fff;color:#737383}.nc_voice{display:none;position:relative;margin-top:-34px;z-index:99;width:auto;height:34px;background:#fff}.omeo-code-img,.omeo-code-audio{font-size:0;text-align:left}.omeo-code-audiobox,.omeo-code-img a,.omeo-code-audio a,.omeo-code-state{display:inline-block;*display:inline;zoom:1;height:32px;vertical-align:top;font-size:12px}.omeo-code .omeo-code-refresh{background:transparent;width:32px;height:32px;font-size:20px;color:#888;text-align:center;text-decoration:none;padding-left:4px;line-height:32px}.omeo-code .omeo-switch{display:none;width:32px;height:32px;border-left:1px solid #e1e1e1;background-image:url("//g.alicdn.com/sd/ncpc/images/checkcode.png");background-repeat:no-repeat}.omeo-img-active .omeo-code-img{display:block}.omeo-img-active .omeo-code-audio{display:none}.omeo-code-img img{border:1px solid #cdcdcd;cursor:pointer}.omeo-code-img .omeo-switch{background-position:9px -41px}.omeo-audio-active .omeo-code-audio{display:block}.omeo-audio-active .omeo-code-img{display:none}.omeo-code-refresh{position:relative;left:95px}.omeo-code-audiobox{position:relative;height:30px;line-height:32px;border:1px solid #e1e1e1;text-align:center;overflow:hidden;left:100px;top:1px;width:45%;min-width:80px;background-color:#eee}.omeo-code-audiobox a{display:block;text-decoration:none;color:#06c}.omeo-code-audiobox-playing a{visibility:hidden}.omeo-code-audiobox span,.omeo-code-audiobox b{visibility:hidden;position:absolute;top:0;left:0;height:30px;font-weight:100;overflow:hidden}.omeo-code-audiobox-playing span,.omeo-code-audiobox-playing b{visibility:visible}.omeo-code-audiobox span{z-index:0;width:0;background:#186bca}.omeo-code-audiobox b{width:100%;z-index:1;text-align:left;text-indent:30px;color:#999;background:url("//g.alicdn.com/sd/ncpc/images/checkcode.png") no-repeat 14px -89px}.omeo-code-audio .omeo-switch{background-position:5px 10px}input[type=text]::-ms-clear{display:none}.omeo-box{position:relative;background-color:#fff}.omeo-code-echo{position:absolute;top:2px;left:2px}.omeo-code-echo input{padding:5px;height:18px;line-height:18px;border:1px solid #ddd;width:80px;outline:0}.omeo-code-state{height:30px;line-height:30px;text-indent:25px;white-space:nowrap;background-image:url("//g.alicdn.com/sd/ncpc/images/checkcode.png");background-repeat:no-repeat;background-position:100px 100px}.omeo-code-echo .omeo-code-state-error{width:auto;background-position:7px -193px}.omeo-code-echo .omeo-code-state-success{position:absolute;width:30px;background-position:7px -243px}.omeo-code-state{position:absolute;left:0;top:28px}.nc_voice_close{display:inline-block;position:relative;cursor:pointer;left:95px;top:0;border-left:#ddd 2px solid;padding:0 0 0 7px;background-color:#fff;font-size:20px;color:#888;line-height:32px}.nc_help{position:absolute;width:100%;height:100%;left:0;top:0;z-index:99999}.nc_help .mask{background-color:#000;opacity:.5;filter:alpha(opacity=50);width:100%;height:100%;top:0;left:0}.nc_btn_close{position:absolute;height:20px;left:500px;border-radius:20px;padding:10px 30px;background-color:#aaa;color:#fff;cursor:pointer;z-index:10}.nc_btn_close:hover{background-color:#afafaf}.nc_hand{position:absolute;width:68px;height:53px;background-image:url("//g.alicdn.com/sd/ncpc/images/hand.png");z-index:3}.nc_slide_bg{z-index:3;font-size:12px;text-align:center;color:#fff;line-height:34px}.nc_voicebtn{position:absolute;padding:0;right:-25px;font-size:23px;color:#888;cursor:pointer;line-height:34px}.nc_helpbtn{position:absolute;cursor:pointer;right:-95px;top:4px;font-size:12px;background-color:#ffb668;color:#fff;padding:4px;border-radius:2px;line-height:18px;display:none}.nc_helpbtn:before{width:0;height:0;content:"";position:absolute;left:-2px;top:6px;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:4px solid #ffb668}.nc-container .errloading{border:#faf1d5 1px solid;text-indent:3px;background-image:none;font-size:12px;width:290px;line-height:20px;padding:7px 5px 8px 5px;color:#ef9f06;}.nc-container .errloading a{color:#30a7fc}.nc_captcha_text .nc_err{float:left;text-indent:0}.button_move{transition:left .5s;-moz-transition:left .5s;-webkit-transition:left .5s;-o-transition:left .5s}.bg_move{transition:width .5s;-moz-transition:width .5s;-webkit-transition:width .5s;-o-transition:width .5s}.nc_slide_box{position:absolute}.nc_captcha_text{height:auto;line-height:20px;visibility:hidden;font-size:12px;color:#999;font-weight:normal}.nc-container .nc_captcha_img_text{width:auto;height:auto;line-height:20px;visibility:hidden;font-size:12px;color:#999;font-weight:normal;display:none;padding:0 0 10px 0;background-position:0 0;}.nc-container .nc_captcha_img_text span.nc-lang-cnt{line-height:inherit}.nc-container .imgCaptcha .nc_captcha_img_text{width:auto}.nc_captcha_img_text{height:auto;line-height:20px;visibility:hidden;font-size:12px;color:#999;font-weight:normal;display:none;padding:0 0 10px 3px;background-position:0 0}.nc-container .nc_wrapper{width:auto}.nc_scale{width:auto;height:34px;background:#e8e8e8;position:relative;margin:0;padding:0}.nc_scale.is_audio{margin-right:25px}.nc-container .nc_scale div{height:auto}.nc-container .nc_scale ul{list-style:none}.nc-container .nc_scale .btn_slide{color:#737383;background-image:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.nc-container .nc_scale span{text-align:center;width:40px;height:32px;line-height:32px;border:1px solid #ccc;position:absolute;left:0;cursor:move;background:#fff;z-index:2}.nc-container .nc_scale span.nc-lang-cnt{*line-height:34px;float:none;width:auto;height:auto;*height:34px;border:none;position:static;cursor:inherit;background:none;z-index:0;display:inline}.nc_slide_button{width:40px;height:32px;border:1px solid #ccc;position:absolute;left:0;cursor:move;background:#fff url("//g.alicdn.com/sd/ncpc/images/rt.png") no-repeat center;z-index:2}@media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){.nc_scale span{height:32px}}.nc-container .nc_scale .btnok{cursor:default;background:#fff url("//g.alicdn.com/sd/ncpc/images/yes.png") no-repeat center;z-index:3}.nc-container .nc_scale .btnok2{cursor:default;font-size:20px;background:#fff url("//g.alicdn.com/sd/ncpc/images/no.png") no-repeat center;z-index:3}.nc-container .nc_scale .btn_warn{cursor:default;color:#ff3f08;line-height:34px;text-align:center;font-size:20px;background:#fff;z-index:3}.nc-container .clickCaptcha_text .btn_refresh{font-size:20px}.nc-container .clickCaptcha_text .icon_close{line-height:30px;margin-left:8px;cursor:default;color:#ff3f08;font-size:16px;float:left;margin-right:2px;background:transparent;z-index:3}.nc-container .nc_captcha_img_text .icon_close{cursor:default;color:#ff3f08;font-size:16px;float:left;margin-right:4px;background:transparent;z-index:3;line-height:18px}.nc-container .errloading .icon_warn{cursor:default;color:#ff3f08;font-size:18px;float:left;background:transparent;z-index:3}.nc-container .nc_scale .btn_ok{cursor:default;line-height:34px;text-align:center;font-size:20px;background:#fff;z-index:3;color:#76c61d}.nc-container .nc_scale .nc_ok,.nc-container .nc_scale .nc_bg{background:#7ac23c}.nc-container .nc_scale .nc_bg{position:absolute;height:100%;_height:34px;left:0;width:10px}.nc-container .nc_scale div.redbar{background:#fc461e;opacity:.5;filter:alpha(opacity=50)}.nc-container .nc_scale div.orange{background:#f00}.nc-container .nc_scale .scale_text{width:100%;height:100%;text-align:center;position:absolute;z-index:1;background:transparent;color:#9c9c9c;line-height:34px;font-size:12px;cursor:pointer}.nc-container .nc_scale .scale_text2{text-align:left;color:#fff;font-size:12px;text-indent:10px}.nc-container .nc_scale .scale_text2 b{padding-left:0;font-weight:normal}.nc-container .nc_scale .scale_text.scale_loading_text{text-align:center}.nc-container .nc_scale .imgCaptcha,.nc-container .nc_scale .clickCaptcha{display:none;overflow:hidden;border:1px solid #ccc;background:#fff;z-index:20000;}.nc-container .nc_scale .imgCaptcha p.error span,.nc-container .nc_scale .clickCaptcha p.error span{line-height:normal}.nc-container .nc_scale .imgCaptcha{height:auto}.nc-container .nc_scale .clickCaptcha{position:absolute;left:0;top:35px;height:270px;background:#fff;display:none;}.nc-container .nc_scale .clickCaptcha p.error i{color:#ff3f08;font-style:normal}.nc-container .nc_scale .clickCaptcha div{position:static;clear:both;width:100%;background:#fff;height:auto}.nc-container .nc_scale .clickCaptcha .clickCaptcha_text{height:30px;line-height:30px;font-size:12px;color:#999;}.nc-container .nc_scale .clickCaptcha .clickCaptcha_text b{font-weight:normal}.nc_btn_2{position:absolute;right:0;top:0;cursor:pointer;margin:2px 9px 0 0}.nc_iconfont.nc_btn_2{position:absolute;right:0;top:0;cursor:pointer}.nc_iconfont.nc_btn_1{position:absolute;top:10px;right:5px}.nc_btn_1{top:10px;right:10px}.scale_text i{font-style:normal;border:none;position:static;cursor:default;color:#fffc00;background:none;display:inline;width:100%}.nc-container .clickCaptcha .clickCaptcha_img{margin:0 auto;clear:both;position:relative;}.nc-container .clickCaptcha .clickCaptcha_img img{width:230px;height:230px;margin-left:10px;margin-top:5px}.nc-container .clickCaptcha .clickCaptcha_btn{margin:10px 0 0 15px;position:relative;text-align:left;}.nc-container .clickCaptcha .clickCaptcha_btn img{cursor:pointer}.nc-container .imgCaptcha{position:absolute;left:0;top:35px;height:auto;padding-bottom:15px;border:1px solid #ccc;background:#fff;}.nc-container .imgCaptcha div{position:static;width:90%;background-color:#fff}.nc-container .imgCaptcha,.nc-container .clickCaptcha{text-align:left;}.nc-container .imgCaptcha a,.nc-container .clickCaptcha a{color:#ff3f08}.nc-container .imgCaptcha .imgCaptcha_text{height:42px;line-height:42px;width:120px;background:#fff;font-size:14px;text-align:left;color:#747474;float:left;margin-left:10px;}.nc-container .imgCaptcha .imgCaptcha_text input{margin-top:5px;height:30px;line-height:30px;font-size:14px;width:90px;background:#fff}.nc-container .imgCaptcha .imgCaptcha_text input:focus{outline:none;color:#bbb}.nc-container .imgCaptcha .imgCaptcha_btn{margin:0 0 0 12px;*margin-left:0;clear:both;padding-top:5px;width:90%;}.nc-container .imgCaptcha .imgCaptcha_btn img{cursor:pointer}.nc-container .imgCaptcha .nc_scale_submit{margin:0 auto;cursor:pointer;background-color:#fc461e;width:120px;height:32px;line-height:32px;color:#fff;text-align:center}.nc-container .imgCaptcha .imgCaptcha_img{margin:4px 0 0 100px;height:40px;width:130px;overflow:hidden;cursor:pointer;}.nc-container .imgCaptcha .imgCaptcha_img img{width:130px}.nc-container .imgCaptcha .imgCaptcha_img input{border:solid 1px #ccc}.nc-lang-ar_MA,.nc-lang-ar_SA,.nc-lang-iw_HE,.nc-lang-iw_IL{text-align:right;*text-align:left;}.nc-lang-ar_MA .nc_scale .scale_text2,.nc-lang-ar_SA .nc_scale .scale_text2,.nc-lang-iw_HE .nc_scale .scale_text2,.nc-lang-iw_IL .nc_scale .scale_text2{text-align:right;}.nc-lang-ar_MA .nc_scale .scale_text2 span,.nc-lang-ar_SA .nc_scale .scale_text2 span,.nc-lang-iw_HE .nc_scale .scale_text2 span,.nc-lang-iw_IL .nc_scale .scale_text2 span{*display:inline-block;padding:0 56px 0 0}.nc-lang-ar_MA .nc_captcha_img_text,.nc-lang-ar_SA .nc_captcha_img_text,.nc-lang-iw_HE .nc_captcha_img_text,.nc-lang-iw_IL .nc_captcha_img_text{*text-align:right}.nc-lang-ar_MA span.nc-lang-cnt,.nc-lang-ar_SA span.nc-lang-cnt,.nc-lang-iw_HE span.nc-lang-cnt,.nc-lang-iw_IL span.nc-lang-cnt{text-align:right;direction:rtl}.nocaptcha span.nc-lang-cnt{float:none;height:auto;line-height:30px}.nc-container{font-size:12px;-ms-touch-action:none;touch-action:none;}.nc-container p{margin:0;padding:0;display:inline}.nc-container .scale_text.scale_text span[data-nc-lang="_startTEXT"]{display:inline-block;width:100%}.nc-container .scale_text.scale_text.slidetounlock span[data-nc-lang="_startTEXT"]{background:-webkit-gradient(linear,left top,right top,color-stop(0,#4d4d4d),color-stop(.4,#4d4d4d),color-stop(.5,#fff),color-stop(.6,#4d4d4d),color-stop(1,#4d4d4d));-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-animation:slidetounlock 3s infinite;-webkit-text-size-adjust:none}.nc-container .nc_scale .nc-align-center.scale_text2{text-align:center;text-indent:-42px}@-webkit-keyframes slidetounlock{0%{background-position:-200px 0}100%{background-position:200px 0}}.nc-container.tb-login .clickCaptcha_text .icon_close{line-height:30px;margin-left:0;cursor:default;color:#ff3f08;font-size:16px;float:left;margin-right:0;background:transparent;z-index:3}.nc-container.tb-login{position:relative;margin-top:20px;display:none;}.nc-container.tb-login .nc_scale{width:auto;}.nc-container.tb-login .nc_scale .scale_text2{text-indent:-42px;text-align:center;}.nc-container.tb-login .nc_scale .scale_text2 b{padding:0}.nc-container.tb-login .nc_scale.nc_err div.scale_text{background:#f79977}.nc-container.tb-login .errloading{width:auto}.nc-container.tb-login .imgCaptcha,.nc-container.tb-login .clickCaptcha{width:252px;*width:256px;border:0;*height:300px;min-height:300px;max-height:inherit !important;}.nc-container.tb-login .imgCaptcha div.login-msg.error,.nc-container.tb-login .clickCaptcha div.login-msg.error{background:#fff2f2}.nc-container.tb-login .imgCaptcha .captcha-error,.nc-container.tb-login .clickCaptcha .captcha-error{position:absolute;top:0;width:244px;height:auto;margin-bottom:15px;padding:3px;border:solid 1px #ff8e8e;line-height:18px}.nc-container.tb-login .imgCaptcha .captcha-inform,.nc-container.tb-login .clickCaptcha .captcha-inform{font-size:110%;margin-left:20px}.nc-container.tb-login .imgCaptcha{padding-top:66px;}.nc-container.tb-login .imgCaptcha .imgCaptcha_text{width:100px;margin-left:0;}.nc-container.tb-login .imgCaptcha .imgCaptcha_text input:focus{color:#000}.nc-container.tb-login .imgCaptcha .imgCaptcha_img{width:120px;_width:100px}.nc-container.tb-login .imgCaptcha .imgCaptcha_btn{width:100%;margin-left:0}.nc-container.tb-login .imgCaptcha .nc_scale_submit{width:100%;height:36px;line-height:36px;margin-top:20px;margin-left:0;border-radius:3px;font-size:16px;font-family:Tahoma,Helvetica,Arial,sans-serif;background:#ff3f08}.nc-container.tb-login .clickCaptcha{padding-top:40px;}.nc-container.tb-login .clickCaptcha .clickCaptcha_text{text-indent:4px}.nc-container.tb-login .clickCaptcha .clickCaptcha_img img{margin-left:10px}.nc-container.tb-login .nc_btn_1{top:77px;_top:57px}.nc-container.tb-login .nc_btn_2{top:36px}.login .nc-container.tb-login .login-msg p,.login-box .nc-container.tb-login .login-msg p{width:auto;float:left}.nc-container.tb-login.nc-old-login{margin:20px 0 10px 0;width:250px;}.nc-container.tb-login.nc-old-login .nc_wrapper{width:250px}.nc-container.tb-login.nc-old-login .imgCaptcha,.nc-container.tb-login.nc-old-login .clickCaptcha{width:250px;min-height:auto;}.nc-container.tb-login.nc-old-login .imgCaptcha .captcha-error,.nc-container.tb-login.nc-old-login .clickCaptcha .captcha-error{line-height:16px}.nc-container.tb-login.nc-old-login .clickCaptcha{padding-top:28px;}.nc-container.tb-login.nc-old-login .clickCaptcha .clickCaptcha_img img{width:200px;height:200px}.nc-container.nc-old-login.show-click-captcha{padding-bottom:60px}.nc-container.nc-old-login.show-click-captcha.nc-tm-min-fix{padding-bottom:40px}.nc-container.tb-login.nc-tm-min-fix .clickCaptcha{max-height:340px !important}#content .login-box .bd .nc-container.tb-login .login-msg{margin:10px auto 15px auto}#content .login-box .bd .nc-container.tb-login.nc-old-login.show-click-captcha .login-msg{margin:2px 0 0 0}.nc-container .nc_scale .nc-cc{display:none;position:absolute;left:0;top:35px;z-index:20000;width:360px;height:570px;border:1px solid #5eaef1;border-radius:4px;background:#fff;font-size:14px;line-height:18px;color:#333;}.nc-container .nc_scale .nc-cc.nc-cc-status-loading .nc-cc-btn,.nc-container .nc_scale .nc-cc.nc-cc-status-verifing .nc-cc-btn{background-color:#90c1eb}.nc-container .nc_scale .nc-cc.nc-cc-status-loading .nc-cc-btn,.nc-container .nc_scale .nc-cc.nc-cc-status-verifing .nc-cc-btn,.nc-container .nc_scale .nc-cc.nc-cc-status-loading .nc-cc-refresh,.nc-container .nc_scale .nc-cc.nc-cc-status-verifing .nc-cc-refresh{cursor:default}.nc-container .nc_scale .nc-cc.nc-cc-status-loading .nc-cc-refresh,.nc-container .nc_scale .nc-cc.nc-cc-status-verifing .nc-cc-refresh{color:#999}.nc-container .nc_scale .nc-cc a{color:#3199f4;text-decoration:none}.nc-container .nc_scale .nc-cc .nc_iconfont{vertical-align:top;margin-right:8px}.nc-container .nc_scale .nc-cc-btn{display:inline-block;*display:inline;*zoom:1;vertical-align:top;letter-spacing:normal;word-spacing:normal;width:100px;line-height:30px;text-align:center;background-color:#3199f4;color:#fff;border-radius:4px;cursor:pointer;}.nc-container .nc_scale .nc-cc-btn.nc-cc-disabled{background-color:#90c1eb;cursor:default}.nc-container .nc_scale .nc-cc-btn .nc-lang-cnt{line-height:18px}.nc-container .nc_scale .nc-cc-header{padding:20px 20px 19px 20px;height:100px;background:#f4f8fa;border-bottom:1px solid #ccc}.nc-container .nc_scale .nc-cc-img1-box{float:left;width:100px;height:100px;margin-right:16px}.nc-container .nc_scale .nc-cc-txt{overflow:hidden;*zoom:1;line-height:30px;padding-top:11px}.nc-container .nc_scale .nc-cc-img2-box{position:relative;padding:0 20px;margin-top:20px}.nc-container .nc_scale .nc-cc-items{position:absolute;left:20px;_left:0;top:0;width:320px;overflow:hidden}.nc-container .nc_scale .nc-cc-items-inner{margin-right:-20px}.nc-container .nc_scale .nc-cc-item{position:relative;display:inline-block;*display:inline;*zoom:1;vertical-align:top;letter-spacing:normal;word-spacing:normal;margin-right:10px;margin-bottom:10px;border:1px solid #ccc;width:98px;height:98px;background:url("//gtms02.alicdn.com/tps/i2/T1ty2QFNNXXXc6Yc2r-1-1.gif");}.nc-container .nc_scale .nc-cc-item:hover{border-color:#3199f4}.nc-container .nc_scale .nc-cc-item .nc_iconfont{display:none;position:absolute;right:0;bottom:0;color:#3199f4;font-size:22px;margin-right:0}.nc-container .nc_scale .nc-cc-item.nc-cc-selected .nc_iconfont{display:block}.nc-container .nc_scale .nc-cc-tip{display:none;position:absolute;left:0;bottom:60px;width:360px;line-height:18px;text-align:center;color:#eb4f38;}.nc-container .nc_scale .nc-cc-tip span{line-height:normal}.nc-container .nc_scale .nc-cc-footer{position:absolute;left:0;bottom:20px;width:360px;height:30px;line-height:30px;text-align:center;}.nc-container .nc_scale .nc-cc-footer .nc_iconfont{color:#c4cbd0}.nc-container .nc_scale .nc-cc-refresh,.nc-container .nc_scale .nc-cc-wait{position:absolute;left:20px;top:0;color:#3199f4;cursor:pointer}.nc-container .nc_scale .nc-cc-wait{display:none}.nc-container .nc_scale .nc-cc-cancel{position:absolute;right:20px;top:0;color:#3199f4;cursor:pointer;}.nc-container .nc_scale .nc-cc-cancel .nc_iconfont{position:relative;top:-1px}.nc-container .nc_scale .nc-cc-loading{margin-top:247px;text-align:center;line-height:14px}.nc-container .nc_scale .nc-cc-loading-img{display:inline-block;*display:inline;*zoom:1;vertical-align:top;letter-spacing:normal;word-spacing:normal;vertical-align:middle;background:url("//img.alicdn.com/tps/TB1OdxsKpXXXXcgXFXXXXXXXXXX-14-14.gif") no-repeat;width:14px;height:14px;position:relative;top:-1px;margin-right:9px}.nc-container .nc_scale .nc-cc-fail{position:absolute;left:50%;top:50%;width:320px;height:180px;margin-left:-160px;margin-top:-90px;background:#fff;border-radius:4px}.nc-container .nc_scale .nc-cc-fail-inner{text-align:center;padding:55px 10px 10px}.nc-container .nc_scale .nc-cc-fail-action{margin:28px 0 18px;}.nc-container .nc_scale .nc-cc-fail-action a{display:inline-block;*display:inline;*zoom:1;vertical-align:top;letter-spacing:normal;word-spacing:normal;line-height:30px;margin-left:16px}.nc-container .nc_scale .nc-cc-contact{text-align:right;color:#666;padding-right:9px}.nc-container .nc_scale .nc-cc-mask{display:none;position:absolute;left:0;top:0;width:360px;height:570px;background:rgba(0,0,0,0.3);filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#4C000000', endColorstr='#4C000000');}:root .nc-container .nc_scale .nc-cc-mask{-webkit-filter:none;filter:none}.nc-container .nc_scale .nc-cc-arrow-1,.nc-container .nc_scale .nc-cc-arrow-2{display:none;position:absolute;top:340px;border:solid transparent;height:0;width:0}.nc-container .nc_scale .nc-cc-arrow-1{border-width:16px;margin-top:-1px}.nc-container .nc_scale .nc-cc-arrow-2{border-width:15px}.nc-container .nc_scale .nc-cc-right .nc-cc-arrow-1,.nc-container .nc_scale .nc-cc-left .nc-cc-arrow-1,.nc-container .nc_scale .nc-cc-right .nc-cc-arrow-2,.nc-container .nc_scale .nc-cc-left .nc-cc-arrow-2{display:block;_display:none}.nc-container .nc_scale .nc-cc-right{left:180px;top:-339px;}.nc-container .nc_scale .nc-cc-right .nc-cc-arrow-1{border-right-color:#5eaef1;left:-32px}.nc-container .nc_scale .nc-cc-right .nc-cc-arrow-2{border-right-color:#fff;left:-30px}.nc-container .nc_scale .nc-cc-left{left:-335px;top:-339px;}.nc-container .nc_scale .nc-cc-left .nc-cc-arrow-1{border-left-color:#5eaef1;right:-32px}.nc-container .nc_scale .nc-cc-left .nc-cc-arrow-2{border-left-color:#fff;right:-30px}</style><script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/logger.js"></script><script charset="UTF-8" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/bundle.js"></script><link href="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/bdsstyle.css" rel="stylesheet" type="text/css"><script charset="UTF-8" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/like.js"></script><link href="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/praiseButton.css" type="text/css" rel="stylesheet"></head>
+
+<body id="nv_forum" class="page page-template-default custom-background boxed w1600 pg_viewthread" onkeydown="if(event.keyCode==27) return false;"><iframe id="WEIBO_STK_LOGIN_IFRAME" name="WEIBO_STK_LOGIN_IFRAME" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/login_Proxy.htm" style="display: none;"></iframe><iframe style="display: none;" frameborder="0"></iframe><div id="bdshare_s" style="display: block;"><iframe id="bdsIfr" style="position:absolute;display:none;z-index:9999;" frameborder="0"></iframe><div id="bdshare_l" style="display: none;"><div id="bdshare_l_c"><h6>分享到</h6><ul><li><a href="#" class="bds_mshare mshare">一键分享</a></li><li><a href="#" class="bds_qzone qqkj">QQ空间</a></li><li><a href="#" class="bds_tsina xlwb">新浪微博</a></li><li><a href="#" class="bds_bdysc bdysc">百度云收藏</a></li><li><a href="#" class="bds_renren rrw">人人网</a></li><li><a href="#" class="bds_tqq txwb">腾讯微博</a></li><li><a href="#" class="bds_bdxc bdxc">百度相册</a></li><li><a href="#" class="bds_kaixin001 kxw">开心网</a></li><li><a href="#" class="bds_tqf txpy">腾讯朋友</a></li><li><a href="#" class="bds_tieba bdtb">百度贴吧</a></li><li><a href="#" class="bds_douban db">豆瓣网</a></li><li><a href="#" class="bds_tsohu shwb">搜狐微博</a></li><li><a href="#" class="bds_bdhome bdhome">百度新首页</a></li><li><a href="#" class="bds_sqq sqq">QQ好友</a></li><li><a href="#" class="bds_thx thx">和讯微博</a></li><li><a href="#" class="bds_more">更多...</a></li></ul><p><a href="#" class="goWebsite">百度分享</a></p></div></div></div><iframe style="display: none;" id="sina_anywhere_iframe"></iframe><div style="position: absolute; bottom: 0px;"><object type="application/x-shockwave-flash" wmode="transparent" data="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/clear.swf" id="fmFlash" style="visibility:hidden;" width="1" height="1"><param name="movie" value="http://static.fraudmetrix.cn/clear.swf?v1=2"><param name="allowScriptAccess" value="always"><param name="flashVars" value="sessionId=74hegttsap554bokq08gqv0uo4&amp;partnerCode=arduino_cn&amp;serviceUrl=fpflash.fraudmetrix.cn"></object></div>
+
+<div id="append_parent"><div id="ls_fastloginfield_ctrl_menu" class="sltm" style="display: none; width: 40px;"><ul><li class="current">用户名</li><li>Email</li></ul></div></div><div id="ajaxwaitid"></div>
+<div id="toptb" class="cl">
+<div class="wp">
+<div class="z"><a href="javascript:;" onclick="setHomepage('http://www.arduino.cn/');">设为首页</a><a href="http://www.arduino.cn/" onclick="addFavorite(this.href, 'Arduino中文社区');return false;">收藏本站</a></div>
+<div class="y">
+<a id="switchblind" href="javascript:;" onclick="toggleBlind(this)" title="开启辅助访问" class="switchblind">开启辅助访问</a>
+
+<script type="text/javascript">
+document.write(" <a name=\"StranLink\" id=\"StranLink\" style=\"color:#FF0000;cursor:pointer; font-weight:400; font-size:13px;\"> 繁體中文 </a>");
+var Default_isFT = 0
+var StranIt_Delay = 1500 
+</script> <a name="StranLink" id="StranLink" style="color:#FF0000;cursor:pointer; font-weight:400; font-size:13px;" href="javascript:StranBody()" title="點擊以繁體中文方式浏覽"> 繁體中文 </a>
+<script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/language.js" type="text/javascript"></script>
+<a href="javascript:;" id="switchwidth" onclick="widthauto(this)" title="切换到宽版" class="switchwidth">切换到宽版</a>
+</div>
+</div>
+</div>
+
+<div id="qmenu_menu" class="p_pop blk" style="display: none;">
+<div class="ptm pbw hm">
+请 <a href="javascript:;" class="xi2" onclick="lsSubmit()"><strong>登录</strong></a> 后使用快捷导航<br>没有帐号？<a href="http://www.arduino.cn/member.php?mod=zc" class="xi2 xw1">立即注册</a>
+</div>
+<div id="fjump_menu" class="btda"></div></div>
+<div id="page">  <div id="header">
+    <div class="toplogo">
+        <div class="row">
+          <div class="branding">
+            <div class="columns five z">
+              <div class="logo">
+                <h1 id="site-title">
+                <a href="http://www.arduino.cn/" title="Arduino中文社区" class="hover" rel="home"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/logo.png" alt="Arduino中文社区" border="0"></a>                </h1>
+              </div>
+            </div>
+            <div class="columns y" style="width:670px">
+
+<div class="hdc cl">
+
+<script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/logging.js" type="text/javascript"></script>
+<form method="post" autocomplete="off" id="lsform" action="member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes" onsubmit="return lsSubmit();">
+<div class="fastlg cl">
+<span id="return_ls" style="display:none"></span>
+<div class="y pns">
+<table cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td>
+<span class="ftid">
+<select name="fastloginfield" id="ls_fastloginfield" width="40" tabindex="900" selecti="0" style="display: none;">
+
+
+<option value="username" selected="selected"></option></select><a href="javascript:;" id="ls_fastloginfield_ctrl" style="width:40px" tabindex="900">用户名</a>
+</span>
+<script type="text/javascript">simulateSelect('ls_fastloginfield')</script>
+</td>
+<td><input name="username" id="ls_username" autocomplete="off" class="px vm" tabindex="901" type="text"></td>
+<td class="fastlg_l"><label for="ls_cookietime"><input name="cookietime" id="ls_cookietime" class="pc" value="2592000" tabindex="903" type="checkbox">自动登录</label></td>
+<td>&nbsp;<a href="javascript:;" onclick="showWindow('login', 'member.php?mod=logging&amp;action=login&amp;viewlostpw=1')">找回密码</a></td>
+</tr>
+<tr>
+<td><label for="ls_password" class="z psw_w">密码</label></td>
+<td><input name="password" id="ls_password" class="px vm" autocomplete="off" tabindex="902" type="password"></td>
+<td class="fastlg_l"><button type="submit" class="pn vm" tabindex="904" style="width: 75px;"><em>登录</em></button></td>
+<td>&nbsp;<a href="http://www.arduino.cn/member.php?mod=zc" class="xi2 xw1">立即注册</a></td>
+</tr>
+</tbody></table>
+<input name="quickforward" value="yes" type="hidden">
+<input name="handlekey" value="ls" type="hidden">
+</div>
+
+<div class="fastlg_fm y" style="margin-right: 10px; padding-right: 10px">
+<p><a href="http://www.arduino.cn/connect.php?mod=login&amp;op=init&amp;referer=forum.php%3Fmod%3Dviewthread%26tid%3D19413%26extra%3Dpage%253D1%26page%3D1&amp;statfrom=login_simple"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/qq_login.gif" class="vm" alt="QQ登录"></a></p>
+<p class="hm xg1" style="padding-top: 2px;">只需一步，快速开始</p>
+</div>
+
+<div class="fastlg_fm y" style="margin-right: 10px; padding-right: 10px">
+<p><a href="http://www.arduino.cn/wechat-login.html"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/wechat_login.png" class="vm"></a></p>
+<p class="hm xg1" style="padding-top: 2px;">扫一扫，访问微社区</p>
+</div>
+            <link rel="stylesheet" href="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/oculus.css">
+            <link rel="stylesheet" href="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/nc.css">
+            <script type="text/javascript" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/nc.js"></script>
+            <script type="text/javascript" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/oculus_nc.js"></script>
+            <div id="nc-float" style="display:none;">
+                <div class="nc-f-head">
+                    <img class="nc-f-icon" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/TB1_3FrKVXXXXbdXXXXXXXXXXXX-129-128.png" alt="" width="20" height="20">
+                    <span class="nc-f-title">安全验证</span>
+                    <a class="close" href="#"><i class="nc_iconfont"></i></a>
+                </div>
+                <div class="nc-f-body" id="oculus-nc-f-body">
+                    <div class="nc-f-des">请完成以下验证码</div>
+                    <div id="_umfp" style="width:1px;height:1px"></div>
+                    <div id="nocaptcha"></div>
+                </div>
+            </div>
+            <script type="text/javascript" reload="1" defer="true">
+            paxmac_ready(function(){
+            var lsform = document.getElementById('lsform');
+            var o = document.createElement("button");
+            o.id = "header-loggin-btn";
+            o.setAttribute('type', 'submit');
+            o.value = "";
+            o.style.display = "none";
+            try{
+            lsform.appendChild(o);
+                }
+            catch(err){
+                
+            }
+            window['aq-nc-grey-ratio'] = 1;
+            o.onclick = function() {
+                var ncf = new NCFloat(document.getElementById('nc-float'));
+                _nc_plugin_init('D5V8', 'nocaptcha', 'lsform', 'discuz_header_nc');
+                discuz_header_nc.on('success', function(){
+                            ncf.hide(1);
+                            lsSubmit();
+                    });
+                discuz_header_nc.on('after_code', function() {
+                    document.getElementById('oculus-nc-f-body').style.height = "300px";
+                });
+                ncf.show();
+
+            };
+            });
+            </script>                <div style="margin-right: 10px; padding-right: 10px" class="fastlg_fm y">
+		<p><a target="_blank" href="http://www.arduino.cn/plugin.php?id=ljxlwb&amp;opp=in"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/weibo_login.png" title="点击进入授权页面" alt="点击进入授权页面" border="0"></a></p>
+		<p style="padding-top: 2px;" class="hm xg1">只需一步，快速开始</p>
+		</div></div>
+<button id="header-loggin-btn" type="submit" value="" style="display: none;"></button></form>
+
+</div>
+
+            
+            
+              
+              
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row full-width navigation">
+      <div class="twelve columns">
+        <div class="row">
+          <div class="twelve columns">
+              <ul class="nav-bar">
+                <li id="mn_Nd153"><a href="http://www.elecspark.com/" hidefocus="true" target="_blank">资讯</a></li><li id="mn_Nfa01"><a href="http://www.arduino.cn/xigua_integralmall-xigua_integralmall.html" hidefocus="true">积分商城</a></li><li id="mn_N7521"><a href="http://www.arduino.cn/forum-90-1.html" hidefocus="true">招聘/求职</a></li><li class="a" id="mn_forum"><a href="http://www.arduino.cn/forum.php" hidefocus="true" title="BBS">论坛<span>BBS</span></a></li><li id="mn_N208b"><a href="http://www.arduino.cn/thread-5838-1-1.html" hidefocus="true">软件下载</a></li><li id="mn_N4392"><a href="http://www.arduino.cn/thread-1066-1-1.html" hidefocus="true">教程</a></li><li id="mn_Nd722"><a href="http://www.arduino.cn/thread-23052-1-1.html" hidefocus="true">视频课程</a></li><li id="mn_N650e"><a href="http://www.arduino.cn/forum-68-1.html" hidefocus="true">社区活动</a></li>              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+
+<ul class="p_pop h_pop" id="plugin_menu" style="display: none">  <li><a href="http://www.arduino.cn/dsu_paulsign-sign.html" id="mn_plink_sign">每日签到</a></li>
+ </ul>
+<div class="p_pop h_pop" id="mn_userapp_menu" style="display: none"></div><div id="mu" class="cl">
+</div><div id="scbar" class="scbar_narrow cl">
+<form id="scbar_form" method="post" autocomplete="off" onsubmit="searchFocus($('scbar_txt'))" action="search.php?searchsubmit=yes" target="_blank">
+<input name="mod" id="scbar_mod" value="forum" type="hidden">
+<input name="formhash" value="d62e4028" type="hidden">
+<input name="srchtype" value="title" type="hidden">
+<input name="srhfid" value="45" type="hidden">
+<input name="srhlocality" value="forum::viewthread" type="hidden">
+<table cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="scbar_icon_td"></td>
+<td class="scbar_txt_td"><input name="srchtxt" id="scbar_txt" autocomplete="off" x-webkit-speech="" speech="" class=" xg1" placeholder="请输入搜索内容" type="text"></td>
+<td class="scbar_type_td"><a href="javascript:;" id="scbar_type" class="xg1" onclick="showMenu(this.id)" hidefocus="true">帖子</a></td>
+<td class="scbar_btn_td"><button type="submit" name="searchsubmit" id="scbar_btn" sc="1" class="pn pnc" value="true"><strong class="xi2">搜索</strong></button></td>
+<td class="scbar_hot_td">
+<div id="scbar_hot">
+<strong class="xw1">热搜: </strong>
+
+<a href="http://www.arduino.cn/search.php?mod=forum&amp;srchtxt=%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85&amp;formhash=d62e4028&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1">驱动安装</a>
+
+
+
+<a href="http://www.arduino.cn/search.php?mod=forum&amp;srchtxt=%E8%BD%AF%E4%BB%B6%E4%B8%8B%E8%BD%BD&amp;formhash=d62e4028&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1">软件下载</a>
+
+
+
+<a href="http://www.arduino.cn/search.php?mod=forum&amp;srchtxt=%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B&amp;formhash=d62e4028&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1">基础教程</a>
+
+
+
+<a href="http://www.arduino.cn/search.php?mod=forum&amp;srchtxt=101&amp;formhash=d62e4028&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1">101</a>
+
+
+
+<a href="http://www.arduino.cn/search.php?mod=forum&amp;srchtxt=intel%20Curie&amp;formhash=d62e4028&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1">intel Curie</a>
+
+
+
+<a href="http://www.arduino.cn/search.php?mod=forum&amp;srchtxt=12864%E9%A9%B1%E5%8A%A8&amp;formhash=d62e4028&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1">12864驱动</a>
+
+
+
+<a href="http://www.arduino.cn/search.php?mod=forum&amp;srchtxt=%E4%BC%A0%E6%84%9F%E5%99%A8&amp;formhash=d62e4028&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1">传感器</a>
+
+
+
+<a href="http://www.arduino.cn/search.php?mod=forum&amp;srchtxt=%E5%AE%9A%E6%97%B6%E5%99%A8&amp;formhash=d62e4028&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1">定时器</a>
+
+</div>
+</td>
+</tr>
+</tbody></table>
+</form>
+</div>
+<ul id="scbar_type_menu" class="p_pop" style="display: none;"><li><a href="javascript:;" rel="curforum" fid="45">本版</a></li><li><a href="javascript:;" rel="article">文章</a></li><li><a href="javascript:;" rel="forum" class="curtype">帖子</a></li><li><a href="javascript:;" rel="user">用户</a></li></ul>
+<script type="text/javascript">
+initSearchmenu('scbar', '');
+</script>
+<style type="text/css">
+@import url('http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83');
+@import url('http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/styles/shCoreDefault.css?ver=3.0.83');
+@import url('http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.83');
+.syntaxhighlighter,
+.syntaxhighlighter a,
+.syntaxhighlighter div,
+.syntaxhighlighter code,
+.syntaxhighlighter table,
+.syntaxhighlighter table td,
+.syntaxhighlighter table tr,
+.syntaxhighlighter table tbody,
+.syntaxhighlighter table thead,
+.syntaxhighlighter table caption,
+.syntaxhighlighter textarea {
+font-size: 12px !important; /* Set the font size in pixels */
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */
+}
+.syntaxhighlighter table caption {
+/* For Title(Caption) */
+font-size: 14px !important; /* Set the font size in pixels */
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */
+}
+.syntaxhighlighter.nogutter td.code .line {
+/* Set the left padding space when no-gutter in ver. 3.0 */
+padding-left: 3px !important;
+}
+
+.syntaxhighlighter .lines {
+	padding: 5px 0px 5px 0px !important;
+}
+.syntaxhighlighter .line .number {
+	padding: 5px 5px 5px 0 !important;
+}
+.syntaxhighlighter .line .content {
+	padding: 5px 0px 5px 10px !important;
+}
+
+/* For gutter */
+.syntaxhighlighter table td.code {
+width:auto !important;
+}
+.syntaxhighlighter table td.gutter .line {
+padding: 0 0.5em !important;
+}
+.syntaxhighlighter .gutter {
+width: 40px !important;
+}
+
+.syntaxhighlighter table td.gutter .line {
+	padding: 5px 5px 5px 0 !important;
+}
+.syntaxhighlighter table td.code .line {
+	padding: 5px 0px 5px 10px !important;
+}
+
+.syntaxhighlighter {
+/* For Chrome/Safari(WebKit) */
+/* Hide the superfluous vertical scrollbar in ver. 3.0 */
+/*overflow-y: hidden !important;*/
+padding: 1px !important;
+}
+
+.syntaxhighlighter {
+	width: 99.7% !important;
+	max-height: 600px !important;
+	height:expression(this.scrollHeight > 600 ? "600px" : "auto");
+	overflow-y: auto;
+}
+
+/* For Title(Caption) */
+font-size: 10px !important; /* Set the font size in pixels */
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */
+}
+</style>
+            <link rel="stylesheet" href="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/oculus.css">
+            <link rel="stylesheet" href="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/nc.css">
+            <script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/nc.js"></script>
+            <script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/oculus_nc.js"></script>
+            <div id="nc-float" style="display:none;">
+                <div class="nc-f-head">
+                    <img class="nc-f-icon" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/TB1_3FrKVXXXXbdXXXXXXXXXXXX-129-128.png" alt="" width="20" height="20">
+                    <span class="nc-f-title">安全验证</span>
+                    <a class="close" href="#"><i class="nc_iconfont"></i></a>
+                </div>
+                <div class="nc-f-body" id="oculus-nc-f-body">
+                <div class="nc-f-des">请完成以下验证码</div>
+                    <div id="nocaptcha"></div>
+                </div>
+            </div>
+<div id="main">
+<div id="wp" class="wp"><script type="text/javascript">var fid = parseInt('45'), tid = parseInt('19413');</script>
+
+<script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/forum_viewthread.js" type="text/javascript"></script>
+<script type="text/javascript">zoomstatus = parseInt(1);var imagemaxwidth = '600';var aimgcount = new Array();</script>
+
+<style id="diy_style" type="text/css"></style>
+<!--[diy=diynavtop]--><div id="diynavtop" class="area"></div><!--[/diy]-->
+<div id="pt" class="bm cl">
+<div class="z">
+<a href="http://www.arduino.cn/" class="nvhm" title="首页">Arduino中文社区</a><em>»</em><a href="http://www.arduino.cn/forum.php">论坛</a> <em>›</em> <a href="http://www.arduino.cn/forum.php?gid=44">Arduino讨论区</a> <em>›</em> <a href="http://www.arduino.cn/forum-45-1.html">Arduino综合讨论区</a> <em>›</em> <a href="http://www.arduino.cn/thread-19413-1-1.html">使用Visual Studio 开发Arduino及进行硬件调试 ...</a>
+</div>
+</div>
+
+<style id="diy_style" type="text/css"></style>
+<div class="wp">
+<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
+</div>
+
+<div id="ct" class="wp cl">
+<div id="pgt" class="pgs mbm cl ">
+<div class="pgt"><div class="pg"><strong>1</strong><a href="http://www.arduino.cn/thread-19413-2-1.html">2</a><label><input name="custompage" class="px" size="2" title="输入页码，按回车快速跳转" value="1" onkeydown="if(event.keyCode==13) {window.location='forum.php?mod=viewthread&amp;tid=19413&amp;extra=page%3D1&amp;page='+this.value;; doane(event);}" type="text"><span title="共 2 页"> / 2 页</span></label><a href="http://www.arduino.cn/thread-19413-2-1.html" class="nxt">下一页</a></div></div>
+<span class="y pgb" id="visitedforums" onmouseover="$('visitedforums').id = 'visitedforumstmp';this.id = 'visitedforums';showMenu({'ctrlid':this.id,'pos':'34'})"><a href="http://www.arduino.cn/forum-45-1.html">返回列表</a></span>
+<a id="newspecial" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" onclick="showWindow('newthread', 'forum.php?mod=post&amp;action=newthread&amp;fid=45')" href="javascript:;" title="发新帖"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/pn_post.png" alt="发新帖"></a></div>
+
+
+
+<div id="postlist" class="pl bm">
+<table cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls ptn pbn">
+<div class="hm ptn">
+<span class="xg1">查看:</span> <span class="xi1">5283</span><span class="pipe">|</span><span class="xg1">回复:</span> <span class="xi1">11</span>
+</div>
+</td>
+<td class="plc ptm pbn vwthd">
+<div class="y">
+<a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;action=printable&amp;tid=19413" title="打印" target="_blank"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/print.png" alt="打印" class="vm"></a>
+<a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=nextoldset&amp;tid=19413" title="上一主题"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/thread-prev.png" alt="上一主题" class="vm"></a>
+<a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=nextnewset&amp;tid=19413" title="下一主题"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/thread-next.png" alt="下一主题" class="vm"></a>
+</div>
+<h1 class="ts">
+<span id="thread_subject">使用Visual Studio 开发Arduino及进行硬件调试</span>
+</h1>
+<span class="xg1">
+<a href="http://www.arduino.cn/thread-19413-1-1.html" onclick="return copyThreadUrl(this, 'Arduino中文社区')">[复制链接]</a>
+</span>
+</td>
+</tr>
+</tbody></table>
+
+
+<table class="ad" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table><div id="post_169915"><table id="pid169915" class="plhin" summary="pid169915" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar169915" class="pls favatar" style="top: 0px; position: fixed;">
+<a name="newpost"></a> <div class="pi">
+<div class="authi"><a href="http://www.arduino.cn/space-uid-45731.html" target="_blank" class="xw1">Z-Maker</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_" id="userinfo169915" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo169915_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.arduino.cn/space-uid-45731.html" target="_blank" class="xi2">Z-Maker</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.arduino.cn/home.php?mod=space&amp;uid=45731&amp;do=profile" target="_blank" class="xi2">118</a></dd>
+</dl><div class="imicn">
+<a href="http://www.arduino.cn/home.php?mod=space&amp;uid=45731&amp;do=profile" target="_blank" title="查看详细资料"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar"><a href="http://www.arduino.cn/space-uid-45731.html" class="avtm" target="_blank"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/avatar_002.gif"></a></div>
+</div>
+<p><img title="未绑定新浪微博" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/icon_off.gif"></p><p>该用户从未签到</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">参加活动: <em>0  </em>次</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">组织活动: <em>0  </em>次</p>
+ </div>
+</td>
+<td class="plc">
+<div class="pi">
+<div id="fj" class="y">
+<label class="z">电梯直达</label>
+<input class="px p_fre z" size="2" onkeyup="$('fj_btn').href='forum.php?mod=redirect&amp;ptid=19413&amp;authorid=0&amp;postno='+this.value" onkeydown="if(event.keyCode==13) {window.location=$('fj_btn').href;return false;}" title="跳转到指定楼层" type="text">
+<a href="javascript:;" id="fj_btn" class="z" title="跳转到指定楼层"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/fj_btn.png" alt="跳转到指定楼层" class="vm"></a>
+</div>
+<strong>
+<a href="http://www.arduino.cn/thread-19413-1-1.html" id="postnum169915" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+楼主</a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon169915" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/online_member.gif">
+<em id="authorposton169915">发表于 2016-2-26 19:29</em>
+<span class="pipe">|</span>
+<a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=19413&amp;page=1&amp;authorid=45731" rel="nofollow">只看该作者</a>
+<span class="pipe">|</span><a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=19413&amp;from=album">只看大图</a>
+<span class="none"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/arw_r.gif" class="vm" alt="回帖奖励"></span>
+<span class="pipe show">|</span><a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=19413&amp;extra=page%3D1&amp;ordertype=1" class="show">倒序浏览</a>
+<span class="pipe show">|</span><a href="javascript:;" onclick="readmode($('thread_subject').innerHTML, 169915);" class="show">阅读模式</a>
+<div style="float:right;"><!-- Baidu Button BEGIN -->
+    <div id="bdshare" class="bdshare_b" style="line-height: 12px;"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/type-button-1.jpg"></div>
+    <script type="text/javascript" id="bdshare_js" data="type=button&amp;uid=0" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/bds_s_v2.js"></script>
+    
+    <script type="text/javascript">
+        document.getElementById("bdshell_js").src = "http://share.baidu.com/static/js/shell_v2.js?t=" + new Date().getHours();
+    </script>
+<!-- Baidu Button END --></div></div>
+</div>
+</div><div class="pct"><style type="text/css">.pcb{margin-right:0}</style><div class="pcb">
+ 
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_169915">
+<i class="pstatus"> 本帖最后由 Z-Maker 于 2016-2-26 19:49 编辑 </i><br>
+<br>
+<font face="Tahoma,"><font size="4">使用Visual Studio 开发Arduino及进行硬件调试<br>
+1.下载安装联合控件&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<br>
+2.新建工程并下载<br>
+3.调试程序（硬件调试、串口监视器）&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<br>
+4.添加库，查看例程、官方库、头文件&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<br>
+5.让Visual Studio真正变成Arduino Studio&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<br>
+6.附录和感谢</font></font><font face="Tahoma,">&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</font><br>
+<br>
+<br>
+<font size="4"><font face="Tahoma,"><font face="宋体">&nbsp; 
+&nbsp;&nbsp;&nbsp;ArduinoIDE 
+现在已经更新到1.6.7，从1.6.5开始已经支持中文注释和文字拖动（英文注释确实不太方便），Arduino 
+IDE界面简洁，整体功能还算完善，相比其他编译器明显的不足就是不能进行硬件调试，再就是没有代码提示功能，文件关系不清晰、头文件打开不方便。<br>
+<br>
+&nbsp; &nbsp; VisualStudio作为时下最为流行的Windows高级语言编译器有着强大的功能，下面就介绍一下如何使用VisualStudio 开发Arduino及进行硬件调试。<br>
+<br>
+<br>
+<br>
+<font size="5">1.下载安装联合控件</font><br>
+<br>
+首先要下载联合控件，可以直接在Visual Studio中安装，在工具-&gt;扩展与更新(tools-&gt;dimisions &amp;updata)中查找并下载安装，如下图<br>
+
+<ignore_js_op>
+
+<img id="aimg_15952" aid="15952" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/194910use61f9gwzhl0wzv.jpg" zoomfile="data/attachment/forum/201602/26/194910use61f9gwzhl0wzv.jpg" file="data/attachment/forum/201602/26/194910use61f9gwzhl0wzv.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="517">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15952_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184807bpd5lw1blf9dvp4w.jpg</strong> <em class="xg1">(50.42 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NTJ8ZmMzZjcxYzB8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 19:49 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+安装完后点击重新启动VS，可以看到菜单栏多出一个VISUAL MICRO，如下图<br>
+
+<ignore_js_op>
+
+<img id="aimg_15953" aid="15953" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/194910xh3ah4yh1ji0jzh3.jpg" zoomfile="data/attachment/forum/201602/26/194910xh3ah4yh1ji0jzh3.jpg" file="data/attachment/forum/201602/26/194910xh3ah4yh1ji0jzh3.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15953_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184808udp4yyyu9my5ccyz.jpg</strong> <em class="xg1">(13.34 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NTN8M2I5ZjUwNGF8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 19:49 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+在图中还可以看到Arduino IDE型号，Arduino板子型号选择以及端口选择，这里我们先点击Visual Micro 
+Explorer(也可以在VISUAL MICRO中找到)然后点击Configure进行配置，选择你电脑上Arduino 
+IDE的型号和安装目录，如下图<br>
+
+<ignore_js_op>
+
+<img id="aimg_15954" aid="15954" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/195031g6oo06zhh4h8666g.jpg" zoomfile="data/attachment/forum/201602/26/195031g6oo06zhh4h8666g.jpg" file="data/attachment/forum/201602/26/195031g6oo06zhh4h8666g.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="508">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15954_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184809ry3q1i7g1xtzigd7.jpg</strong> <em class="xg1">(37.68 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NTR8OGI1ZDEzZWF8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 19:50 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+
+<ignore_js_op>
+
+<img id="aimg_15955" aid="15955" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/195031q84o99z9o50ori68.jpg" zoomfile="data/attachment/forum/201602/26/195031q84o99z9o50ori68.jpg" file="data/attachment/forum/201602/26/195031q84o99z9o50ori68.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="500">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15955_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184811j69f9jxmr5k53l85.jpg</strong> <em class="xg1">(36.68 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NTV8YTNjNTNlYTB8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 19:50 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+&nbsp; &nbsp;&nbsp; &nbsp; <br>
+至此，就可以使用VS对Arduino进行开发、调试了。NEXT…<br>
+&nbsp;&nbsp;<br>
+<br>
+<font size="5">2.新建工程并下载</font><br>
+<br>
+首先新建工程，点击新建项目或者文件-&gt;新建-&gt;Arduino Project，如下图<br>
+
+<ignore_js_op>
+
+<img id="aimg_15956" aid="15956" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/195149myu9lv7q9kw63v6w.jpg" zoomfile="data/attachment/forum/201602/26/195149myu9lv7q9kw63v6w.jpg" file="data/attachment/forum/201602/26/195149myu9lv7q9kw63v6w.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="507">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15956_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184812efj15ooer1y212q2.jpg</strong> <em class="xg1">(36.82 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NTZ8M2UyNDQzOTB8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 19:51 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+
+<ignore_js_op>
+
+<img id="aimg_15957" aid="15957" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/195149i4py4c84fi7ipz8i.jpg" zoomfile="data/attachment/forum/201602/26/195149i4py4c84fi7ipz8i.jpg" file="data/attachment/forum/201602/26/195149i4py4c84fi7ipz8i.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="512">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15957_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184812wohv60x6olhk1ovv.jpg</strong> <em class="xg1">(33.17 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NTd8NDI4ZTZjYjd8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 19:51 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+<br>
+这里通过新建项目来创建(方便选择目录)，如下图<br>
+
+<ignore_js_op>
+
+<img id="aimg_15958" aid="15958" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/195150osishiohfc53h5ir.jpg" zoomfile="data/attachment/forum/201602/26/195150osishiohfc53h5ir.jpg" file="data/attachment/forum/201602/26/195150osishiohfc53h5ir.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="510">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15958_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184813ht4qane4ytk1kiyt.jpg</strong> <em class="xg1">(37.4 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NTh8ZTg3ZDJjNzB8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 19:51 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+&nbsp; &nbsp; <br>
+&nbsp; &nbsp;&nbsp;&nbsp;<br>
+可以看到工程中和Arduino IDE一样把setup和loop函数提供好，下面编写一段简单的代码，首先看一下代码提示功能<br>
+
+<ignore_js_op>
+
+<img id="aimg_15959" aid="15959" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/195150oisifkibuuakg0uz.jpg" zoomfile="data/attachment/forum/201602/26/195150oisifkibuuakg0uz.jpg" file="data/attachment/forum/201602/26/195150oisifkibuuakg0uz.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="461">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15959_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184813v3s6awdmdvxdm6ks.jpg</strong> <em class="xg1">(14.14 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NTl8NjczOTYxNzF8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 19:51 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+
+<ignore_js_op>
+
+<img id="aimg_15960" aid="15960" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/195717a0bvonsu8avlnfj7.jpg" zoomfile="data/attachment/forum/201602/26/195717a0bvonsu8avlnfj7.jpg" file="data/attachment/forum/201602/26/195717a0bvonsu8avlnfj7.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="474">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15960_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184813avojjueqnhjql3lf.jpg</strong> <em class="xg1">(21.78 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NjB8ZWEyOGRhOTh8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 19:57 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+编写好代码准备编译和下载，如下图，板型和端口号选择，注意Automatic 
+Debugging(自动调试)不要勾选，这个是进行调试用的，后面再介绍。如下图配置完后点击Build&amp;Upload(编译并下载)或者工具
+栏里的调试按钮或下图标注的开始按钮。等一会儿，下面显示下载完成。<br>
+
+<ignore_js_op>
+
+<img id="aimg_15961" aid="15961" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/195717p7pwykz5573knp0e.jpg" zoomfile="data/attachment/forum/201602/26/195717p7pwykz5573knp0e.jpg" file="data/attachment/forum/201602/26/195717p7pwykz5573knp0e.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="431">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15961_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184814xqplzpf9buujunff.jpg</strong> <em class="xg1">(29.57 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NjF8OTliNDEwOTN8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 19:57 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+
+<ignore_js_op>
+
+<img id="aimg_15962" aid="15962" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/201311nb01cxtxqzmxyxb2.jpg" zoomfile="data/attachment/forum/201602/26/201311nb01cxtxqzmxyxb2.jpg" file="data/attachment/forum/201602/26/201311nb01cxtxqzmxyxb2.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15962_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184814rktykfktdstuktww.jpg</strong> <em class="xg1">(27.97 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NjJ8M2M5YTk3NzJ8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 20:13 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+
+<ignore_js_op>
+
+<img id="aimg_15963" aid="15963" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/201311zws806dzyvwvy6ye.jpg" zoomfile="data/attachment/forum/201602/26/201311zws806dzyvwvy6ye.jpg" file="data/attachment/forum/201602/26/201311zws806dzyvwvy6ye.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15963_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184815u1t000atuu3ntzt1.jpg</strong> <em class="xg1">(17.11 KB, 下载次数: 2)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NjN8OGYxYTNmMmJ8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 20:13 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+<font size="5">3.调试程序（硬件调试、串口监视器）</font><br>
+<br>
+&nbsp;&nbsp;调试程序主要进行几个简单的配置即可，如下图<br>
+
+<ignore_js_op>
+
+<img id="aimg_15964" aid="15964" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/201603snnfo7randutpn66.jpg" zoomfile="data/attachment/forum/201602/26/201603snnfo7randutpn66.jpg" file="data/attachment/forum/201602/26/201603snnfo7randutpn66.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="244">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15964_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184815i4ttt8g4cmjj8ejq.jpg</strong> <em class="xg1">(16.79 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NjR8OTgyODYwNzh8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 20:16 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+
+<ignore_js_op>
+
+<img id="aimg_15965" aid="15965" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/201603uuzok75kuo2zwuuu.jpg" zoomfile="data/attachment/forum/201602/26/201603uuzok75kuo2zwuuu.jpg" file="data/attachment/forum/201602/26/201603uuzok75kuo2zwuuu.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="301">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15965_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184815dp5ratfnsxz4cxiu.jpg</strong> <em class="xg1">(17.16 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NjV8NzQ2NDQ4YjB8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 20:16 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+然后点击编译并下载后，如下图，出现一个串口监视器<br>
+
+<ignore_js_op>
+
+<img id="aimg_15966" aid="15966" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/204227rulxuzyk7r7sw87y.jpg" zoomfile="data/attachment/forum/201602/26/204227rulxuzyk7r7sw87y.jpg" file="data/attachment/forum/201602/26/204227rulxuzyk7r7sw87y.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15966_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184816p1wqyhyhm6pnmql6.jpg</strong> <em class="xg1">(53.85 KB, 下载次数: 5)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NjZ8M2ZlNDhiNmZ8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 20:42 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+点击串口监视器右上角的设置按钮，选择JumpTo Breakpoints(跳至断点)<br>
+
+<ignore_js_op>
+
+<img id="aimg_15967" aid="15967" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/204227v1nsi0si77xxsg0l.jpg" zoomfile="data/attachment/forum/201602/26/204227v1nsi0si77xxsg0l.jpg" file="data/attachment/forum/201602/26/204227v1nsi0si77xxsg0l.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="544">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15967_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184816lms7mv5g71v14fnx.jpg</strong> <em class="xg1">(28.69 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5Njd8ZmFlM2RjNGZ8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 20:42 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+以上配置完后就可以，点击工具栏上的单步运行(F11)，就可以进行调试了，每次运行一个断点，下面的输出窗口显示运行到第几行，串口监视器显示串口发送的内容，硬件部分也会跟着变化。<br>
+
+<ignore_js_op>
+
+<img id="aimg_15968" aid="15968" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/204420hj00kkqnina7n5k0.jpg" zoomfile="data/attachment/forum/201602/26/204420hj00kkqnina7n5k0.jpg" file="data/attachment/forum/201602/26/204420hj00kkqnina7n5k0.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15968_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184816na97oul0u0kmk6gk.jpg</strong> <em class="xg1">(24.95 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5Njh8ODI4ZTA1ODZ8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 20:44 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+
+<ignore_js_op>
+
+<img id="aimg_15969" aid="15969" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/204420by6bwxyw6dcgd68b.jpg" zoomfile="data/attachment/forum/201602/26/204420by6bwxyw6dcgd68b.jpg" file="data/attachment/forum/201602/26/204420by6bwxyw6dcgd68b.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" initialized="true" width="485">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15969_menu" style="position: absolute; z-index: 301; left: 376.5px; top: 6539.25px; display: none;" disautofocus="true" initialized="true">
+<div class="xs0">
+<p><strong>184817edbkhl3u6tult631.jpg</strong> <em class="xg1">(32.15 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5Njl8NGU5MTQyZjJ8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 20:44 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+再看下面的输出窗口，实时显示并记录运行到第几行，输出来源默认显示Debug Trace (调试踪迹)，右侧有几个选项，向左向右的箭头分别代表转到上一条消息和转到下一条消息，然后对应着，程序中的光标也会出现到对应的断点处。<br>
+
+<ignore_js_op>
+
+<img id="aimg_15970" aid="15970" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/205215icvu1tz1p5tpcuik.jpg" zoomfile="data/attachment/forum/201602/26/205215icvu1tz1p5tpcuik.jpg" file="data/attachment/forum/201602/26/205215icvu1tz1p5tpcuik.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" initialized="true" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15970_menu" style="position: absolute; z-index: 301; left: 376.5px; top: 7024.5px; display: none;" disautofocus="true" initialized="true">
+<div class="xs0">
+<p><strong>184817lixgzppwt4xx8o7x.jpg</strong> <em class="xg1">(29.6 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NzB8NDZlYWM5Yzh8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 20:52 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+<font size="5">4.添加库，查看例程、官方库</font><br>
+<br>
+添加库：工具栏-&gt;AddLibrary-&gt;Built-in<br>
+
+<ignore_js_op>
+
+<img id="aimg_15971" aid="15971" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/205215ou77vjtitioycd6v.jpg" zoomfile="data/attachment/forum/201602/26/205215ou77vjtitioycd6v.jpg" file="data/attachment/forum/201602/26/205215ou77vjtitioycd6v.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" initialized="true" width="510">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15971_menu" style="position: absolute; z-index: 301; left: 376.5px; top: 7352.25px; display: none;" disautofocus="true" initialized="true">
+<div class="xs0">
+<p><strong>184818uwmdtt7ytlw0dy0z.jpg</strong> <em class="xg1">(63.46 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NzF8ODgwNzAzZTl8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 20:52 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+查看例程：第一次安装后的配置，打开VisualMicro Explore(VISUAL MICRO菜单下或者板型选择口右侧)，如下图，双击打开目标文件即可<br>
+
+<ignore_js_op>
+
+<img id="aimg_15972" aid="15972" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/210532nyrdh69uih40y0c6.jpg" zoomfile="data/attachment/forum/201602/26/210532nyrdh69uih40y0c6.jpg" file="data/attachment/forum/201602/26/210532nyrdh69uih40y0c6.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" initialized="true" width="530">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15972_menu" style="position: absolute; z-index: 301; left: 376.5px; top: 7818.5px; display: none;" disautofocus="true" initialized="true">
+<div class="xs0">
+<p><strong>184818czyyz4i76rkyy7p6.jpg</strong> <em class="xg1">(31.21 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NzJ8OGIwZTY0ZDF8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 21:05 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+官方库介绍：还是在VisualMicro Explore窗口，reference中，如下图，点击后会在浏览器中打开<br>
+
+<ignore_js_op>
+
+<img id="aimg_15973" aid="15973" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/210532ab50yw59d9pbpwdw.jpg" zoomfile="data/attachment/forum/201602/26/210532ab50yw59d9pbpwdw.jpg" file="data/attachment/forum/201602/26/210532ab50yw59d9pbpwdw.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="539">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15973_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184819gmdyjhpomyuyshay.jpg</strong> <em class="xg1">(34.23 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NzN8YWQ0YWIyZjF8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 21:05 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+
+<ignore_js_op>
+
+<img id="aimg_15974" aid="15974" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/211210i0zw60jx10yafzgg.jpg" zoomfile="data/attachment/forum/201602/26/211210i0zw60jx10yafzgg.jpg" file="data/attachment/forum/201602/26/211210i0zw60jx10yafzgg.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="551">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15974_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184820uyg5fw7gfs74fy09.jpg</strong> <em class="xg1">(58.82 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NzR8MjBhOGU0ODN8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 21:12 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+查看头文件：直接在目标头文件上右键，点击打开；或者在解决方案资源管理器-&gt;外部依赖项中点击打开<br>
+
+<ignore_js_op>
+
+<img id="aimg_15975" aid="15975" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/211210exjgwi02saz3wsjr.jpg" zoomfile="data/attachment/forum/201602/26/211210exjgwi02saz3wsjr.jpg" file="data/attachment/forum/201602/26/211210exjgwi02saz3wsjr.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15975_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184819cyj598zzyqc5vq95.jpg</strong> <em class="xg1">(65.46 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NzV8NmQyNDk3Y2N8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 21:12 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+<br>
+<font size="5">5.让Visual Studio真正变成ArduinoStudio </font><br>
+<br>
+
+<ignore_js_op>
+
+<img id="aimg_15976" aid="15976" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/211236hpgemty7ofetmtge.jpg" zoomfile="data/attachment/forum/201602/26/211236hpgemty7ofetmtge.jpg" file="data/attachment/forum/201602/26/211236hpgemty7ofetmtge.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15976_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184820nc6o59c9tftc9ff4.jpg</strong> <em class="xg1">(36.11 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5NzZ8MDM5YzMzYjl8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 21:12 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+大家看上面一段代码，整体还算漂亮，但是代码部分明显比较单调，关键字的颜色没有改变，这个其实是文件类型的原因，Arduino代码文件类型一般为ino或者pde，打开工具-&gt;选项，如下图，将ino和pde两个文件应用到VC++文件中<br>
+
+<ignore_js_op>
+
+<img id="aimg_15977" aid="15977" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/211236mn58zsdj2up38w2z.jpg" zoomfile="data/attachment/forum/201602/26/211236mn58zsdj2up38w2z.jpg" file="data/attachment/forum/201602/26/211236mn58zsdj2up38w2z.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15977_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184820vlmljtuy4ypu2zlj.jpg</strong> <em class="xg1">(30.6 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5Nzd8YzE4NzBiNWJ8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 21:12 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+
+<ignore_js_op>
+
+<img id="aimg_15978" aid="15978" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/211630gsaaa5ajphi2ptol.jpg" zoomfile="data/attachment/forum/201602/26/211630gsaaa5ajphi2ptol.jpg" file="data/attachment/forum/201602/26/211630gsaaa5ajphi2ptol.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15978_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184821rdyyyvdydxygggjv.jpg</strong> <em class="xg1">(40.94 KB, 下载次数: 2)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5Nzh8OWRlY2E0NjB8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 21:16 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+以上代码的颜色搭配都是默认值，这里我们可以自己进行配置，打开工具-&gt;选项-&gt;环境-&gt;字体与颜色，如下图，修改成员函数和数字的颜色<br>
+
+<ignore_js_op>
+
+<img id="aimg_15979" aid="15979" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/211630rk5qgz11lqemk0s5.jpg" zoomfile="data/attachment/forum/201602/26/211630rk5qgz11lqemk0s5.jpg" file="data/attachment/forum/201602/26/211630rk5qgz11lqemk0s5.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="516">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15979_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184821dfjag8s2fxliiaeh.jpg</strong> <em class="xg1">(38.8 KB, 下载次数: 2)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5Nzl8NTkyMTViNDR8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 21:16 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+
+<ignore_js_op>
+
+<img id="aimg_15980" aid="15980" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/212018oyg9y19rpy3q90g8.jpg" zoomfile="data/attachment/forum/201602/26/212018oyg9y19rpy3q90g8.jpg" file="data/attachment/forum/201602/26/212018oyg9y19rpy3q90g8.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="499">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15980_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184821ystits3smwrm43j3.jpg</strong> <em class="xg1">(22.83 KB, 下载次数: 1)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5ODB8YTE5ZWZiM2F8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 21:20 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+
+<ignore_js_op>
+
+<img id="aimg_15981" aid="15981" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/212018tyjgreyjo0333lo0.jpg" zoomfile="data/attachment/forum/201602/26/212018tyjgreyjo0333lo0.jpg" file="data/attachment/forum/201602/26/212018tyjgreyjo0333lo0.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15981_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184822h0mi0y58ozquo32y.jpg</strong> <em class="xg1">(35.43 KB, 下载次数: 3)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5ODF8ZWViYjE2ZWR8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 21:20 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+上图，各种颜色似乎有点花哨，都看个人喜好了，哈哈！除了数字和成员函数，还可以修改字符串啊、注释啊、函数啊之类的颜色，自己可以试试。<br>
+<br>
+最后再介绍一个大招：工具-&gt;选项-&gt;环境，颜色主题改为Arduino IDE蓝色<br>
+
+<ignore_js_op>
+
+<img id="aimg_15982" aid="15982" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/212628rkf25jrzc5hzh52r.jpg" zoomfile="data/attachment/forum/201602/26/212628rkf25jrzc5hzh52r.jpg" file="data/attachment/forum/201602/26/212628rkf25jrzc5hzh52r.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15982_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184822eqzm1q1md0165m1y.jpg</strong> <em class="xg1">(34.71 KB, 下载次数: 3)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5ODJ8MzVkZDZkOTh8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 21:26 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+
+<ignore_js_op>
+
+<img id="aimg_15983" aid="15983" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/212628lpa633zcvab6kua5.jpg" zoomfile="data/attachment/forum/201602/26/212628lpa633zcvab6kua5.jpg" file="data/attachment/forum/201602/26/212628lpa633zcvab6kua5.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15983_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184823zh2l288pl6cet8xo.jpg</strong> <em class="xg1">(35.29 KB, 下载次数: 2)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5ODN8NTlhODk4Y2J8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 21:26 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+以上都是默认值，整体感觉还挺好的，只是有些关键字和系统函数没有高亮显示。不过可以自己修改数字和字符串颜色，就像下图，怎么样，感觉还不错吧。就是这么有品味！<br>
+
+<ignore_js_op>
+
+<img id="aimg_15984" aid="15984" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/220344krlnum7irguim8n7.jpg" zoomfile="data/attachment/forum/201602/26/220344krlnum7irguim8n7.jpg" file="data/attachment/forum/201602/26/220344krlnum7irguim8n7.jpg" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" width="554">
+
+<div class="tip tip_4 aimg_tip" id="aimg_15984_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>184824g1jlohizpz47egjz.jpg</strong> <em class="xg1">(34.18 KB, 下载次数: 2)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTU5ODR8NDVmZTc2ZDN8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-2-26 22:03 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+ <br>
+<br>
+<br>
+6.附录和感谢<br>
+<br>
+Arduino作为当下最为流行的开源硬件，越来越受到广大电子发烧友的喜爱，VS for 
+Arduino其实已经问世很多年，只不过笔者最近才发现，本贴作为新人贴，主要也是整合一下前人的分享，很多功能还并不了解，希望能对使用
+Arduino的电子发烧友有所帮助。也希望能有更多的人进行分享，让开源成为主流。<br>
+<br>
+下笔匆匆，文中难免有疏漏之处，也请诸位多多指正，多多指教！<br>
+<br>
+<br>
+<br>
+感谢一下参考贴的楼主：<br>
+<br>
+<a href="http://www.arduino.cn/thread-1683-1-1.html" target="_blank">http://www.arduino.cn/thread-1683-1-1.html</a><br>
+<br>
+<a href="http://visualmicro.codeplex.com/" target="_blank">http://visualmicro.codeplex.com/</a><br>
+<br>
+<a href="http://www.visualmicro.com/" target="_blank">http://www.visualmicro.com/</a><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; ---2016.02.26
+ 于哈工大（威海）</font></font></font><br>
+<br>
+<br>
+</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_169915" class="cm">
+</div>
+
+<div id="post_rate_div_169915"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+<div id="p_btn" class="mtw mbm hm cl">
+<div class="tshare cl">
+<b>分享到:&nbsp;</b>
+
+
+<a href="http://www.arduino.cn/home.php?mod=spacecp&amp;ac=plugin&amp;id=qqconnect:spacecp&amp;pluginop=share&amp;sh_type=4&amp;thread_id=19413" id="k_share_to_qq" title="QQ好友和群" target="_blank"><i><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/qq_share.png" alt="QQ好友和群">QQ好友和群</i></a>
+<a href="javascript:void(0);" id="k_qqshare" onclick="postToQzone();" title="QQ空间"><i><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/qzone.gif" alt="QQ空间">QQ空间</i></a>
+<a href="javascript:void(0)" onclick="postToWb();" id="k_weiboshare" title="腾讯微博"><i><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/weibo.png" alt="腾讯微博">腾讯微博</i></a>
+<a href="javascript:void(0);" onclick="postToPengyou();" id="k_pengyoushare" title="腾讯朋友"><i><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/pengyou.png" alt="腾讯朋友">腾讯朋友</i></a>
+<script type="text/javascript">
+function postToWb(){
+var _t = encodeURI(document.title);
+var _url = encodeURIComponent(document.location);
+var _appkey = encodeURI("ce7fb946290e4109bdc9175108b6db3a");
+var _pic = "http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15952%26size%3D400x400%26key%3D3f7ebe2d75c78701%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15953%26size%3D400x400%26key%3D81f2c7e24b136123%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15954%26size%3D400x400%26key%3D34f37490c51ab905%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15955%26size%3D400x400%26key%3D3379ff977b025954%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15956%26size%3D400x400%26key%3Da08f064b5071cb7c%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15957%26size%3D400x400%26key%3De93cdbd8a1757038%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15958%26size%3D400x400%26key%3Dc0004843102e4ba6%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15959%26size%3D400x400%26key%3Dd9ca62114cc1dc24%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15960%26size%3D400x400%26key%3D3538f9be4381f37d%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15961%26size%3D400x400%26key%3Dbe8572e839823f9b%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15962%26size%3D400x400%26key%3D260b64c338b790dd%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15963%26size%3D400x400%26key%3D571dcb30e9dd7231%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15964%26size%3D400x400%26key%3Da9bf459e0f1eec39%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15965%26size%3D400x400%26key%3D275195a33292d647%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15966%26size%3D400x400%26key%3Dd6edba23c7c4596f%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15967%26size%3D400x400%26key%3D49eaa59af12f7f86%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15968%26size%3D400x400%26key%3Df38e2f712cfe6be6%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15969%26size%3D400x400%26key%3D85dfe256b1504787%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15970%26size%3D400x400%26key%3D4234ee9cf35e782d%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15971%26size%3D400x400%26key%3D6b791077884388b1%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15972%26size%3D400x400%26key%3Dc000068ef1911d41%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15973%26size%3D400x400%26key%3D9f776ab7835f0ef9%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15974%26size%3D400x400%26key%3D7186976e770eb99c%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15975%26size%3D400x400%26key%3D27e314e2a8a9cef2%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15976%26size%3D400x400%26key%3Daed955da6c86e174%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15977%26size%3D400x400%26key%3D1eebd73ba7110001%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15978%26size%3D400x400%26key%3Dcb72e13baac80851%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15979%26size%3D400x400%26key%3Ddc5a619cc01e17e0%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15980%26size%3D400x400%26key%3D5f31d9a2bc50da44%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15981%26size%3D400x400%26key%3Dd18ff180700ed7ce%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15982%26size%3D400x400%26key%3Dce99a475ea489b70%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15983%26size%3D400x400%26key%3Dc0bbf997d88c3aa2%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15984%26size%3D400x400%26key%3D4d79fb4efc1ca3e0%26nocache%3Dyes%26type%3Dfixnone";
+var _site = encodeURIComponent("Arduino中文社区");
+var _from = 'discuz';
+var _u = 'http://v.t.qq.com/share/share.php?url='+_url+'&appkey='+_appkey+'&site='+_site+'&pic='+_pic+'&title='+_t+'&from='+_from;
+window.open( _u,'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
+}
+function postToPengyou(){
+var _url = encodeURIComponent(document.location.href);
+var _site = encodeURIComponent("Arduino中文社区");
+var _title = encodeURIComponent("使用Visual Studio 开发Arduino及进行硬件调试");
+var _pics = "http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15952%26size%3D400x400%26key%3D3f7ebe2d75c78701%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15953%26size%3D400x400%26key%3D81f2c7e24b136123%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15954%26size%3D400x400%26key%3D34f37490c51ab905%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15955%26size%3D400x400%26key%3D3379ff977b025954%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15956%26size%3D400x400%26key%3Da08f064b5071cb7c%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15957%26size%3D400x400%26key%3De93cdbd8a1757038%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15958%26size%3D400x400%26key%3Dc0004843102e4ba6%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15959%26size%3D400x400%26key%3Dd9ca62114cc1dc24%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15960%26size%3D400x400%26key%3D3538f9be4381f37d%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15961%26size%3D400x400%26key%3Dbe8572e839823f9b%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15962%26size%3D400x400%26key%3D260b64c338b790dd%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15963%26size%3D400x400%26key%3D571dcb30e9dd7231%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15964%26size%3D400x400%26key%3Da9bf459e0f1eec39%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15965%26size%3D400x400%26key%3D275195a33292d647%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15966%26size%3D400x400%26key%3Dd6edba23c7c4596f%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15967%26size%3D400x400%26key%3D49eaa59af12f7f86%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15968%26size%3D400x400%26key%3Df38e2f712cfe6be6%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15969%26size%3D400x400%26key%3D85dfe256b1504787%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15970%26size%3D400x400%26key%3D4234ee9cf35e782d%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15971%26size%3D400x400%26key%3D6b791077884388b1%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15972%26size%3D400x400%26key%3Dc000068ef1911d41%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15973%26size%3D400x400%26key%3D9f776ab7835f0ef9%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15974%26size%3D400x400%26key%3D7186976e770eb99c%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15975%26size%3D400x400%26key%3D27e314e2a8a9cef2%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15976%26size%3D400x400%26key%3Daed955da6c86e174%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15977%26size%3D400x400%26key%3D1eebd73ba7110001%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15978%26size%3D400x400%26key%3Dcb72e13baac80851%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15979%26size%3D400x400%26key%3Ddc5a619cc01e17e0%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15980%26size%3D400x400%26key%3D5f31d9a2bc50da44%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15981%26size%3D400x400%26key%3Dd18ff180700ed7ce%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15982%26size%3D400x400%26key%3Dce99a475ea489b70%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15983%26size%3D400x400%26key%3Dc0bbf997d88c3aa2%26nocache%3Dyes%26type%3Dfixnone|http%3A%2F%2Fwww.arduino.cn%2Fforum.php%3Fmod%3Dimage%26aid%3D15984%26size%3D400x400%26key%3D4d79fb4efc1ca3e0%26nocache%3Dyes%26type%3Dfixnone";
+var _from = 'discuz';
+var _u = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?to=pengyou&url='+_url+'&site='+_site+'&title='+_title+'&pics='+_pics+'&from='+_from;
+window.open(_u);
+}
+</script>
+	
+
+
+<a href="javascript:;" onclick="showWindow('wechat_share', 'plugin.php?id=wechat:qrcode&amp;threadqr=19413&amp;access=yes&amp;share=yes')"><i><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/share.png" alt="微信">微信</i></a>
+
+
+
+</div>
+
+<a href="http://www.arduino.cn/home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=19413&amp;formhash=d62e4028" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'" title="收藏本帖"><i><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/fav.gif" alt="收藏">收藏<span id="favoritenumber">4</span></i></a>
+<a id="recommend_add" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=recommend&amp;do=add&amp;tid=19413&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = $('recommendv_add').innerHTML + ' 人支持'" title="顶一下"><i><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/rec_add.gif" alt="支持">支持<span id="recommendv_add" style="display:none">0</span></i></a>
+<a id="recommend_subtract" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=recommend&amp;do=subtract&amp;tid=19413&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = $('recommendv_subtract').innerHTML + ' 人反对'" title="踩一下"><i><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/rec_subtract.gif" alt="反对">反对<span id="recommendv_subtract" style="display:none">0</span></i></a>
+
+
+
+<a onclick="setTimeout('forstat()', 0);" href="javascript:void((function(s,d,e,r,l,p,t,z,c,o)%20{var%20f='http://service.weibo.com/share/share.php?appkey=389724847',u=z||d.location,p=['&amp;url=',e(u),'&amp;title=',e(t||d.title),'&amp;ralateUid=',o||'','&amp;sourceUrl=',e(l),'&amp;content=',c||'gb2312','&amp;pic=',e(p||'')].join('');function%20a(){if(!window.open([f,p].join(''),'mb',%20['toolbar=0,status=0,resizable=1,width=440,height=430,left=',(s.width-%20440)/2,',top=',(s.height-430)/2].join('')))u.href=[f,p].join('');};%20if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0);}else{a();}})%20(screen,document,encodeURIComponent,'','','','','','gbk',%20'1641473574'));"><i><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/icon_logo.png">分享到微博</i></a>
+  
+        
+<div style="display: inline-block;margin-right: 3px;padding-right: 4px; vertical-align: top;white-space: nowrap;"><wb:like appkey="389724847" type="simple"><div class="WB_widget WB_praise" node-type="outer"><div class="praise_btn_line" node-type="inner"><a node-type="likeBtn" action-type="like" action-data="type=like" href="javascript:;" class="praise_btn status_origin "><cite class="praise_btn_inner"><u class="WB_ico_logo"></u><cite class="praise_text">赞</cite></cite></a></div></div></wb:like></div>
+  
+</div>
+</td>
+</tr>
+<tr id="_postposition169915"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.arduino.cn/forum.php?mod=post&amp;action=reply&amp;fid=45&amp;tid=19413&amp;reppost=169915&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+</em>
+
+<p>
+<a href="javascript:;" onclick="showWindow('miscreport169915', 'misc.php?mod=report&amp;rtype=post&amp;rid=169915&amp;tid=19413&amp;fid=45', 'get', -1);return false;">举报</a>
+</p>
+
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+<script type="text/javascript" reload="1">
+aimgcount[169915] = ['15952','15953','15954','15955','15956','15957','15958','15959','15960','15961','15962','15963','15964','15965','15966','15967','15968','15969','15970','15971','15972','15973','15974','15975','15976','15977','15978','15979','15980','15981','15982','15983','15984'];
+attachimggroup(169915);
+var aimgfid = 0;
+</script>
+</div><div id="post_169919"><table id="pid169919" class="plhin" summary="pid169919" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar169919" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.arduino.cn/space-uid-45731.html" target="_blank" class="xw1">Z-Maker</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_" id="userinfo169919" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo169919_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.arduino.cn/space-uid-45731.html" target="_blank" class="xi2">Z-Maker</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.arduino.cn/home.php?mod=space&amp;uid=45731&amp;do=profile" target="_blank" class="xi2">118</a></dd>
+</dl><div class="imicn">
+<a href="http://www.arduino.cn/home.php?mod=space&amp;uid=45731&amp;do=profile" target="_blank" title="查看详细资料"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar"><a href="http://www.arduino.cn/space-uid-45731.html" class="avtm" target="_blank"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/avatar_002.gif"></a></div>
+</div>
+<p><img title="未绑定新浪微博" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/icon_off.gif"></p><p>该用户从未签到</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">参加活动: <em>0  </em>次</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">组织活动: <em>0  </em>次</p>
+ </div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=19413&amp;pid=169919" id="postnum169919" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+沙发</a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon169919" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/ico_lz.png">
+&nbsp;楼主<span class="pipe">|</span>
+<em id="authorposton169919">发表于 2016-2-26 19:50</em>
+<span class="pipe">|</span>
+<a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=19413&amp;page=1&amp;authorid=45731" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_169919">
+附件添加不了，去此贴一楼可以下载，帖子里图不太清楚，PDF文档还比较清楚<br>
+<a href="http://www.geek-workshop.com/forum.php?mod=viewthread&amp;tid=26200&amp;page=1&amp;extra=#pid116917" target="_blank">http://www.geek-workshop.com/for ... mp;extra=#pid116917</a></td></tr></tbody></table>
+
+
+</div>
+<div id="comment_169919" class="cm">
+</div>
+
+<div id="post_rate_div_169919"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition169919"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.arduino.cn/forum.php?mod=post&amp;action=reply&amp;fid=45&amp;tid=19413&amp;repquote=169919&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=19413&amp;pid=169919&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_169919').innerHTML ? $('review_support_169919').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_169919"></span></a>
+<a class="replysubtract" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=19413&amp;pid=169919&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_169919').innerHTML ? $('review_against_169919').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_169919"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" onclick="showWindow('miscreport169919', 'misc.php?mod=report&amp;rtype=post&amp;rid=169919&amp;tid=19413&amp;fid=45', 'get', -1);return false;">举报</a>
+</p>
+
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_170380"><table id="pid170380" class="plhin" summary="pid170380" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar170380" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.arduino.cn/space-uid-62885.html" target="_blank" class="xw1">sun5304</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_" id="userinfo170380" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo170380_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.arduino.cn/space-uid-62885.html" target="_blank" class="xi2">sun5304</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.arduino.cn/home.php?mod=space&amp;uid=62885&amp;do=profile" target="_blank" class="xi2">174</a></dd>
+</dl><div class="imicn">
+<a href="http://www.arduino.cn/home.php?mod=space&amp;uid=62885&amp;do=profile" target="_blank" title="查看详细资料"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar"><a href="http://www.arduino.cn/space-uid-62885.html" class="avtm" target="_blank"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/avatar.jpg"></a></div>
+</div>
+<p><img title="未绑定新浪微博" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/icon_off.gif"></p><div class="qdsmile"><li><center>TA的每日心情</center><table><tbody><tr><th><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/ym.gif"></th><th><font size="5px">郁闷</font><br>2016-4-12 17:33</th></tr></tbody></table></li></div><p>签到天数: 22 天</p><p>[LV.4]偶尔看看III</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">参加活动: <em>0  </em>次</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">组织活动: <em>0  </em>次</p>
+ </div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=19413&amp;pid=170380" id="postnum170380" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+板凳</a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon170380" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/online_member.gif">
+<em id="authorposton170380">发表于 2016-2-29 14:40</em>
+<span class="pipe">|</span>
+<a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=19413&amp;page=1&amp;authorid=62885" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_170380">
+感谢楼主提供，新人来学习学习。<img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/smile.gif" smilieid="1" alt="" border="0"></td></tr></tbody></table>
+
+
+</div>
+<div id="comment_170380" class="cm">
+</div>
+
+<div id="post_rate_div_170380"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition170380"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.arduino.cn/forum.php?mod=post&amp;action=reply&amp;fid=45&amp;tid=19413&amp;repquote=170380&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=19413&amp;pid=170380&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_170380').innerHTML ? $('review_support_170380').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_170380"></span></a>
+<a class="replysubtract" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=19413&amp;pid=170380&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_170380').innerHTML ? $('review_against_170380').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_170380"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" onclick="showWindow('miscreport170380', 'misc.php?mod=report&amp;rtype=post&amp;rid=170380&amp;tid=19413&amp;fid=45', 'get', -1);return false;">举报</a>
+</p>
+
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_170383"><table id="pid170383" class="plhin" summary="pid170383" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar170383" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.arduino.cn/space-uid-63064.html" target="_blank" class="xw1">Leo121</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_" id="userinfo170383" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo170383_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.arduino.cn/space-uid-63064.html" target="_blank" class="xi2">Leo121</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.arduino.cn/home.php?mod=space&amp;uid=63064&amp;do=profile" target="_blank" class="xi2">485</a></dd>
+</dl><div class="imicn">
+<a href="http://www.arduino.cn/home.php?mod=space&amp;uid=63064&amp;do=profile" target="_blank" title="查看详细资料"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar"><a href="http://www.arduino.cn/space-uid-63064.html" class="avtm" target="_blank"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/avatar_003.gif"></a></div>
+</div>
+<p><img title="未绑定新浪微博" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/icon_off.gif"></p><div class="qdsmile"><li><center>TA的每日心情</center><table><tbody><tr><th><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/kx.gif"></th><th><font size="5px">开心</font><br>2016-12-13 00:51</th></tr></tbody></table></li></div><p>签到天数: 46 天</p><p>[LV.5]常住居民I</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">参加活动: <em>0  </em>次</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">组织活动: <em>0  </em>次</p>
+ </div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=19413&amp;pid=170383" id="postnum170383" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+地板</a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon170383" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/online_member.gif">
+<em id="authorposton170383">发表于 2016-2-29 15:11</em>
+<span class="pipe">|</span>
+<a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=19413&amp;page=1&amp;authorid=63064" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_170383">
+支持intelisense和snippet吗?</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_170383" class="cm">
+</div>
+
+<div id="post_rate_div_170383"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition170383"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.arduino.cn/forum.php?mod=post&amp;action=reply&amp;fid=45&amp;tid=19413&amp;repquote=170383&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=19413&amp;pid=170383&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_170383').innerHTML ? $('review_support_170383').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_170383"></span></a>
+<a class="replysubtract" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=19413&amp;pid=170383&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_170383').innerHTML ? $('review_against_170383').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_170383"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" onclick="showWindow('miscreport170383', 'misc.php?mod=report&amp;rtype=post&amp;rid=170383&amp;tid=19413&amp;fid=45', 'get', -1);return false;">举报</a>
+</p>
+
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_170407"><table id="pid170407" class="plhin" summary="pid170407" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar170407" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.arduino.cn/space-uid-45731.html" target="_blank" class="xw1">Z-Maker</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_" id="userinfo170407" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo170407_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.arduino.cn/space-uid-45731.html" target="_blank" class="xi2">Z-Maker</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.arduino.cn/home.php?mod=space&amp;uid=45731&amp;do=profile" target="_blank" class="xi2">118</a></dd>
+</dl><div class="imicn">
+<a href="http://www.arduino.cn/home.php?mod=space&amp;uid=45731&amp;do=profile" target="_blank" title="查看详细资料"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar"><a href="http://www.arduino.cn/space-uid-45731.html" class="avtm" target="_blank"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/avatar_002.gif"></a></div>
+</div>
+<p><img title="未绑定新浪微博" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/icon_off.gif"></p><p>该用户从未签到</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">参加活动: <em>0  </em>次</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">组织活动: <em>0  </em>次</p>
+ </div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=19413&amp;pid=170407" id="postnum170407" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>5</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon170407" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/ico_lz.png">
+&nbsp;楼主<span class="pipe">|</span>
+<em id="authorposton170407">发表于 2016-2-29 17:57</em>
+<span class="pipe">|</span>
+<a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=19413&amp;page=1&amp;authorid=45731" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_170407">
+<div class="quote"><blockquote><font size="2"><a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=findpost&amp;pid=170383&amp;ptid=19413" target="_blank"><font color="#999999">Leo121 发表于 2016-2-29 15:11</font></a></font><br>
+支持intelisense和snippet吗?</blockquote></div><br>
+VS我也是新手，这两个功能简单试了一下，有些是可以的。比如for循环</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_170407" class="cm">
+</div>
+
+<div id="post_rate_div_170407"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition170407"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.arduino.cn/forum.php?mod=post&amp;action=reply&amp;fid=45&amp;tid=19413&amp;repquote=170407&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=19413&amp;pid=170407&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_170407').innerHTML ? $('review_support_170407').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_170407"></span></a>
+<a class="replysubtract" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=19413&amp;pid=170407&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_170407').innerHTML ? $('review_against_170407').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_170407"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" onclick="showWindow('miscreport170407', 'misc.php?mod=report&amp;rtype=post&amp;rid=170407&amp;tid=19413&amp;fid=45', 'get', -1);return false;">举报</a>
+</p>
+
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_171805"><table id="pid171805" class="plhin" summary="pid171805" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar171805" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.arduino.cn/space-uid-69863.html" target="_blank" class="xw1">海鲜真好味</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_" id="userinfo171805" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo171805_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.arduino.cn/space-uid-69863.html" target="_blank" class="xi2">海鲜真好味</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.arduino.cn/home.php?mod=space&amp;uid=69863&amp;do=profile" target="_blank" class="xi2">20</a></dd>
+</dl><div class="imicn">
+<a href="http://www.arduino.cn/home.php?mod=space&amp;uid=69863&amp;do=profile" target="_blank" title="查看详细资料"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar"><a href="http://www.arduino.cn/space-uid-69863.html" class="avtm" target="_blank"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/avatar.gif"></a></div>
+</div>
+<p><img title="未绑定新浪微博" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/icon_off.gif"></p><p>该用户从未签到</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">参加活动: <em>0  </em>次</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">组织活动: <em>0  </em>次</p>
+ </div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=19413&amp;pid=171805" id="postnum171805" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>6</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon171805" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/online_member.gif">
+<em id="authorposton171805">发表于 2016-3-6 22:55</em>
+<span class="pipe">|</span>
+<a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=19413&amp;page=1&amp;authorid=69863" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_171805">
+Compiling 'arcn' for 'Arduino/Genuino Uno'<br>
+Build folder: file:///C:/Users/sb/AppData/Local/V.Micro/Arduino/Builds/arcn/uno<br>
+error*:C:\Users\sb\AppData\Local\V.Micro\Arduino\Builds\arcn\uno\core.a: No such file or directory<br>
+Error creating .elf<br>
+<br>
+我编译时出现了上面这段错误，请问是什么意思</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_171805" class="cm">
+</div>
+
+<div id="post_rate_div_171805"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition171805"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.arduino.cn/forum.php?mod=post&amp;action=reply&amp;fid=45&amp;tid=19413&amp;repquote=171805&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=19413&amp;pid=171805&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_171805').innerHTML ? $('review_support_171805').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_171805"></span></a>
+<a class="replysubtract" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=19413&amp;pid=171805&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_171805').innerHTML ? $('review_against_171805').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_171805"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" onclick="showWindow('miscreport171805', 'misc.php?mod=report&amp;rtype=post&amp;rid=171805&amp;tid=19413&amp;fid=45', 'get', -1);return false;">举报</a>
+</p>
+
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_171838"><table id="pid171838" class="plhin" summary="pid171838" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar171838" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.arduino.cn/space-uid-45731.html" target="_blank" class="xw1">Z-Maker</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_" id="userinfo171838" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo171838_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.arduino.cn/space-uid-45731.html" target="_blank" class="xi2">Z-Maker</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.arduino.cn/home.php?mod=space&amp;uid=45731&amp;do=profile" target="_blank" class="xi2">118</a></dd>
+</dl><div class="imicn">
+<a href="http://www.arduino.cn/home.php?mod=space&amp;uid=45731&amp;do=profile" target="_blank" title="查看详细资料"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar"><a href="http://www.arduino.cn/space-uid-45731.html" class="avtm" target="_blank"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/avatar_002.gif"></a></div>
+</div>
+<p><img title="未绑定新浪微博" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/icon_off.gif"></p><p>该用户从未签到</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">参加活动: <em>0  </em>次</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">组织活动: <em>0  </em>次</p>
+ </div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=19413&amp;pid=171838" id="postnum171838" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>7</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon171838" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/ico_lz.png">
+&nbsp;楼主<span class="pipe">|</span>
+<em id="authorposton171838">发表于 2016-3-7 07:37</em>
+<span class="pipe">|</span>
+<a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=19413&amp;page=1&amp;authorid=45731" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_171838">
+<div class="quote"><blockquote><font size="2"><a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=findpost&amp;pid=171805&amp;ptid=19413" target="_blank"><font color="#999999">海鲜真好味 发表于 2016-3-6 22:55</font></a></font><br>
+Compiling 'arcn' for 'Arduino/Genuino Uno'<br>
+Build folder: file:///C:/Users/sb/AppData/Local/V.Micro/A ...</blockquote></div><br>
+No such files,很明显是提示，没有库文件</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_171838" class="cm">
+</div>
+
+<div id="post_rate_div_171838"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition171838"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.arduino.cn/forum.php?mod=post&amp;action=reply&amp;fid=45&amp;tid=19413&amp;repquote=171838&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=19413&amp;pid=171838&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_171838').innerHTML ? $('review_support_171838').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_171838"></span></a>
+<a class="replysubtract" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=19413&amp;pid=171838&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_171838').innerHTML ? $('review_against_171838').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_171838"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" onclick="showWindow('miscreport171838', 'misc.php?mod=report&amp;rtype=post&amp;rid=171838&amp;tid=19413&amp;fid=45', 'get', -1);return false;">举报</a>
+</p>
+
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_171996"><table id="pid171996" class="plhin" summary="pid171996" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar171996" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.arduino.cn/space-uid-69863.html" target="_blank" class="xw1">海鲜真好味</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_" id="userinfo171996" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo171996_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.arduino.cn/space-uid-69863.html" target="_blank" class="xi2">海鲜真好味</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.arduino.cn/home.php?mod=space&amp;uid=69863&amp;do=profile" target="_blank" class="xi2">20</a></dd>
+</dl><div class="imicn">
+<a href="http://www.arduino.cn/home.php?mod=space&amp;uid=69863&amp;do=profile" target="_blank" title="查看详细资料"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar"><a href="http://www.arduino.cn/space-uid-69863.html" class="avtm" target="_blank"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/avatar.gif"></a></div>
+</div>
+<p><img title="未绑定新浪微博" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/icon_off.gif"></p><p>该用户从未签到</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">参加活动: <em>0  </em>次</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">组织活动: <em>0  </em>次</p>
+ </div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=19413&amp;pid=171996" id="postnum171996" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>8</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon171996" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/online_member.gif">
+<em id="authorposton171996">发表于 2016-3-7 19:10</em>
+<span class="pipe">|</span>
+<a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=19413&amp;page=1&amp;authorid=69863" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_171996">
+<div class="quote"><blockquote><font size="2"><a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=findpost&amp;pid=171838&amp;ptid=19413" target="_blank"><font color="#999999">Z-Maker 发表于 2016-3-7 07:37</font></a></font><br>
+No such files,很明显是提示，没有库文件</blockquote></div><br>
+那我该怎么办<img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/cry.gif" smilieid="4" alt="" border="0"></td></tr></tbody></table>
+
+
+</div>
+<div id="comment_171996" class="cm">
+</div>
+
+<div id="post_rate_div_171996"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition171996"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.arduino.cn/forum.php?mod=post&amp;action=reply&amp;fid=45&amp;tid=19413&amp;repquote=171996&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=19413&amp;pid=171996&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_171996').innerHTML ? $('review_support_171996').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_171996"></span></a>
+<a class="replysubtract" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=19413&amp;pid=171996&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_171996').innerHTML ? $('review_against_171996').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_171996"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" onclick="showWindow('miscreport171996', 'misc.php?mod=report&amp;rtype=post&amp;rid=171996&amp;tid=19413&amp;fid=45', 'get', -1);return false;">举报</a>
+</p>
+
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_172201"><table id="pid172201" class="plhin" summary="pid172201" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar172201" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.arduino.cn/space-uid-45731.html" target="_blank" class="xw1">Z-Maker</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_" id="userinfo172201" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo172201_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.arduino.cn/space-uid-45731.html" target="_blank" class="xi2">Z-Maker</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.arduino.cn/home.php?mod=space&amp;uid=45731&amp;do=profile" target="_blank" class="xi2">118</a></dd>
+</dl><div class="imicn">
+<a href="http://www.arduino.cn/home.php?mod=space&amp;uid=45731&amp;do=profile" target="_blank" title="查看详细资料"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar"><a href="http://www.arduino.cn/space-uid-45731.html" class="avtm" target="_blank"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/avatar_002.gif"></a></div>
+</div>
+<p><img title="未绑定新浪微博" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/icon_off.gif"></p><p>该用户从未签到</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">参加活动: <em>0  </em>次</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">组织活动: <em>0  </em>次</p>
+ </div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=19413&amp;pid=172201" id="postnum172201" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>9</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon172201" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/ico_lz.png">
+&nbsp;楼主<span class="pipe">|</span>
+<em id="authorposton172201">发表于 2016-3-8 15:54</em>
+<span class="pipe">|</span>
+<a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=19413&amp;page=1&amp;authorid=45731" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_172201">
+<div class="quote"><blockquote><font size="2"><a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=findpost&amp;pid=171996&amp;ptid=19413" target="_blank"><font color="#999999">海鲜真好味 发表于 2016-3-7 19:10</font></a></font><br>
+那我该怎么办</blockquote></div><br>
+把库文件放到安装路径的libraries里</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_172201" class="cm">
+</div>
+
+<div id="post_rate_div_172201"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition172201"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.arduino.cn/forum.php?mod=post&amp;action=reply&amp;fid=45&amp;tid=19413&amp;repquote=172201&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=19413&amp;pid=172201&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_172201').innerHTML ? $('review_support_172201').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_172201"></span></a>
+<a class="replysubtract" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=19413&amp;pid=172201&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_172201').innerHTML ? $('review_against_172201').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_172201"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" onclick="showWindow('miscreport172201', 'misc.php?mod=report&amp;rtype=post&amp;rid=172201&amp;tid=19413&amp;fid=45', 'get', -1);return false;">举报</a>
+</p>
+
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_197421"><table id="pid197421" class="plhin" summary="pid197421" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar197421" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.arduino.cn/space-uid-81864.html" target="_blank" class="xw1">Grooove</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_" id="userinfo197421" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo197421_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.arduino.cn/space-uid-81864.html" target="_blank" class="xi2">Grooove</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.arduino.cn/home.php?mod=space&amp;uid=81864&amp;do=profile" target="_blank" class="xi2">89</a></dd>
+</dl><div class="imicn">
+<a href="http://www.arduino.cn/home.php?mod=space&amp;uid=81864&amp;do=profile" target="_blank" title="查看详细资料"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar"><a href="http://www.arduino.cn/space-uid-81864.html" class="avtm" target="_blank"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/avatar_002.jpg"></a></div>
+</div>
+<p><img title="未绑定新浪微博" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/icon_off.gif"></p><div class="qdsmile"><li><center>TA的每日心情</center><table><tbody><tr><th><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/ng.gif"></th><th><font size="5px">难过</font><br>2016-12-1 22:47</th></tr></tbody></table></li></div><p>签到天数: 2 天</p><p>[LV.1]初来乍到</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">参加活动: <em>0  </em>次</p>
+<p><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/run.png">组织活动: <em>0  </em>次</p>
+ </div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.arduino.cn/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=19413&amp;pid=197421" id="postnum197421" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>10</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon197421" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/online_member.gif">
+<em id="authorposton197421">发表于 2016-6-18 13:55</em>
+<span class="pipe">|</span>
+<a href="http://www.arduino.cn/forum.php?mod=viewthread&amp;tid=19413&amp;page=1&amp;authorid=81864" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_197421">
+楼主好，我安装好vs2015和Arduino插件，新建sketch工程后为何Arduino的关键词不能识别，提示“未定义标识符”。也就是IDE无
+法识别语法。我看了vs设置里面也将.ino和.pde添加进C++了。board也显示0，右侧箭头点了也是空的，请问怎么添加？
+<ignore_js_op>
+
+<img id="aimg_19524" aid="19524" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/none.gif" zoomfile="data/attachment/forum/201606/18/135412a3yqpnz939k0q9h9.png" file="data/attachment/forum/201606/18/135412a3yqpnz939k0q9h9.png" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" width="433">
+
+<div class="tip tip_4 aimg_tip" id="aimg_19524_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>图像 1.png</strong> <em class="xg1">(2.77 KB, 下载次数: 0)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTk1MjR8YTBlYWU1N2Z8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-6-18 13:54 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+
+<ignore_js_op>
+
+<img id="aimg_19525" aid="19525" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/none.gif" zoomfile="data/attachment/forum/201606/18/135413jttpv8et8qylzqle.png" file="data/attachment/forum/201606/18/135413jttpv8et8qylzqle.png" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" width="432">
+
+<div class="tip tip_4 aimg_tip" id="aimg_19525_menu" style="position: absolute; display: none" disautofocus="true">
+<div class="xs0">
+<p><strong>图像 2.png</strong> <em class="xg1">(7.91 KB, 下载次数: 0)</em></p>
+<p>
+<a href="http://www.arduino.cn/forum.php?mod=attachment&amp;aid=MTk1MjV8YmI1MTFhYzJ8MTQ4MTU5MzM4NnwwfDE5NDEz&amp;nothumb=yes" target="_blank">下载附件</a>
+
+</p>
+
+<p class="xg1 y">2016-6-18 13:54 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+<br>
+<br>
+</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_197421" class="cm">
+</div>
+
+<div id="post_rate_div_197421"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition197421"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.arduino.cn/forum.php?mod=post&amp;action=reply&amp;fid=45&amp;tid=19413&amp;repquote=197421&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=19413&amp;pid=197421&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_197421').innerHTML ? $('review_support_197421').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_197421"></span></a>
+<a class="replysubtract" href="http://www.arduino.cn/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=19413&amp;pid=197421&amp;hash=d62e4028" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_197421').innerHTML ? $('review_against_197421').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_197421"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" onclick="showWindow('miscreport197421', 'misc.php?mod=report&amp;rtype=post&amp;rid=197421&amp;tid=19413&amp;fid=45', 'get', -1);return false;">举报</a>
+</p>
+
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+<script type="text/javascript" reload="1">
+aimgcount[197421] = ['19524','19525'];
+attachimggroup(197421);
+var aimgfid = 0;
+</script>
+</div><div id="postlistreply" class="pl"><div id="post_new" class="viewthread_table" style="display: none"></div></div>
+</div>
+
+
+<form method="post" autocomplete="off" name="modactions" id="modactions">
+<input name="formhash" value="d62e4028" type="hidden">
+<input name="optgroup" type="hidden">
+<input name="operation" type="hidden">
+<input name="listextra" value="page%3D1" type="hidden">
+<input name="page" value="1" type="hidden">
+</form>
+
+
+<div class="pgbtn"><a href="http://www.arduino.cn/thread-19413-2-1.html" hidefocus="true" class="bm_h">下一页 »</a></div>
+
+<div class="pgs mtm mbm cl">
+<div class="pg"><strong>1</strong><a href="http://www.arduino.cn/thread-19413-2-1.html">2</a><label><input name="custompage" class="px" size="2" title="输入页码，按回车快速跳转" value="1" onkeydown="if(event.keyCode==13) {window.location='forum.php?mod=viewthread&amp;tid=19413&amp;extra=page%3D1&amp;page='+this.value;; doane(event);}" type="text"><span title="共 2 页"> / 2 页</span></label><a href="http://www.arduino.cn/thread-19413-2-1.html" class="nxt">下一页</a></div><span class="pgb y" id="visitedforumstmp" onmouseover="$('visitedforums').id = 'visitedforumstmp';this.id = 'visitedforums';showMenu({'ctrlid':this.id,'pos':'21'})"><a href="http://www.arduino.cn/forum-45-1.html">返回列表</a></span>
+<a id="newspecialtmp" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" onclick="showWindow('newthread', 'forum.php?mod=post&amp;action=newthread&amp;fid=45')" href="javascript:;" title="发新帖"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/pn_post.png" alt="发新帖"></a>
+</div>
+
+<!--[diy=diyfastposttop]--><div id="diyfastposttop" class="area"></div><!--[/diy]-->
+<script type="text/javascript">
+var postminchars = parseInt('10');
+var postmaxchars = parseInt('50000');
+var disablepostctrl = parseInt('0');
+</script>
+
+<div id="f_pst" class="pl bm bmw">
+<form method="post" autocomplete="off" id="fastpostform" action="forum.php?mod=post&amp;action=reply&amp;fid=45&amp;tid=19413&amp;extra=page%3D1&amp;replysubmit=yes&amp;infloat=yes&amp;handlekey=fastpost" onsubmit="return fastpostvalidate(this)">
+<table cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls">
+</td>
+<td class="plc">
+
+<span id="fastpostreturn"></span>
+
+
+<div class="cl">
+<div id="fastsmiliesdiv" class="y"><div id="fastsmiliesdiv_data"><div id="fastsmilies"></div></div></div><div class="hasfsl" id="fastposteditor">
+<div class="tedt mtn">
+<div class="bar">
+<span class="y">
+<a href="http://www.arduino.cn/forum.php?mod=post&amp;action=reply&amp;fid=45&amp;tid=19413" onclick="return switchAdvanceMode(this.href)">高级模式</a>
+</span><script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/seditor.js" type="text/javascript"></script>
+<div class="fpd">
+<a href="javascript:;" title="文字加粗" class="fbld">B</a>
+<a href="javascript:;" title="设置文字颜色" class="fclr" id="fastpostforecolor">Color</a>
+<a id="fastpostimg" href="javascript:;" title="图片" class="fmg">Image</a>
+<a id="fastposturl" href="javascript:;" title="添加链接" class="flnk">Link</a>
+<a id="fastpostquote" href="javascript:;" title="引用" class="fqt">Quote</a>
+<a id="fastpostcode" href="javascript:;" title="代码" class="fcd">Code</a>
+<a href="javascript:;" class="fsml" id="fastpostsml">Smilies</a>
+</div></div>
+<div class="area">
+<div class="pt hm">
+您需要登录后才可以回帖 <a href="http://www.arduino.cn/member.php?mod=logging&amp;action=login" onclick="showWindow('login', this.href)" class="xi2">登录</a> | <a href="http://www.arduino.cn/member.php?mod=zc" class="xi2">立即注册</a>
+
+
+<a href="http://www.arduino.cn/connect.php?mod=login&amp;op=init&amp;referer=forum.php%3Fmod%3Dviewthread%26tid%3D19413%26extra%3Dpage%253D1%26page%3D1&amp;statfrom=login" target="_top" rel="nofollow"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/qq_login.gif" class="vm"></a>
+
+
+<a href="http://www.arduino.cn/wechat-login.html"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/wechat_login.png" class="vm"></a>
+&nbsp;<a rel="nofollow" target="_top" href="http://www.arduino.cn/plugin.php?id=ljxlwb&amp;opp=in"><img class="vm" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/weibo_login.png"></a></div>
+</div>
+</div>
+</div>
+</div>
+<div id="seccheck_fastpost">
+</div>
+
+
+<input name="formhash" value="d62e4028" type="hidden">
+<input name="usesig" value="" type="hidden">
+<input name="subject" value="  " type="hidden">
+<p class="ptm pnpost">
+<a href="http://www.arduino.cn/home.php?mod=spacecp&amp;ac=credit&amp;op=rule&amp;fid=45" class="y" target="_blank">本版积分规则</a>
+<button type="button" onclick="showWindow('login', 'member.php?mod=logging&amp;action=login&amp;guestmessage=yes')" onmouseover="checkpostrule('seccheck_fastpost', 'ac=reply');this.onmouseover=null" name="replysubmit" id="fastpostsubmit" class="pn pnc vm" value="replysubmit" tabindex="5"><strong>发表回复</strong></button>
+<label for="fastpostrefresh"><input id="fastpostrefresh" class="pc" type="checkbox">回帖后跳转到最后一页</label>
+<script type="text/javascript">if(getcookie('fastpostrefresh') == 1) {$('fastpostrefresh').checked=true;}</script>
+</p>
+</td>
+</tr>
+</tbody></table>
+</form>
+</div>
+
+<script type="text/javascript">
+var connect_qzone_share_url = '';
+var connect_weibo_share_url = '';
+var connect_thread_info = {
+thread_url: 'http://www.arduino.cn/thread-19413-1-1.html',
+thread_id: '19413',
+post_id: '',
+forum_id: '45',
+author_id: '',
+author: ''
+};
+
+connect_autoshare = '';
+connect_isbind = '';
+if(connect_autoshare == 1 && connect_isbind) {
+_attachEvent(window, 'load', function(){
+connect_share(connect_weibo_share_url, connect_openid);
+});
+}
+</script>
+
+
+<div id="visitedforums_menu" class="p_pop blk cl" style="display: none;">
+<table cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td id="v_forums">
+<h3 class="mbn pbn bbda xg1">浏览过的版块</h3>
+<ul class="xl xl1">
+<li><a href="http://www.arduino.cn/forum-48-1.html">求助区</a></li></ul>
+</td>
+</tr>
+</tbody></table>
+</div>
+<script type="text/javascript">
+new lazyload();
+</script>
+<script type="text/javascript">document.onkeyup = function(e){keyPageScroll(e, 0, 1, 'forum.php?mod=viewthread&tid=19413', 1);}</script>
+</div>
+
+<div class="wp mtn">
+<!--[diy=diy3]--><div id="diy3" class="area"></div><!--[/diy]-->
+</div>
+
+<script type="text/javascript">
+function succeedhandle_followmod(url, msg, values) {
+var fObj = $('followmod_'+values['fuid']);
+if(values['type'] == 'add') {
+fObj.innerHTML = '不收听';
+fObj.href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid'];
+} else if(values['type'] == 'del') {
+fObj.innerHTML = '收听TA';
+fObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash=d62e4028&fuid='+values['fuid'];
+}
+}
+fixed_avatar([169915,169919,170380,170383,170407,171805,171838,171996,172201,197421], 1);
+</script>	</div>
+  </div>
+
+
+<div class="focus" id="sitefocus">
+<div class="bm">
+<div class="bm_h cl">
+<a href="javascript:;" onclick="setcookie('nofocus_forum', 1, 1*3600);$('sitefocus').style.display='none'" class="y" title="关闭">关闭</a>
+<h2>
+推荐主题<span id="focus_ctrl" class="fctrl"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/pic_nv_prev.gif" alt="上一条" title="上一条" id="focusprev" class="cur1" onclick="showfocus('prev');"> <em><span id="focuscur">1</span>/4</em> <img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/pic_nv_next.gif" alt="下一条" title="下一条" id="focusnext" class="cur1" onclick="showfocus('next')"></span>
+</h2>
+</div>
+<div class="bm_c" id="focus_con">
+<dl class="xld cl bbda">
+<dt><a href="http://arduino.cn/thread-1066-1-1.html" class="xi2" target="_blank">Arduino教程汇总贴</a></dt>
+<dd>初学者必看</dd>
+</dl>
+<p class="ptn cl"><a href="http://arduino.cn/thread-1066-1-1.html" class="xi2 y" target="_blank">查看 »</a></p>
+</div>
+</div>
+</div><div class="bm_c" style="display: none" id="focus_0">
+<dl class="xld cl bbda">
+<dt><a href="http://arduino.cn/thread-1066-1-1.html" class="xi2" target="_blank">Arduino教程汇总贴</a></dt>
+<dd>初学者必看</dd>
+</dl>
+<p class="ptn cl"><a href="http://arduino.cn/thread-1066-1-1.html" class="xi2 y" target="_blank">查看 »</a></p>
+</div><div class="bm_c" style="display: none" id="focus_1">
+<dl class="xld cl bbda">
+<dt><a href="http://www.arduino.cn/forum-68-1.html" class="xi2" target="_blank">社区活动</a></dt>
+<dd>社区最新活动，欢迎大家来玩~</dd>
+</dl>
+<p class="ptn cl"><a href="http://www.arduino.cn/forum-68-1.html" class="xi2 y" target="_blank">查看 »</a></p>
+</div><div class="bm_c" style="display: none" id="focus_2">
+<dl class="xld cl bbda">
+<dt><a href="http://www.arduino.cn/thread-19311-1-1.html" class="xi2" target="_blank">免费的激光雕刻机加工服务</a></dt>
+<dd>2016年3月1日起，社区将面向所有在社区发表过精华帖的用户，提供免费的激光雕刻机加工服务。</dd>
+</dl>
+<p class="ptn cl"><a href="http://www.arduino.cn/thread-19311-1-1.html" class="xi2 y" target="_blank">查看 »</a></p>
+</div><div class="bm_c" style="display: none" id="focus_3">
+<dl class="xld cl bbda">
+<dt><a href="http://www.douyu.com/arduinocn" class="xi2" target="_blank">Arduino中文社区直播间开播啦~</a></dt>
+<dd>1、主播手把手带你从上到下、由内而外地了解、把玩Arduino
+2、围观社区大神在线秀技术
+3、提供给优秀的团队与吃瓜群众交流学习的机会
+</dd>
+</dl>
+<p class="ptn cl"><a href="http://www.douyu.com/arduinocn" class="xi2 y" target="_blank">查看 »</a></p>
+</div><script type="text/javascript">
+var focusnum = 4;
+if(focusnum < 2) {
+$('focus_ctrl').style.display = 'none';
+}
+if(!$('focuscur').innerHTML) {
+var randomnum = parseInt(Math.round(Math.random() * focusnum));
+$('focuscur').innerHTML = Math.max(1, randomnum);
+}
+showfocus();
+var focusautoshow = window.setInterval('showfocus(\'next\', 1);', 5000);
+</script>
+
+
+
+
+<div id="wechat_float_qrcode" class="p_pop xg1" style="text-align: center; float: left; position: fixed; top: 220px; z-index: 100; margin-left: 2px; width: 110px; left: 1175px; right: auto;">
+<p class="cl"><img class="y" style="cursor:pointer" onclick="display('wechat_float_qrcode');setcookie('wechatfqrc', 1, 86400)" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/ad_close.gif"></p>
+<img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/plugin.jpg" width="98">
+<p>微信扫码，手机阅读</p>
+</div>
+<script>
+function wechat_qrcode(type) {
+if(type && $('wechat_float_qrcode').style.display == 'none') {
+return;
+}
+var qrleft = parseInt($('ft').clientWidth + parseInt(fetchOffset($('ft'))['left']));
+$('wechat_float_qrcode').style.display = '';
+if(qrleft + $('wechat_float_qrcode').clientWidth > document.documentElement.clientWidth) {
+$('wechat_float_qrcode').style.cssFloat = 'right';
+$('wechat_float_qrcode').style.left = 'auto';
+$('wechat_float_qrcode').style.right = 0;
+} else {
+$('wechat_float_qrcode').style.cssFloat = 'left';
+$('wechat_float_qrcode').style.left = (qrleft) + 'px';
+$('wechat_float_qrcode').style.right = 'auto';
+}
+}
+_attachEvent(window, 'scroll', function () { wechat_qrcode(1); })
+_attachEvent(window, 'load', function() { wechat_qrcode(0); }, document);
+</script>
+
+
+<script type="text/javascript">
+function mw_syntaxhighlighter_show_editor_codebox(editortype) {
+var tag = 'code';
+var mw_syntaxhighlighter_tag = 'mw_shl_code';
+var str = '请输入要插入的代码<br>选择语言：';
+str += '<select id="brush_lang" name="lang">';str += '<option value="applescript">AppleScript</option>';
+str += '<option value="actionscript3">Actionscript3</option>';
+str += '<option value="bash">Bash shell</option>';
+str += '<option value="coldfusion">ColdFusion</option>';
+str += '<option value="c">C</option>';
+str += '<option value="cpp">C++</option>';
+str += '<option value="csharp">C#</option>';
+str += '<option value="css">CSS</option>';
+str += '<option value="delphi">Delphi</option>';
+str += '<option value="diff">Diff</option>';
+str += '<option value="erlang">Erlang</option>';
+str += '<option value="groovy">Groovy</option>';
+str += '<option value="html">HTML</option>';
+str += '<option value="java">Java</option>';
+str += '<option value="javafx">JavaFX</option>';
+str += '<option value="javascript">JavaScript</option>';
+str += '<option value="pascal">Pascal</option>';
+str += '<option value="patch">Patch</option>';
+str += '<option value="perl">Perl</option>';
+str += '<option value="php">PHP</option>';
+str += '<option value="text">Plain Text</option>';
+str += '<option value="powershell">PowerShell</option>';
+str += '<option value="python">Python</option>';
+str += '<option value="ruby">Ruby</option>';
+str += '<option value="rails">Ruby on Rails</option>';
+str += '<option value="sass">Sass</option>';
+str += '<option value="scala">Scala</option>';
+str += '<option value="scss">Scss</option>';
+str += '<option value="shell">Shell</option>';
+str += '<option value="sql">SQL</option>';
+str += '<option value="vb">Visual Basic</option>';
+str += '<option value="vbnet">Visual Basic .NET</option>';
+str += '<option value="xhtml">XHTML</option>';
+str += '<option value="xml">XML</option>';
+str += '<option value="xslt">XSLT</option>';
+str += '<option value="objc">Objective-C</option>';
+str += '<option value="asm">Asm</option>';
+str += '<option value="aauto">AAuto</option>';
+str += '<option value="golang">Golang</option>';
+
+str += '</select><br>';
+
+str += '显示行号：';
+str += '<input type="checkbox" id="show_gutter" name="show_gutter" value="1" checked><br>';
+
+
+if(editortype == 'newthread') {
+
+var sel, selection;
+var str1 = '', strdialog = 0, stitle = '';
+var ctrlid = editorid + '_' + tag;
+var menu = $(ctrlid + '_menu');
+var pos = [0, 0];
+var menuwidth = 270;
+var menupos = '43!';
+var menutype = 'menu';
+
+str += '<div id="mw_codearea">你的代码：<br>';
+str += '<textarea id="' + ctrlid + '_param_1" style="width: 98%" cols="50" rows="5" class="txtarea"></textarea></div>';
+
+//note �޸���ie�µĲ���������
+if(BROWSER.ie) {
+if(wysiwyg) {
+editdoc.body.focus();
+sel = editdoc.selection.createRange();
+} else {
+sel = document.selection.createRange();
+}
+pos = getCaret();
+}
+
+selection = sel ? (wysiwyg ? sel.text : sel.text) : mw_highlighter_getSel();//note �޸�sel.HtmlText�޸�ΪText���༭���еĿ��ӻ��ò��ʵ�ֱȽ�����
+if(menu) {
+if($(ctrlid).getAttribute('menupos') !== null) {
+menupos = $(ctrlid).getAttribute('menupos');
+}
+if($(ctrlid).getAttribute('menuwidth') !== null) {
+menu.style.width = $(ctrlid).getAttribute('menuwidth') + 'px';
+}
+
+if(selection) {//note ���ѡ�������ݵĴ���
+$('mw_codearea').style.display = 'none';
+}
+
+showMenu({'ctrlid':ctrlid,'evt':'click','pos':menupos,'timeout':250,'duration':in_array(tag, ['fontname', 'fontsize', 'sml']) ? 2 : 3,'drag':1});
+} else {
+
+var menu = document.createElement('div');
+menu.id = ctrlid + '_menu';
+menu.style.display = 'none';
+menu.className = 'p_pof upf';
+menu.style.width = menuwidth + 'px';
+
+s = '<div class="p_opt cl"><span class="y" style="margin:-10px -10px 0 0"><a onclick="hideMenu();return false;" class="flbc" href="javascript:;">关闭</a></span><div>' + str + '</div><div class="pns mtn"><button type="submit" id="' + ctrlid + '_submit" class="pn pnc"><strong>提交</strong></button></div></div>';
+menu.innerHTML = s;
+$(editorid + '_editortoolbar').appendChild(menu);
+
+if(selection) {//note ���ѡ�������ݵĴ���
+$('mw_codearea').style.display = 'none';
+}
+
+showMenu({'ctrlid':ctrlid,'mtype':menutype,'evt':'click','duration':3,'cache':0,'drag':1,'pos':menupos});
+}
+
+try {
+if($(ctrlid + '_param_1')) {
+$(ctrlid + '_param_1').focus();
+}
+} catch(e) {}
+var objs = menu.getElementsByTagName('*');
+for(var i = 0; i < objs.length; i++) {
+_attachEvent(objs[i], 'keydown', function(e) {
+e = e ? e : event;
+obj = BROWSER.ie ? event.srcElement : e.target;
+if((obj.type == 'text' && e.keyCode == 13) || (obj.type == 'textarea' && e.ctrlKey && e.keyCode == 13)) {
+if($(ctrlid + '_submit') && tag != 'image') $(ctrlid + '_submit').click();
+doane(e);
+} else if(e.keyCode == 27) {
+hideMenu();
+doane(e);
+}
+});
+}
+if($(ctrlid + '_submit')) $(ctrlid + '_submit').onclick = function() {
+checkFocus();
+if(BROWSER.ie && wysiwyg) {
+setCaret(pos[0]);
+}
+if(wysiwyg) {
+if(!BROWSER.ie) {
+selection = selection ? selection : '';
+}
+}
+str1 = $(ctrlid + '_param_1') && $(ctrlid + '_param_1').value ? $(ctrlid + '_param_1').value : (selection ? selection : '');
+
+var opentag = '[' + mw_syntaxhighlighter_tag + '=' + $('brush_lang').value + ',' + (($('show_gutter') && $('show_gutter').checked) ? 'true' : 'false') + ']';
+var closetag = '[/' + mw_syntaxhighlighter_tag + ']';
+
+if(wysiwyg) {
+str1 = preg_replace(['<', '>'], ['&lt;', '&gt;'], str1);
+
+str1 = str1.replace(/\r?\n/g, '<br />');
+}
+str1 = opentag + str1 + closetag;
+insertText(str1, strlen(opentag), strlen(closetag), false, sel);
+hideMenu();
+};
+
+} else if(editortype == 'fastpost' || editortype == 'post') {
+
+var sel = false;
+var seditorkey = editortype;
+if(!isUndefined($(seditorkey + 'message').selectionStart)) {
+sel = $(seditorkey + 'message').selectionEnd - $(seditorkey + 'message').selectionStart;
+} else if(document.selection && document.selection.createRange) {
+$(seditorkey + 'message').focus();
+var sel = document.selection.createRange();
+$(seditorkey + 'message').sel = sel;
+sel = sel.text ? true : false;
+}
+
+var ctrlid = seditorkey + tag;
+var menuid = ctrlid + '_menu';
+
+str += '<div id="mw_codearea">你的代码：<br>';
+str += '<textarea id="' + ctrlid + '_param_1" style="width: 98%" cols="50" rows="5" class="txtarea"></textarea></div>';
+
+if(!$(menuid)) {
+var submitstr = "seditor_insertunit('" + seditorkey + "', '[" + mw_syntaxhighlighter_tag + "=' + $('brush_lang').value + ',' + (($('show_gutter') && $('show_gutter').checked) ? 'true' : 'false') + ']'+$('" + ctrlid + "_param_1').value, '[/" + mw_syntaxhighlighter_tag + "]', null, 1);hideMenu();";
+var menu = document.createElement('div');
+menu.id = menuid;
+menu.style.display = 'none';
+menu.className = 'p_pof upf';
+menu.style.width = '270px';
+$('append_parent').appendChild(menu);
+menu.innerHTML = '<span class="y"><a onclick="hideMenu()" class="flbc" href="javascript:;">关闭</a></span><div class="p_opt cl"><form onsubmit="' + submitstr + ';return false;" autocomplete="off"><div>' + str + '</div><div class="pns mtn"><button type="submit" id="' + ctrlid + '_submit" class="pn pnc"><strong>提交</strong></button><button type="button" onClick="hideMenu()" class="pn"><em>取消</em></button></div></form></div>';
+}
+if(sel) {//note ���ѡ�������ݵĴ���
+$('mw_codearea').style.display = 'none';
+}
+showMenu({'ctrlid':ctrlid,'evt':'click','duration':3,'cache':0,'drag':1});
+}
+}
+
+function mw_highlighter_getSel() {
+if(wysiwyg) {
+try {
+selection = editwin.getSelection();
+return selection.toString();
+//checkFocus();
+//range = selection ? selection.getRangeAt(0) : editdoc.createRange();
+//return readNodes(range.cloneContents(), false);
+} catch(e) {
+try {
+var range = editdoc.selection.createRange();
+if(range.htmlText && range.text) {
+return range.text;
+} else {
+var htmltext = '';
+for(var i = 0; i < range.length; i++) {
+htmltext += range.item(i).outerHTML;
+}
+return htmltext;
+}
+} catch(e) {
+return '';
+}
+}
+} else {
+if(!isUndefined(editdoc.selectionStart)) {
+return editdoc.value.substr(editdoc.selectionStart, editdoc.selectionEnd - editdoc.selectionStart);
+} else if(document.selection && document.selection.createRange) {
+return document.selection.createRange().text;
+} else if(window.getSelection) {
+alert(editdoc);
+return window.getSelection() + '';
+} else {
+return false;
+}
+}
+}
+</script>
+<script type="text/javascript" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/mw_syntaxhighlighter.js"></script><script type="text/javascript" reload="1">mw_syntaxhighlighter("fastpost");</script>
+<!-- mw_syntaxhighlighter ver.3.0.83 Begin -->
+<script type="text/javascript" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/shCore.js"></script>
+<script type="text/javascript" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/shAutoloader.js"></script>
+<script type="text/javascript" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/shBrushXml.js"></script>
+<script type="text/javascript">//<![CDATA[
+	SyntaxHighlighter.autoloader(
+	"applescript	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushAppleScript.js?ver=3.0.83"
+	,"as3 actionscript3	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushAS3.js?ver=3.0.83"
+	,"bash shell	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushBash.js?ver=3.0.83"
+	,"cf coldfusion	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushColdFusion.js?ver=3.0.83"
+	,"cpp c	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js?ver=3.0.83"
+	,"c# c-sharp csharp	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCSharp.js?ver=3.0.83"
+	,"css	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCss.js?ver=3.0.83"
+	,"delphi pas pascal	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDelphi.js?ver=3.0.83"
+	,"diff patch	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDiff.js?ver=3.0.83"
+	,"erl erlang	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushErlang.js?ver=3.0.83"
+	,"groovy	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushGroovy.js?ver=3.0.83"
+	,"java	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJava.js?ver=3.0.83"
+	,"jfx javafx	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJavaFX.js?ver=3.0.83"
+	,"js jscript javascript	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0.83"
+	,"perl pl	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPerl.js?ver=3.0.83"
+	,"php	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.83"
+	,"plain text	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0.83"
+	,"ps powershell	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPowerShell.js?ver=3.0.83"
+	,"py python	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPython.js?ver=3.0.83"
+	,"rails ror ruby rb	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushRuby.js?ver=3.0.83"
+	,"sass scss	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushSass.js?ver=3.0.83"
+	,"scala	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushScala.js?ver=3.0.83"
+	,"sql	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushSql.js?ver=3.0.83"
+	,"vb vbnet	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushVb.js?ver=3.0.83"
+	,"xml xhtml xslt html	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0.83"
+	,"objc	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushObjC.js?ver=3.0.83"
+	,"asm	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushAsm.js?ver=3.0.83"
+	,"aauto	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushAAuto.js?ver=3.0.83"
+	,"go golang	http://www.arduino.cn/source/plugin/mw_syntaxhighlighter/syntaxhighlighter3/scripts/shBrushGo.js?ver=3.0.83"
+	);
+	SyntaxHighlighter.defaults['auto-links'] = true;
+	SyntaxHighlighter.defaults['quick-code'] = true;
+	SyntaxHighlighter.defaults['title'] = '';
+	SyntaxHighlighter.defaults['class-name'] = 'notranslate';
+	SyntaxHighlighter.defaults['collapse'] = false;
+	SyntaxHighlighter.defaults['first-line'] = 1;
+	SyntaxHighlighter.defaults['gutter'] = true;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = 1;
+	SyntaxHighlighter.defaults['smart-tabs'] = true;
+	SyntaxHighlighter.defaults['tab-size'] = 4;
+	SyntaxHighlighter.defaults['toolbar'] = true;
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter';
+	SyntaxHighlighter.config.strings.noBrush = "Can\'t find brush for: ";
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = "Brush wasn\'t configured for html-script option: ";
+	SyntaxHighlighter.all();
+	
+//]]></script>
+<!-- mw_syntaxhighlighter ver.3.0.83 End -->
+
+<script type="text/javascript">
+(function() {
+var viewsource = [];
+var copycode = [];
+if(document.getElementsByClassName) {
+viewsource = document.getElementsByClassName('viewsource');
+copycode = document.getElementsByClassName('copycode');
+} else {
+var emlist = document.getElementsByTagName('em');
+for(var i=0;i<emlist.length;i++) {
+if(emlist[i].className == 'viewsource') {
+viewsource.push(emlist[i]);
+} else if(emlist[i].className == 'copycode') {
+copycode.push(emlist[i]);
+}
+}
+}
+function mw_code_toolbar_addevent(objs, eventtype) {
+for(var i=0; i<objs.length; i++) {
+if(objs[i].id != undefined) {
+objs[i].setAttribute('num', i);
+objs[i].onclick = function() {
+var highlighters = SyntaxHighlighter.vars.highlighters;
+var k = 0;
+var num = this.getAttribute('num');
+for(var i in highlighters) {
+if(k == num) {
+if(eventtype == 'viewcode') {
+mw_viewcode_execute(highlighters[i]);
+} else if(eventtype == 'copycode') {
+mw_copycode_execute(highlighters[i]);
+}
+break;
+}
+k++;
+}
+return false;
+}
+}
+}
+}
+if(viewsource) {
+mw_code_toolbar_addevent(viewsource, 'viewcode');
+}
+if(copycode) {
+mw_code_toolbar_addevent(copycode, 'copycode');
+}
+function mw_viewcode_execute(highlighter) {
+var code = mw_get_code(highlighter);
+code = mw_fixinputstring(code).replace(/</g, '&lt;');
+var wnd = mw_popup('', '_blank', 750, 400, 'location=0, resizable=1, menubar=0, scrollbars=1');
+code = mw_unindent(code);
+wnd.document.write('<pre>' + code + '</pre>');
+wnd.document.close();
+}
+function mw_copycode_execute(highlighter) {
+var code = mw_get_code(highlighter);
+code = mw_fixinputstring(code)
+.replace(/&lt;/g, '<')
+.replace(/&gt;/g, '>')
+.replace(/&amp;/g, '&')
+;
+code = mw_unindent(code);
+setCopy(code, '代码已复制到剪贴板');
+}
+function mw_fixinputstring(str) {
+var br = /<br\s*\/>|<br\s*>|&lt;br\s*\/?&gt;/gi;
+if(SyntaxHighlighter.config.bloggerMode == true) {
+str = str.replace(br, '\n');
+}
+if(SyntaxHighlighter.config.stripBrs == true) {
+str = str.replace(br, '');
+}
+return str;
+}
+function mw_popup(url, name, width, height, options) {
+var x = (screen.width - width) / 2,
+y = (screen.height - height) / 2
+;
+options +=	', left=' + x +
+', top=' + y +
+', width=' + width +
+', height=' + height
+;
+options = options.replace(/^,/, '');
+var win = window.open(url, name, options);
+win.focus();
+return win;
+}
+function mw_unindent(str) {
+var lines = mw_fixinputstring(str).split('\n'),
+indents = new Array(),
+regex = /^\s*/,
+min = 1000
+;
+for(var i = 0; i < lines.length && min > 0; i++) {
+var line = lines[i];
+if(mw_trim(line).length == 0) {
+continue;
+}
+var matches = regex.exec(line);
+if(matches == null) {
+return str;
+}
+min = Math.min(matches[0].length, min);
+}
+if(min > 0) {
+for(var i = 0; i < lines.length; i++) {
+lines[i] = lines[i].substr(min);
+}
+}
+return lines.join('\n');
+}
+function mw_trim(str) {
+return str.replace(/^\s+|\s+$/g, '');
+}
+function mw_get_code(highlighter) {
+
+var container = mw_findelement($('highlighter_' + highlighter.id), '.container');
+var lines = container.childNodes;
+var code = [];
+for(var i=0; i<lines.length; i++) {
+code.push(lines[i].innerText || lines[i].textContent);
+}
+code = code.join('\r');
+return code;
+
+}
+function mw_findelement(target, search, reverse) {
+if(target == null)
+return null;
+var nodes = reverse != true ? target.childNodes : [ target.parentNode ],
+propertyToFind	= { '#' : 'id', '.' : 'className' }[search.substr(0, 1)] || 'nodeName',
+expectedValue,
+found
+;
+expectedValue = propertyToFind != 'nodeName'
+? search.substr(1)
+: search.toUpperCase()
+;
+if((target[propertyToFind] || '').indexOf(expectedValue) != -1)
+return target;
+for(var i = 0; nodes && i < nodes.length && found == null; i++)
+found = mw_findelement(nodes[i], search, reverse);
+return found;
+}
+})();
+</script>
+
+
+
+<div id="ft" class="wp cl">
+<div id="flk" class="y">
+<p>
+<a href="http://www.arduino.cn/forum.php?mobile=yes">手机版</a><span class="pipe">|</span><a href="http://www.arduino.cn/archiver/">Archiver</a><span class="pipe">|</span><strong><a href="http://www.arduino.cn/" target="_blank">Arduino中文社区</a></strong>
+( <a href="http://www.miitbeian.gov.cn/" target="_blank">蜀ICP备14017632号-3</a> )&nbsp;<a href="http://discuz.qq.com/service/security" target="_blank" title="防水墙保卫网站远离侵害"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/security.png"></a>&nbsp;<a href="http://addon.discuz.com/?@tongdun.plugin" target="_blank" title="同盾防灌水，杜绝网站不良信息！"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/tongdun.png"></a><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fe6c4d5154a992e0491dfd2f1e13d1108' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/h.js" type="text/javascript"></script><a href="http://tongji.baidu.com/hm-web/welcome/ico?s=e6c4d5154a992e0491dfd2f1e13d1108" target="_blank"><img src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/21.gif" width="20" height="20" border="0"></a>
+</p>
+<p class="xs0">
+GMT+8, 2016-12-13 09:43<span id="debuginfo">
+, Processed in 0.347791 second(s), 78 queries
+.
+</span>
+</p>
+</div>	
+<div id="frt">
+<p>Powered by <strong><a href="http://www.discuz.net/" target="_blank">Discuz!</a></strong> <em>X3.2</em></p>
+<p class="xs0">© 2001-2013 Design <a href="http://singcere.net/" target="_blank">S!</a>
+</p></div></div>
+
+
+
+</div>
+
+<div id="g_upmine_menu" class="tip tip_3" style="display:none;">
+<div class="tip_c">
+积分 0, 距离下一级还需  积分
+</div>
+<div class="tip_horn"></div>
+</div>
+<script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/home.php" type="text/javascript"></script>
+<div id="scrolltop" style="left: 1175px; visibility: visible;">
+<span><a href="http://www.arduino.cn/forum.php?mod=post&amp;action=reply&amp;fid=45&amp;tid=19413&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" class="replyfast" title="快速回复"><b>快速回复</b></a></span>
+<span hidefocus="true"><a title="返回顶部" onclick="window.scrollTo('0','0')" class="scrolltopa"><b>返回顶部</b></a></span>
+<span>
+<a href="http://www.arduino.cn/forum-45-1.html" hidefocus="true" class="returnlist" title="返回列表"><b>返回列表</b></a>
+</span>
+</div>
+<script type="text/javascript">_attachEvent(window, 'scroll', function () { showTopLink(); });checkBlind();</script>
+			<div id="discuz_tips" style="display:none;"></div>
+			<script type="text/javascript">
+				var tipsinfo = '8899802|X3.2|0.6||0||0|7|1481593386|ae8f1da725949fd832be674cf2e8849a|2';
+			</script>
+			<script src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/discuz_tips.js" type="text/javascript" charset="UTF-8"></script>
+
+<div class="WB_widget WB_praise" style="position: absolute; z-index: 9999; display: none;" node-type="outer"><div class="usercard_layer"><div class="usercard_layer_outside"><div class="usercard_layer_inside"><div class="user_content_container"><div class="praise_btn_line" node-type="inner"><cite class="praise_intro" node-type="text">    	    <cite class="related_user" tempdata="true">
+		<a class="related_name" action-type="userclk" href="http://weibo.com/arduinocn" target="_blank" title="Arduino中文社区">Arduino...</a><a href="http://verified.weibo.com/verify" target="_blank"><span class="WB_approve_co feed_icon"></span></a>
+		</cite>		
+				<cite class="name_split">, </cite>
+				
+		    <cite class="related_user">
+		<a class="related_name" action-type="userclk" href="http://weibo.com/1408815677" target="_blank" title="南通吴汉清">南通吴汉清</a>
+		</cite>		
+				
+		<cite class="praise_display">等<em node-type="count">247</em>人赞过</cite>
+</cite><div class="related_list_container" node-type="face"><ul class="related_list">
+	<li class="related_item" tempdata="true">
+		<a class="related_item_a" action-type="userclk" href="http://weibo.com/arduinocn" target="_blank" title="Arduino中文社区" short_title="Arduino..."><img class="related_item_a_img" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/61d6e626gw1eh7y4of25bj208c08cjs0.jpg" alt="Arduino中文社区" width="30" height="30"></a>
+	</li>
+ 	<li class="related_item">
+		<a class="related_item_a" action-type="userclk" href="http://weibo.com/1408815677" target="_blank" title="南通吴汉清" short_title="南通吴汉清"><img class="related_item_a_img" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/53f8d23djw1e8qgp5bmzyj2050050aa8.jpg" alt="南通吴汉清" width="30" height="30"></a>
+	</li>
+ 	<li class="related_item">
+		<a class="related_item_a" action-type="userclk" href="http://weibo.com/5339456913" target="_blank" title="ABCDQQQ明_307" short_title="ABCDQQQ..."><img class="related_item_a_img" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/default_avatar_male_50.gif" alt="ABCDQQQ明_307" width="30" height="30"></a>
+	</li>
+ 	<li class="related_item">
+		<a class="related_item_a" action-type="userclk" href="http://weibo.com/MU4Toys" target="_blank" title="MU4Toys" short_title="MU4Toys"><img class="related_item_a_img" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/006lGmiqgw1f3lt0zb9kpj30fj0d9t9a.jpg" alt="MU4Toys" width="30" height="30"></a>
+	</li>
+ 	<li class="related_item">
+		<a class="related_item_a" action-type="userclk" href="http://weibo.com/3975618055" target="_blank" title="末冬了" short_title="末冬了"><img class="related_item_a_img" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/ecf71e07jw8ejl6gqcxf4j20u00u0jsq.jpg" alt="末冬了" width="30" height="30"></a>
+	</li>
+ 	<li class="related_item">
+		<a class="related_item_a" action-type="userclk" href="http://weibo.com/coloz" target="_blank" title="奈何col" short_title="奈何col"><img class="related_item_a_img" src="%E4%BD%BF%E7%94%A8Visual%20Studio%20%E5%BC%80%E5%8F%91Arduino%E5%8F%8A%E8%BF%9B%E8%A1%8C%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95_files/5c713285jw1e8qgp5bmzyj2050050aa8.jpg" alt="奈何col" width="30" height="30"></a>
+	</li>
+ </ul>
+</div></div></div></div><div node-type="arrow" class="layer_arrow_inside_a"></div></div></div></div></body></html>
