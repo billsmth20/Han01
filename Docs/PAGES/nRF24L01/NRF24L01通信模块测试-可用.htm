@@ -1,0 +1,1614 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class=" widthauto"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<title>NRF24L01通信模块测试 - 技术交流 -  上海极制信息科技有限公司 -  Powered by Discuz!</title>
+<link href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230" rel="canonical">
+<meta name="keywords" content="NRF24L01通信模块测试">
+<meta name="description" content=" NRF24L01通信模块测试 ,上海极制信息科技有限公司">
+<meta name="generator" content="Discuz! X3.1">
+<meta name="author" content="Discuz! Team and Comsenz UI Team">
+<meta name="copyright" content="2001-2013 Comsenz Inc.">
+<meta name="MSSmartTagsPreventParsing" content="True">
+<meta http-equiv="MSThemeCompatible" content="Yes">
+<!-- base href="http://www.topmaker.com.cn/bbs/" --><link rel="stylesheet" type="text/css" href="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/style_1_common.css"><link rel="stylesheet" type="text/css" href="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/style_1_forum_viewthread.css"><script type="text/javascript">var STYLEID = '1', STATICURL = 'static/', IMGDIR = 'static/image/common', VERHASH = 'q9q', charset = 'gbk', discuz_uid = '0', cookiepre = 'Pxo9_2132_', cookiedomain = '', cookiepath = '/', showusercard = '1', attackevasive = '0', disallowfloat = 'newthread', creditnotice = '1|威望|,2|金钱|,3|贡献|', defaultstyle = '', REPORTURL = 'aHR0cDovL3d3dy50b3BtYWtlci5jb20uY24vYmJzL2ZvcnVtLnBocD9tb2Q9dmlld3RocmVhZCZ0aWQ9MjMwJmV4dHJhPXBhZ2UlM0Qx', SITEURL = 'http://www.topmaker.com.cn/bbs/', JSPATH = 'data/cache/', DYNAMICURL = '';</script>
+<script src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/common.js" type="text/javascript"></script>
+<meta name="application-name" content="上海极制信息科技有限公司">
+<meta name="msapplication-tooltip" content="上海极制信息科技有限公司">
+<meta name="msapplication-task" content="name=首页;action-uri=http://www.topmaker.com.cn/bbs/portal.php;icon-uri=http://www.topmaker.com.cn/bbs/static/image/common/portal.ico"><meta name="msapplication-task" content="name=论坛;action-uri=http://www.topmaker.com.cn/bbs/forum.php;icon-uri=http://www.topmaker.com.cn/bbs/static/image/common/bbs.ico">
+<link rel="archives" title="上海极制信息科技有限公司" href="http://www.topmaker.com.cn/bbs/archiver/">
+<link rel="stylesheet" id="css_widthauto" type="text/css" href="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/style_1_widthauto.css">
+<script type="text/javascript">HTMLNODE.className += ' widthauto'</script>
+<script src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/forum.js" type="text/javascript"></script>
+<script src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/getdzjs.js" ime-cfg="lt=2"></script></head>
+
+<body id="nv_forum" class="pg_viewthread" onkeydown="if(event.keyCode==27) return false;">
+<div id="append_parent"><div id="ls_fastloginfield_ctrl_menu" class="sltm" style="display: none; width: 40px;"><ul><li class="current">用户名</li><li>Email</li></ul></div></div><div id="ajaxwaitid"></div>
+<div id="toptb" class="cl">
+<div class="wp">
+<div class="z"></div>
+<div class="y">
+<a id="switchblind" href="javascript:;" onclick="toggleBlind(this)" title="开启辅助访问" class="switchblind">开启辅助访问</a>
+<a href="javascript:;" id="switchwidth" onclick="widthauto(this)" title="切换到窄版" class="switchwidth">切换到窄版</a>
+</div>
+</div>
+</div>
+
+<div id="qmenu_menu" class="p_pop blk" style="display: none;">
+<div class="ptm pbw hm">
+请 <a href="javascript:;" class="xi2" onclick="lsSubmit()"><strong>登录</strong></a> 后使用快捷导航<br>没有帐号？<a href="http://www.topmaker.com.cn/bbs/member.php?mod=register" class="xi2 xw1">立即注册</a>
+</div>
+<div id="fjump_menu" class="btda"></div></div><div id="hd">
+<div class="wp">
+<div class="hdc cl"><h2><a href="http://www.topmaker.com.cn/bbs/" title="上海极制信息科技有限公司"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/logo.png" alt="上海极制信息科技有限公司" border="0"></a></h2><script src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/logging.js" type="text/javascript"></script>
+<form method="post" autocomplete="off" id="lsform" action="member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;infloat=yes&amp;lssubmit=yes" onsubmit="return lsSubmit();">
+<div class="fastlg cl">
+<span id="return_ls" style="display:none"></span>
+<div class="y pns">
+<table cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td>
+<span class="ftid">
+<select name="fastloginfield" id="ls_fastloginfield" width="40" tabindex="900" selecti="0" style="display: none;">
+
+
+<option value="username" selected="selected"></option></select><a href="javascript:;" id="ls_fastloginfield_ctrl" style="width:40px" tabindex="900">用户名</a>
+</span>
+<script type="text/javascript">simulateSelect('ls_fastloginfield')</script>
+</td>
+<td><input name="username" id="ls_username" autocomplete="off" class="px vm" tabindex="901" type="text"></td>
+<td class="fastlg_l"><label for="ls_cookietime"><input name="cookietime" id="ls_cookietime" class="pc" value="2592000" tabindex="903" type="checkbox">自动登录</label></td>
+<td>&nbsp;<a href="javascript:;" onclick="showWindow('login', 'member.php?mod=logging&amp;action=login&amp;viewlostpw=1')">找回密码</a></td>
+</tr>
+<tr>
+<td><label for="ls_password" class="z psw_w">密码</label></td>
+<td><input name="password" id="ls_password" class="px vm" autocomplete="off" tabindex="902" type="password"></td>
+<td class="fastlg_l"><button type="submit" class="pn vm" tabindex="904" style="width: 75px;"><em>登录</em></button></td>
+<td>&nbsp;<a href="http://www.topmaker.com.cn/bbs/member.php?mod=register" class="xi2 xw1">立即注册</a></td>
+</tr>
+</tbody></table>
+<input name="quickforward" value="yes" type="hidden">
+<input name="handlekey" value="ls" type="hidden">
+</div>
+</div>
+</form>
+
+</div>
+
+<div id="nv" style="top: 0px; left: 13.6167px; z-index: 199;">
+
+<ul><li class="a" id="mn_forum"><a href="http://www.topmaker.com.cn/bbs/forum.php" hidefocus="true" title="BBS">论坛<span>BBS</span></a></li></ul>
+</div>
+
+<div class="p_pop h_pop" id="mn_userapp_menu" style="display: none"></div><div id="mu" class="cl">
+</div><div id="scbar" class="cl">
+<form id="scbar_form" method="post" autocomplete="off" onsubmit="searchFocus($('scbar_txt'))" action="search.php?searchsubmit=yes" target="_blank">
+<input name="mod" id="scbar_mod" value="forum" type="hidden">
+<input name="formhash" value="3cb97085" type="hidden">
+<input name="srchtype" value="title" type="hidden">
+<input name="srhfid" value="36" type="hidden">
+<input name="srhlocality" value="forum::viewthread" type="hidden">
+<table cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="scbar_icon_td"></td>
+<td class="scbar_txt_td"><input name="srchtxt" id="scbar_txt" autocomplete="off" x-webkit-speech="" speech="" class=" xg1" placeholder="请输入搜索内容" type="text"></td>
+<td class="scbar_type_td"><a href="javascript:;" id="scbar_type" class="xg1" onclick="showMenu(this.id)" hidefocus="true">帖子</a></td>
+<td class="scbar_btn_td"><button type="submit" name="searchsubmit" id="scbar_btn" sc="1" class="pn pnc" value="true"><strong class="xi2">搜索</strong></button></td>
+<td class="scbar_hot_td">
+<div id="scbar_hot">
+<strong class="xw1">热搜: </strong>
+
+<a href="http://www.topmaker.com.cn/bbs/search.php?mod=forum&amp;srchtxt=%BB%EE%B6%AF&amp;formhash=3cb97085&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1">活动</a>
+
+
+
+<a href="http://www.topmaker.com.cn/bbs/search.php?mod=forum&amp;srchtxt=%C5%E0%D1%B5&amp;formhash=3cb97085&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1">培训</a>
+
+
+
+<a href="http://www.topmaker.com.cn/bbs/search.php?mod=forum&amp;srchtxt=%D7%CA%C1%CF&amp;formhash=3cb97085&amp;searchsubmit=true&amp;source=hotsearch" target="_blank" class="xi2" sc="1">资料</a>
+
+</div>
+</td>
+</tr>
+</tbody></table>
+</form>
+</div>
+<ul id="scbar_type_menu" class="p_pop" style="display: none;"><li><a href="javascript:;" rel="curforum" fid="36">本版</a></li><li><a href="javascript:;" rel="article">文章</a></li><li><a href="javascript:;" rel="forum" class="curtype">帖子</a></li><li><a href="javascript:;" rel="user">用户</a></li></ul>
+<script type="text/javascript">
+initSearchmenu('scbar', '');
+</script>
+</div>
+</div>
+
+
+<div id="wp" class="wp">
+<script type="text/javascript">var fid = parseInt('36'), tid = parseInt('230');</script>
+
+<script src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/forum_viewthread.js" type="text/javascript"></script>
+<script type="text/javascript">zoomstatus = parseInt(1);var imagemaxwidth = '600';var aimgcount = new Array();</script>
+
+<style id="diy_style" type="text/css"></style>
+<!--[diy=diynavtop]--><div id="diynavtop" class="area"></div><!--[/diy]-->
+<div id="pt" class="bm cl">
+<div class="z">
+<a href="http://www.topmaker.com.cn/bbs/" class="nvhm" title="首页">上海极制信息科技有限公司</a><em>&#187;</em><a href="http://www.topmaker.com.cn/bbs/forum.php">论坛</a> <em>&#8250;</em> <a href="http://www.topmaker.com.cn/bbs/forum.php?gid=1">上海极制信息科技有限公司交流区</a> <em>&#8250;</em> <a href="http://www.topmaker.com.cn/bbs/forum.php?mod=forumdisplay&amp;fid=36&amp;page=1">技术交流</a> <em>&#8250;</em> <a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230">NRF24L01通信模块测试</a>
+</div>
+</div>
+
+<script src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/jquery-1.js" type="text/javascript"></script><script type="text/javascript">jQuery.noConflict();</script><script type="text/javascript">(function(d){j=d.createElement('script');j.src='//openapi.guanjia.qq.com/fcgi-bin/getdzjs?cmd=urlquery_gbk_zh_cn';j.setAttribute('ime-cfg','lt=2');d.getElementsByTagName('head')[0].appendChild(j)})(document)</script><link rel="stylesheet" type="text/css" href="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/style.css"><style id="diy_style" type="text/css"></style>
+<div class="wp">
+<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
+</div>
+
+<div id="ct" class="wp cl">
+<div id="pgt" class="pgs mbm cl ">
+<div class="pgt"><div class="pg"><strong>1</strong><a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;extra=page%3D1&amp;page=2">2</a><label><input name="custompage" class="px" size="2" title="输入页码，按回车快速跳转" value="1" onkeydown="if(event.keyCode==13) {window.location='forum.php?mod=viewthread&amp;tid=230&amp;extra=page%3D1&amp;page='+this.value;; doane(event);}" type="text"><span title="共 2 页"> / 2 页</span></label><a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;extra=page%3D1&amp;page=2" class="nxt">下一页</a></div></div>
+<span class="y pgb"><a href="http://www.topmaker.com.cn/bbs/forum.php?mod=forumdisplay&amp;fid=36&amp;page=1">返回列表</a></span>
+<a id="newspecial" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" onclick="showWindow('newthread', 'forum.php?mod=post&amp;action=newthread&amp;fid=36')" href="javascript:;" title="发新帖"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/pn_post.png" alt="发新帖"></a></div>
+
+
+
+<div id="postlist" class="pl bm">
+<table cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls ptn pbn">
+<div class="hm ptn">
+<span class="xg1">查看:</span> <span class="xi1">114416</span><span class="pipe">|</span><span class="xg1">回复:</span> <span class="xi1">16</span>
+</div>
+</td>
+<td class="plc ptm pbn vwthd">
+<div class="y">
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;action=printable&amp;tid=230" title="打印" target="_blank"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/print.png" alt="打印" class="vm"></a>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=nextoldset&amp;tid=230" title="上一主题"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/thread-prev.png" alt="上一主题" class="vm"></a>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=nextnewset&amp;tid=230" title="下一主题"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/thread-next.png" alt="下一主题" class="vm"></a>
+</div>
+<h1 class="ts">
+<span id="thread_subject">NRF24L01通信模块测试</span>
+</h1>
+<span class="xg1">
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230" onclick="return copyThreadUrl(this, '上海极制信息科技有限公司')">[复制链接]</a>
+</span>
+</td>
+</tr>
+</tbody></table>
+
+
+<table class="ad" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table><div id="post_429"><table id="pid429" class="plhin" summary="pid429" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar429" class="pls favatar" style="top: 33px;">
+ <div class="pi">
+<div class="authi"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3" target="_blank" class="xw1">jizhi01</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo429" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo429_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3" target="_blank" class="xi2">jizhi01</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" target="_blank" class="xi2">834</a></dd>
+</dl><div class="imicn">
+<a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" target="_blank" title="查看详细资料"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo429')"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3" class="avtm" target="_blank"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/avatar.gif"></a></div>
+</div>
+<div class="tns xg2"><table cellspacing="0" cellpadding="0"><tbody><tr><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space" class="xi2">38</a></p>主题</th><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space" class="xi2">59</a></p>帖子</th><td><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" class="xi2">834</a></p>积分</td></tr></tbody></table></div>
+
+<p><em><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=usergroup&amp;gid=3" target="_blank">版主</a></em></p>
+
+
+<p><span><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level3.gif" alt="Rank: 7"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level2.gif" alt="Rank: 7"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level1.gif" alt="Rank: 7"></span></p>
+
+
+
+<dl class="pil cl">
+	<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" target="_blank" class="xi2">834</a></dd>
+</dl>
+
+<dl class="pil cl"></dl><ul class="xl xl2 o cl">
+<li class="pm2"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=pm&amp;op=showmsg&amp;handlekey=showmsg_3&amp;touid=3&amp;pmid=0&amp;daterange=2&amp;pid=429&amp;tid=230" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>
+</ul>
+</div>
+</td>
+	
+<td class="plc">
+<div class="pi">
+<div id="fj" class="y">
+<label class="z">电梯直达</label>
+<input class="px p_fre z" size="2" onkeyup="$('fj_btn').href='forum.php?mod=redirect&amp;ptid=230&amp;authorid=0&amp;postno='+this.value" onkeydown="if(event.keyCode==13) {window.location=$('fj_btn').href;return false;}" title="跳转到指定楼层" type="text">
+<a href="javascript:;" id="fj_btn" class="z" title="跳转到指定楼层"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/fj_btn.png" alt="跳转到指定楼层" class="vm"></a>
+</div>
+<strong>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230" id="postnum429" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+楼主</a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon429" src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/online_moderator.gif">
+<em id="authorposton429">发表于 2015-2-23 23:34:14</em>
+<span class="pipe">|</span>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;page=1&amp;authorid=3" rel="nofollow">只看该作者</a>
+<span class="none"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/arw_r.gif" class="vm" alt="回帖奖励"></span>
+<span class="pipe show">|</span><a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;extra=page%3D1&amp;ordertype=1" class="show">倒序浏览</a>
+<span class="pipe show">|</span><a href="javascript:;" onclick="readmode($('thread_subject').innerHTML, 429);" class="show">阅读模式</a>
+</div>
+</div>
+</div><div class="pct"><style type="text/css">.pcb{margin-right:0}</style><div class="pcb">
+ 
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_429">
+<i class="pstatus"> 本帖最后由 jizhi01 于 2015-2-24 17:27 编辑 </i><br>
+<br>
+2.4G模块NRF24L01是经济实惠的无线通信方式，比蓝牙、Wifi都便宜好多呀！下面介绍一个测试NRF24L01模块通信的方法，当然你需要两块NRFL01和两块Arduino。<br>
+接线方式：<br>
+<img id="aimg_xj1LV" onclick="zoom(this, this.src, 0, 0, 0)" class="zoom" file="http://image.geek-workshop.com/forum/201502/23/171149gibqra8ccymci88y.png" alt="" src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/171149gibqra8ccymci88y.png" lazyloaded="true" width="600" height="504" border="0"><br>
+NRF24L01 -------------- Arduino<br>
+IRQ&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; -------------- 悬空不接<br>
+MISO&nbsp; &nbsp;&nbsp; &nbsp; --------------&nbsp;&nbsp;D12<br>
+MOSI&nbsp; &nbsp;&nbsp; &nbsp; --------------&nbsp;&nbsp;D11<br>
+SCK&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;--------------&nbsp;&nbsp;D13<br>
+CSN&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;--------------&nbsp;&nbsp;D7<br>
+CE&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; --------------&nbsp; &nbsp;D8<br>
+VCC&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;--------------&nbsp; &nbsp;3.3V<br>
+GND&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;--------------&nbsp;&nbsp;GND<br>
+库文件Mirf.zip: <br>
+下面的例程是发送端循环发送00000－00999给接收端。<br>
+发送端代码：<br>
+<div class="blockcode"><div id="code_Zn3"><ol><li>#include &lt;SPI.h&gt;<br>
+</li><li>#include &lt;Mirf.h&gt;<br>
+</li><li>#include &lt;nRF24L01.h&gt;<br>
+</li><li>#include &lt;MirfHardwareSpiDriver.h&gt;<br>
+</li><li> <br>
+</li><li>char tempx[6]="00000";<br>
+</li><li>int x=0;<br>
+</li><li> <br>
+</li><li>void setup(){<br>
+</li><li>Serial.begin(9600);<br>
+</li><li>Mirf.spi = &amp;MirfHardwareSpi;<br>
+</li><li>Mirf.init();<br>
+</li><li> <br>
+</li><li>Mirf.setRADDR((byte *)"clie1"); // 标记本地名，用于接收<br>
+</li><li>Mirf.payload = 5; //对话的长度，用于约定双方对话的缓冲窗口大小，这个代表5个字节<br>
+</li><li>Mirf.channel = 3; // 通信信道<br>
+</li><li> <br>
+</li><li>Mirf.config();<br>
+</li><li>}<br>
+</li><li>void loop(){<br>
+</li><li>unsigned long time = millis();<br>
+</li><li> <br>
+</li><li>Mirf.setTADDR((byte *)"serv1"); // 标记对方的地址<br>
+</li><li>&nbsp;&nbsp;<br>
+</li><li>if(x&lt;10)tempx[4]=x+48;<br>
+</li><li>else if(x&gt;9 &amp;&amp; x&lt;100){<br>
+</li><li>&nbsp;&nbsp;tempx[4]=x%10+48;<br>
+</li><li>&nbsp;&nbsp;tempx[3]=x/10+48;<br>
+</li><li>}&nbsp;&nbsp;else if(x&gt;99 &amp;&amp; x&lt;999){<br>
+</li><li>&nbsp;&nbsp;tempx[4]=x%10+48;<br>
+</li><li>&nbsp;&nbsp;tempx[3]=(x/10)%10+48;<br>
+</li><li>&nbsp;&nbsp;tempx[2]=x/100+48;<br>
+</li><li>}<br>
+</li><li> <br>
+</li><li>Sends(tempx);<br>
+</li><li>x++;<br>
+</li><li>if(x==1000){<br>
+</li><li>&nbsp;&nbsp;x=0;<br>
+</li><li>&nbsp; &nbsp;for(int col=0;col&lt;5;col++)tempx[col]=48;<br>
+</li><li>}<br>
+</li><li> <br>
+</li><li>delay(100);<br>
+</li><li>} <br>
+</li><li> <br>
+</li><li> <br>
+</li><li>void Sends(char *str)<br>
+</li><li>{<br>
+</li><li>int lens;<br>
+</li><li>lens=strlen(str);<br>
+</li><li> <br>
+</li><li>char msg[lens];<br>
+</li><li>int i;<br>
+</li><li>for (i=0;i&lt;lens;i++)<br>
+</li><li>{<br>
+</li><li>msg[i]= int(str[i]);<br>
+</li><li>}<br>
+</li><li>Mirf.send((byte *)&amp;msg);<br>
+</li><li> <br>
+</li><li>while(Mirf.isSending()){}<br>
+</li><li>&nbsp; &nbsp;<br>
+</li><li>}</li></ol></div><em onclick="copycode($('code_Zn3'));">复制代码</em></div><br>
+
+<br>
+
+<br>
+接收端代码：<br>
+<div class="blockcode"><div id="code_hee"><ol><li>#include &lt;SPI.h&gt;<br>
+</li><li>#include &lt;Mirf.h&gt;<br>
+</li><li>#include &lt;nRF24L01.h&gt;<br>
+</li><li>#include &lt;MirfHardwareSpiDriver.h&gt;<br>
+</li><li>void setup(){<br>
+</li><li>Serial.begin(9600);<br>
+</li><li> <br>
+</li><li>Mirf.spi = &amp;MirfHardwareSpi;<br>
+</li><li>Mirf.init();<br>
+</li><li> <br>
+</li><li>Mirf.setRADDR((byte *)"serv1"); // 本地名<br>
+</li><li>Mirf.payload = 5; // 长度<br>
+</li><li>Mirf.channel = 3; // 信道<br>
+</li><li> <br>
+</li><li>Mirf.config();<br>
+</li><li> <br>
+</li><li>}<br>
+</li><li>void loop(){<br>
+</li><li> <br>
+</li><li>byte data[Mirf.payload];<br>
+</li><li>if(!Mirf.isSending() &amp;&amp; Mirf.dataReady()){ //存在数据<br>
+</li><li> <br>
+</li><li>Mirf.getData(data);<br>
+</li><li>&nbsp;&nbsp;<br>
+</li><li>int i;<br>
+</li><li>String Temp;<br>
+</li><li>for (i = 0; i &lt; Mirf.payload; i++) //把收到的信息拼起来，到一个串里面<br>
+</li><li>{<br>
+</li><li>Temp += char(data[i]);<br>
+</li><li>}<br>
+</li><li>Serial.print("Get:");<br>
+</li><li>Serial.print(Mirf.payload);<br>
+</li><li>Serial.print(" ");<br>
+</li><li>Serial.println(Temp);<br>
+</li><li> <br>
+</li><li>&nbsp;&nbsp;}<br>
+</li><li>}<br>
+</li><li></li></ol></div><em onclick="copycode($('code_hee'));">复制代码</em></div><br>
+
+<br>
+
+<br>
+<div align="left">下载数据后，打开接收端的串口监视窗口可以查看发送端发送的数据。</div><br>
+<br>
+</td></tr></tbody></table>
+
+<div class="attach_nopermission attach_tips">
+<div>
+<h3><strong>本帖子中包含更多资源</strong></h3>
+<p>您需要 <a href="http://www.topmaker.com.cn/bbs/member.php?mod=logging&amp;action=login" onclick="showWindow('login', this.href);return false;">登录</a> 才可以下载或查看，没有帐号？<a href="http://www.topmaker.com.cn/bbs/member.php?mod=register" title="注册帐号">立即注册</a> </p>
+</div>
+<span class="atips_close" onclick="this.parentNode.style.display='none'">x</span>
+</div>
+
+</div>
+<div id="comment_429" class="cm">
+</div>
+
+<div id="post_rate_div_429"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+<div id="p_btn" class="mtw mbm hm cl">
+
+<a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=230&amp;formhash=3cb97085" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'" title="收藏本帖"><i><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/fav.gif" alt="收藏">收藏<span id="favoritenumber">1</span></i></a>
+</div>
+</td>
+</tr>
+<tr id="_postposition429"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.topmaker.com.cn/bbs/forum.php?mod=post&amp;action=reply&amp;fid=36&amp;tid=230&amp;reppost=429&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+</em>
+
+<p>
+<a href="javascript:;" id="mgc_post_429" onmouseover="showMenu(this.id)" class="showmenu" style="display: none;"></a>
+<a href="javascript:;" onclick="showWindow('miscreport429', 'misc.php?mod=report&amp;rtype=post&amp;rid=429&amp;tid=230&amp;fid=36', 'get', -1);return false;">举报</a>
+</p>
+
+<ul id="mgc_post_429_menu" class="p_pop mgcmn" style="display: none;">
+</ul>
+<script type="text/javascript" reload="1">checkmgcmn('post_429')</script>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+<script type="text/javascript" reload="1">
+aimgcount[429] = ['xj1LV'];
+attachimggroup(429);
+var aimgfid = 0;
+</script>
+</div><div id="post_451"><table id="pid451" class="plhin" summary="pid451" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar451" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=402" target="_blank" class="xw1">hdcboy</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo451" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo451_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=402" target="_blank" class="xi2">hdcboy</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=402&amp;do=profile" target="_blank" class="xi2">42</a></dd>
+</dl><div class="imicn">
+<a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=402&amp;do=profile" target="_blank" title="查看详细资料"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo451')"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=402" class="avtm" target="_blank"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/avatar_004.gif"></a></div>
+</div>
+<div class="tns xg2"><table cellspacing="0" cellpadding="0"><tbody><tr><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=402&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space" class="xi2">0</a></p>主题</th><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=402&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space" class="xi2">7</a></p>帖子</th><td><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=402&amp;do=profile" class="xi2">42</a></p>积分</td></tr></tbody></table></div>
+
+<p><em><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">新手上路</a></em></p>
+
+
+<p><span id="g_up451" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level1.gif" alt="Rank: 1"></span></p>
+<div id="g_up451_menu" class="tip tip_4" style="display: none;"><div class="tip_horn"></div><div class="tip_c">新手上路, 积分 42, 距离下一级还需 8 积分</div></div>
+
+
+<p><span class="pbg2" id="upgradeprogress_451" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!', 'menuid':'g_up451_menu'});"><span class="pbr2" style="width:84%;"></span></span></p>
+<div id="g_up451_menu" class="tip tip_4" style="display: none;"><div class="tip_horn"></div><div class="tip_c">新手上路, 积分 42, 距离下一级还需 8 积分</div></div>
+
+<dl class="pil cl">
+	<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=402&amp;do=profile" target="_blank" class="xi2">42</a></dd>
+</dl>
+
+<dl class="pil cl"></dl><ul class="xl xl2 o cl">
+<li class="pm2"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=pm&amp;op=showmsg&amp;handlekey=showmsg_402&amp;touid=402&amp;pmid=0&amp;daterange=2&amp;pid=451&amp;tid=230" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>
+</ul>
+</div>
+</td>
+	
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=230&amp;pid=451" id="postnum451" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+沙发</a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon451" src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/online_member.gif">
+<em id="authorposton451">发表于 2015-2-28 01:32:05</em>
+<span class="pipe">|</span>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;page=1&amp;authorid=402" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_451">
+台产的和进口的 在外型上怎样区分的</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_451" class="cm">
+</div>
+
+<div id="post_rate_div_451"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition451"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.topmaker.com.cn/bbs/forum.php?mod=post&amp;action=reply&amp;fid=36&amp;tid=230&amp;repquote=451&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=230&amp;pid=451&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_451').innerHTML ? $('review_support_451').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_451"></span></a>
+<a class="replysubtract" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=230&amp;pid=451&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_451').innerHTML ? $('review_against_451').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_451"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" id="mgc_post_451" onmouseover="showMenu(this.id)" class="showmenu" style="display: none;"></a>
+<a href="javascript:;" onclick="showWindow('miscreport451', 'misc.php?mod=report&amp;rtype=post&amp;rid=451&amp;tid=230&amp;fid=36', 'get', -1);return false;">举报</a>
+</p>
+
+<ul id="mgc_post_451_menu" class="p_pop mgcmn" style="display: none;">
+</ul>
+<script type="text/javascript" reload="1">checkmgcmn('post_451')</script>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_453"><table id="pid453" class="plhin" summary="pid453" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar453" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3" target="_blank" class="xw1">jizhi01</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo453" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo453_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3" target="_blank" class="xi2">jizhi01</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" target="_blank" class="xi2">834</a></dd>
+</dl><div class="imicn">
+<a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" target="_blank" title="查看详细资料"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo453')"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3" class="avtm" target="_blank"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/avatar.gif"></a></div>
+</div>
+<div class="tns xg2"><table cellspacing="0" cellpadding="0"><tbody><tr><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space" class="xi2">38</a></p>主题</th><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space" class="xi2">59</a></p>帖子</th><td><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" class="xi2">834</a></p>积分</td></tr></tbody></table></div>
+
+<p><em><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=usergroup&amp;gid=3" target="_blank">版主</a></em></p>
+
+
+<p><span><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level3.gif" alt="Rank: 7"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level2.gif" alt="Rank: 7"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level1.gif" alt="Rank: 7"></span></p>
+
+
+
+<dl class="pil cl">
+	<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" target="_blank" class="xi2">834</a></dd>
+</dl>
+
+<dl class="pil cl"></dl><ul class="xl xl2 o cl">
+<li class="pm2"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=pm&amp;op=showmsg&amp;handlekey=showmsg_3&amp;touid=3&amp;pmid=0&amp;daterange=2&amp;pid=453&amp;tid=230" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>
+</ul>
+</div>
+</td>
+	
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=230&amp;pid=453" id="postnum453" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+板凳</a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon453" src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/ico_lz.png">
+&nbsp;楼主<span class="pipe">|</span>
+<em id="authorposton453">发表于 2015-2-28 16:20:40</em>
+<span class="pipe">|</span>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;page=1&amp;authorid=3" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_453">
+<div class="quote"><blockquote><font size="2"><a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=findpost&amp;pid=451&amp;ptid=230" target="_blank" class="gj_safe_a"><font color="#999999">hdcboy 发表于 2015-2-28 01:32</font></a></font><br>
+台产的和进口的 在外型上怎样区分的</blockquote></div><br>
+这个还真不知道</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_453" class="cm">
+</div>
+
+<div id="post_rate_div_453"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition453"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.topmaker.com.cn/bbs/forum.php?mod=post&amp;action=reply&amp;fid=36&amp;tid=230&amp;repquote=453&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=230&amp;pid=453&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_453').innerHTML ? $('review_support_453').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_453"></span></a>
+<a class="replysubtract" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=230&amp;pid=453&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_453').innerHTML ? $('review_against_453').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_453"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" id="mgc_post_453" onmouseover="showMenu(this.id)" class="showmenu" style="display: none;"></a>
+<a href="javascript:;" onclick="showWindow('miscreport453', 'misc.php?mod=report&amp;rtype=post&amp;rid=453&amp;tid=230&amp;fid=36', 'get', -1);return false;">举报</a>
+</p>
+
+<ul id="mgc_post_453_menu" class="p_pop mgcmn" style="display: none;">
+</ul>
+<script type="text/javascript" reload="1">checkmgcmn('post_453')</script>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_541"><table id="pid541" class="plhin" summary="pid541" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar541" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474" target="_blank" class="xw1">CTGU2012</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo541" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo541_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474" target="_blank" class="xi2">CTGU2012</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=profile" target="_blank" class="xi2">14</a></dd>
+</dl><div class="imicn">
+<a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=profile" target="_blank" title="查看详细资料"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo541')"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474" class="avtm" target="_blank"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/avatar_003.gif"></a></div>
+</div>
+<div class="tns xg2"><table cellspacing="0" cellpadding="0"><tbody><tr><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space" class="xi2">0</a></p>主题</th><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space" class="xi2">5</a></p>帖子</th><td><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=profile" class="xi2">14</a></p>积分</td></tr></tbody></table></div>
+
+<p><em><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">新手上路</a></em></p>
+
+
+<p><span id="g_up541" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level1.gif" alt="Rank: 1"></span></p>
+<div id="g_up541_menu" class="tip tip_4" style="display: none;"><div class="tip_horn"></div><div class="tip_c">新手上路, 积分 14, 距离下一级还需 36 积分</div></div>
+
+
+<p><span class="pbg2" id="upgradeprogress_541" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!', 'menuid':'g_up541_menu'});"><span class="pbr2" style="width:28%;"></span></span></p>
+<div id="g_up541_menu" class="tip tip_4" style="display: none;"><div class="tip_horn"></div><div class="tip_c">新手上路, 积分 14, 距离下一级还需 36 积分</div></div>
+
+<dl class="pil cl">
+	<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=profile" target="_blank" class="xi2">14</a></dd>
+</dl>
+
+<dl class="pil cl"></dl><ul class="xl xl2 o cl">
+<li class="pm2"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=pm&amp;op=showmsg&amp;handlekey=showmsg_474&amp;touid=474&amp;pmid=0&amp;daterange=2&amp;pid=541&amp;tid=230" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>
+</ul>
+</div>
+</td>
+	
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=230&amp;pid=541" id="postnum541" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+地板</a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon541" src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/online_member.gif">
+<em id="authorposton541">发表于 2015-4-12 15:19:41</em>
+<span class="pipe">|</span>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;page=1&amp;authorid=474" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_541">
+请问大牛，我用楼主的代码调试的时候，接收端是乱码，是什么原因<br>
+</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_541" class="cm">
+</div>
+
+<div id="post_rate_div_541"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition541"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.topmaker.com.cn/bbs/forum.php?mod=post&amp;action=reply&amp;fid=36&amp;tid=230&amp;repquote=541&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=230&amp;pid=541&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_541').innerHTML ? $('review_support_541').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_541"></span></a>
+<a class="replysubtract" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=230&amp;pid=541&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_541').innerHTML ? $('review_against_541').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_541"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" id="mgc_post_541" onmouseover="showMenu(this.id)" class="showmenu" style="display: none;"></a>
+<a href="javascript:;" onclick="showWindow('miscreport541', 'misc.php?mod=report&amp;rtype=post&amp;rid=541&amp;tid=230&amp;fid=36', 'get', -1);return false;">举报</a>
+</p>
+
+<ul id="mgc_post_541_menu" class="p_pop mgcmn" style="display: none;">
+</ul>
+<script type="text/javascript" reload="1">checkmgcmn('post_541')</script>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_542"><table id="pid542" class="plhin" summary="pid542" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar542" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3" target="_blank" class="xw1">jizhi01</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo542" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo542_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3" target="_blank" class="xi2">jizhi01</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" target="_blank" class="xi2">834</a></dd>
+</dl><div class="imicn">
+<a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" target="_blank" title="查看详细资料"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo542')"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3" class="avtm" target="_blank"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/avatar.gif"></a></div>
+</div>
+<div class="tns xg2"><table cellspacing="0" cellpadding="0"><tbody><tr><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space" class="xi2">38</a></p>主题</th><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space" class="xi2">59</a></p>帖子</th><td><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" class="xi2">834</a></p>积分</td></tr></tbody></table></div>
+
+<p><em><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=usergroup&amp;gid=3" target="_blank">版主</a></em></p>
+
+
+<p><span><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level3.gif" alt="Rank: 7"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level2.gif" alt="Rank: 7"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level1.gif" alt="Rank: 7"></span></p>
+
+
+
+<dl class="pil cl">
+	<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" target="_blank" class="xi2">834</a></dd>
+</dl>
+
+<dl class="pil cl"></dl><ul class="xl xl2 o cl">
+<li class="pm2"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=pm&amp;op=showmsg&amp;handlekey=showmsg_3&amp;touid=3&amp;pmid=0&amp;daterange=2&amp;pid=542&amp;tid=230" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>
+</ul>
+</div>
+</td>
+	
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=230&amp;pid=542" id="postnum542" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>5</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon542" src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/ico_lz.png">
+&nbsp;楼主<span class="pipe">|</span>
+<em id="authorposton542">发表于 2015-4-14 22:41:20</em>
+<span class="pipe">|</span>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;page=1&amp;authorid=3" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_542">
+<div class="quote"><blockquote><font size="2"><a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=findpost&amp;pid=541&amp;ptid=230" target="_blank" class="gj_safe_a"><font color="#999999">CTGU2012 发表于 2015-4-12 15:19</font></a></font><br>
+请问大牛，我用楼主的代码调试的时候，接收端是乱码，是什么原因</blockquote></div><br>
+通信速率设置是否正确？能提供一下错误信息就更好了。</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_542" class="cm">
+</div>
+
+<div id="post_rate_div_542"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition542"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.topmaker.com.cn/bbs/forum.php?mod=post&amp;action=reply&amp;fid=36&amp;tid=230&amp;repquote=542&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=230&amp;pid=542&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_542').innerHTML ? $('review_support_542').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_542"></span></a>
+<a class="replysubtract" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=230&amp;pid=542&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_542').innerHTML ? $('review_against_542').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_542"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" id="mgc_post_542" onmouseover="showMenu(this.id)" class="showmenu" style="display: none;"></a>
+<a href="javascript:;" onclick="showWindow('miscreport542', 'misc.php?mod=report&amp;rtype=post&amp;rid=542&amp;tid=230&amp;fid=36', 'get', -1);return false;">举报</a>
+</p>
+
+<ul id="mgc_post_542_menu" class="p_pop mgcmn" style="display: none;">
+</ul>
+<script type="text/javascript" reload="1">checkmgcmn('post_542')</script>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_550"><table id="pid550" class="plhin" summary="pid550" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar550" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474" target="_blank" class="xw1">CTGU2012</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo550" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo550_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474" target="_blank" class="xi2">CTGU2012</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=profile" target="_blank" class="xi2">14</a></dd>
+</dl><div class="imicn">
+<a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=profile" target="_blank" title="查看详细资料"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo550')"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474" class="avtm" target="_blank"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/avatar_003.gif"></a></div>
+</div>
+<div class="tns xg2"><table cellspacing="0" cellpadding="0"><tbody><tr><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space" class="xi2">0</a></p>主题</th><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space" class="xi2">5</a></p>帖子</th><td><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=profile" class="xi2">14</a></p>积分</td></tr></tbody></table></div>
+
+<p><em><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">新手上路</a></em></p>
+
+
+<p><span id="g_up550" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level1.gif" alt="Rank: 1"></span></p>
+<div id="g_up550_menu" class="tip tip_4" style="display: none;"><div class="tip_horn"></div><div class="tip_c">新手上路, 积分 14, 距离下一级还需 36 积分</div></div>
+
+
+<p><span class="pbg2" id="upgradeprogress_550" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!', 'menuid':'g_up550_menu'});"><span class="pbr2" style="width:28%;"></span></span></p>
+<div id="g_up550_menu" class="tip tip_4" style="display: none;"><div class="tip_horn"></div><div class="tip_c">新手上路, 积分 14, 距离下一级还需 36 积分</div></div>
+
+<dl class="pil cl">
+	<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=profile" target="_blank" class="xi2">14</a></dd>
+</dl>
+
+<dl class="pil cl"></dl><ul class="xl xl2 o cl">
+<li class="pm2"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=pm&amp;op=showmsg&amp;handlekey=showmsg_474&amp;touid=474&amp;pmid=0&amp;daterange=2&amp;pid=550&amp;tid=230" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>
+</ul>
+</div>
+</td>
+	
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=230&amp;pid=550" id="postnum550" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>6</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon550" src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/online_member.gif">
+<em id="authorposton550">发表于 2015-4-21 12:28:48</em>
+<span class="pipe">|</span>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;page=1&amp;authorid=474" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_550">
+楼主，想要实现简答的收发双向通行，该怎么弄</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_550" class="cm">
+</div>
+
+<div id="post_rate_div_550"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition550"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.topmaker.com.cn/bbs/forum.php?mod=post&amp;action=reply&amp;fid=36&amp;tid=230&amp;repquote=550&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=230&amp;pid=550&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_550').innerHTML ? $('review_support_550').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_550"></span></a>
+<a class="replysubtract" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=230&amp;pid=550&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_550').innerHTML ? $('review_against_550').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_550"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" id="mgc_post_550" onmouseover="showMenu(this.id)" class="showmenu" style="display: none;"></a>
+<a href="javascript:;" onclick="showWindow('miscreport550', 'misc.php?mod=report&amp;rtype=post&amp;rid=550&amp;tid=230&amp;fid=36', 'get', -1);return false;">举报</a>
+</p>
+
+<ul id="mgc_post_550_menu" class="p_pop mgcmn" style="display: none;">
+</ul>
+<script type="text/javascript" reload="1">checkmgcmn('post_550')</script>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_551"><table id="pid551" class="plhin" summary="pid551" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar551" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474" target="_blank" class="xw1">CTGU2012</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo551" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo551_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474" target="_blank" class="xi2">CTGU2012</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=profile" target="_blank" class="xi2">14</a></dd>
+</dl><div class="imicn">
+<a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=profile" target="_blank" title="查看详细资料"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo551')"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474" class="avtm" target="_blank"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/avatar_003.gif"></a></div>
+</div>
+<div class="tns xg2"><table cellspacing="0" cellpadding="0"><tbody><tr><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space" class="xi2">0</a></p>主题</th><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space" class="xi2">5</a></p>帖子</th><td><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=profile" class="xi2">14</a></p>积分</td></tr></tbody></table></div>
+
+<p><em><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">新手上路</a></em></p>
+
+
+<p><span id="g_up551" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level1.gif" alt="Rank: 1"></span></p>
+<div id="g_up551_menu" class="tip tip_4" style="display: none;"><div class="tip_horn"></div><div class="tip_c">新手上路, 积分 14, 距离下一级还需 36 积分</div></div>
+
+
+<p><span class="pbg2" id="upgradeprogress_551" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!', 'menuid':'g_up551_menu'});"><span class="pbr2" style="width:28%;"></span></span></p>
+<div id="g_up551_menu" class="tip tip_4" style="display: none;"><div class="tip_horn"></div><div class="tip_c">新手上路, 积分 14, 距离下一级还需 36 积分</div></div>
+
+<dl class="pil cl">
+	<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=474&amp;do=profile" target="_blank" class="xi2">14</a></dd>
+</dl>
+
+<dl class="pil cl"></dl><ul class="xl xl2 o cl">
+<li class="pm2"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=pm&amp;op=showmsg&amp;handlekey=showmsg_474&amp;touid=474&amp;pmid=0&amp;daterange=2&amp;pid=551&amp;tid=230" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>
+</ul>
+</div>
+</td>
+	
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=230&amp;pid=551" id="postnum551" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>7</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon551" src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/online_member.gif">
+<em id="authorposton551">发表于 2015-4-21 12:30:15</em>
+<span class="pipe">|</span>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;page=1&amp;authorid=474" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_551">
+使用库函数中的定时中断可以实现，双向通行吗</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_551" class="cm">
+</div>
+
+<div id="post_rate_div_551"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition551"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.topmaker.com.cn/bbs/forum.php?mod=post&amp;action=reply&amp;fid=36&amp;tid=230&amp;repquote=551&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=230&amp;pid=551&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_551').innerHTML ? $('review_support_551').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_551"></span></a>
+<a class="replysubtract" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=230&amp;pid=551&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_551').innerHTML ? $('review_against_551').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_551"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" id="mgc_post_551" onmouseover="showMenu(this.id)" class="showmenu" style="display: none;"></a>
+<a href="javascript:;" onclick="showWindow('miscreport551', 'misc.php?mod=report&amp;rtype=post&amp;rid=551&amp;tid=230&amp;fid=36', 'get', -1);return false;">举报</a>
+</p>
+
+<ul id="mgc_post_551_menu" class="p_pop mgcmn" style="display: none;">
+</ul>
+<script type="text/javascript" reload="1">checkmgcmn('post_551')</script>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_569"><table id="pid569" class="plhin" summary="pid569" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar569" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3" target="_blank" class="xw1">jizhi01</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo569" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo569_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3" target="_blank" class="xi2">jizhi01</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" target="_blank" class="xi2">834</a></dd>
+</dl><div class="imicn">
+<a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" target="_blank" title="查看详细资料"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo569')"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3" class="avtm" target="_blank"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/avatar.gif"></a></div>
+</div>
+<div class="tns xg2"><table cellspacing="0" cellpadding="0"><tbody><tr><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space" class="xi2">38</a></p>主题</th><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space" class="xi2">59</a></p>帖子</th><td><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" class="xi2">834</a></p>积分</td></tr></tbody></table></div>
+
+<p><em><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=usergroup&amp;gid=3" target="_blank">版主</a></em></p>
+
+
+<p><span><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level3.gif" alt="Rank: 7"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level2.gif" alt="Rank: 7"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level1.gif" alt="Rank: 7"></span></p>
+
+
+
+<dl class="pil cl">
+	<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=3&amp;do=profile" target="_blank" class="xi2">834</a></dd>
+</dl>
+
+<dl class="pil cl"></dl><ul class="xl xl2 o cl">
+<li class="pm2"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=pm&amp;op=showmsg&amp;handlekey=showmsg_3&amp;touid=3&amp;pmid=0&amp;daterange=2&amp;pid=569&amp;tid=230" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>
+</ul>
+</div>
+</td>
+	
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=230&amp;pid=569" id="postnum569" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>8</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon569" src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/ico_lz.png">
+&nbsp;楼主<span class="pipe">|</span>
+<em id="authorposton569">发表于 2015-4-26 13:16:40</em>
+<span class="pipe">|</span>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;page=1&amp;authorid=3" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_569">
+<div class="quote"><blockquote><font size="2"><a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=findpost&amp;pid=551&amp;ptid=230" target="_blank" class="gj_safe_a"><font color="#999999">CTGU2012 发表于 2015-4-21 12:30</font></a></font><br>
+使用库函数中的定时中断可以实现，双向通行吗</blockquote></div><br>
+理论上讲是可以的</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_569" class="cm">
+</div>
+
+<div id="post_rate_div_569"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition569"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.topmaker.com.cn/bbs/forum.php?mod=post&amp;action=reply&amp;fid=36&amp;tid=230&amp;repquote=569&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=230&amp;pid=569&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_569').innerHTML ? $('review_support_569').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_569"></span></a>
+<a class="replysubtract" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=230&amp;pid=569&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_569').innerHTML ? $('review_against_569').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_569"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" id="mgc_post_569" onmouseover="showMenu(this.id)" class="showmenu" style="display: none;"></a>
+<a href="javascript:;" onclick="showWindow('miscreport569', 'misc.php?mod=report&amp;rtype=post&amp;rid=569&amp;tid=230&amp;fid=36', 'get', -1);return false;">举报</a>
+</p>
+
+<ul id="mgc_post_569_menu" class="p_pop mgcmn" style="display: none;">
+</ul>
+<script type="text/javascript" reload="1">checkmgcmn('post_569')</script>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_1463"><table id="pid1463" class="plhin" summary="pid1463" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar1463" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123" target="_blank" class="xw1">gaochengdu12345</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo1463" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo1463_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123" target="_blank" class="xi2">gaochengdu12345</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123&amp;do=profile" target="_blank" class="xi2">20</a></dd>
+</dl><div class="imicn">
+<a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123&amp;do=profile" target="_blank" title="查看详细资料"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo1463')"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123" class="avtm" target="_blank"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/avatar_002.gif"></a></div>
+</div>
+<div class="tns xg2"><table cellspacing="0" cellpadding="0"><tbody><tr><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space" class="xi2">0</a></p>主题</th><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space" class="xi2">6</a></p>帖子</th><td><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123&amp;do=profile" class="xi2">20</a></p>积分</td></tr></tbody></table></div>
+
+<p><em><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">新手上路</a></em></p>
+
+
+<p><span id="g_up1463" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level1.gif" alt="Rank: 1"></span></p>
+<div id="g_up1463_menu" class="tip tip_4" style="display: none;"><div class="tip_horn"></div><div class="tip_c">新手上路, 积分 20, 距离下一级还需 30 积分</div></div>
+
+
+<p><span class="pbg2" id="upgradeprogress_1463" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!', 'menuid':'g_up1463_menu'});"><span class="pbr2" style="width:40%;"></span></span></p>
+<div id="g_up1463_menu" class="tip tip_4" style="display: none;"><div class="tip_horn"></div><div class="tip_c">新手上路, 积分 20, 距离下一级还需 30 积分</div></div>
+
+<dl class="pil cl">
+	<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123&amp;do=profile" target="_blank" class="xi2">20</a></dd>
+</dl>
+
+<dl class="pil cl"></dl><ul class="xl xl2 o cl">
+<li class="pm2"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=pm&amp;op=showmsg&amp;handlekey=showmsg_14123&amp;touid=14123&amp;pmid=0&amp;daterange=2&amp;pid=1463&amp;tid=230" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>
+</ul>
+</div>
+</td>
+	
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=230&amp;pid=1463" id="postnum1463" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>9</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon1463" src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/online_member.gif">
+<em id="authorposton1463">发表于 2016-3-1 20:45:34</em>
+<span class="pipe">|</span>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;page=1&amp;authorid=14123" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_1463">
+<i class="pstatus"> 本帖最后由 gaochengdu12345 于 2016-3-1 20:54 编辑 </i><br>
+<br>
+sketch_mar01a.ino: In function 'void setup()':<br>
+sketch_mar01a:11: error: 'Mirf' was not declared in this scope<br>
+sketch_mar01a:11: error: 'MirfHardwareSpi' was not declared in this scope<br>
+sketch_mar01a.ino: In function 'void loop()':<br>
+sketch_mar01a:23: error: 'Mirf' was not declared in this scope<br>
+sketch_mar01a.ino: In function 'void Sends(char*)':<br>
+sketch_mar01a:57: error: 'Mirf' was not declared in this scope<br>
+请问，我把楼主的代码复制过去，编译错误提示，怎么改呢<br>
+<br>
+</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_1463" class="cm">
+</div>
+
+<div id="post_rate_div_1463"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition1463"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.topmaker.com.cn/bbs/forum.php?mod=post&amp;action=reply&amp;fid=36&amp;tid=230&amp;repquote=1463&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=230&amp;pid=1463&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_1463').innerHTML ? $('review_support_1463').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_1463"></span></a>
+<a class="replysubtract" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=230&amp;pid=1463&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_1463').innerHTML ? $('review_against_1463').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_1463"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" id="mgc_post_1463" onmouseover="showMenu(this.id)" class="showmenu" style="display: none;"></a>
+<a href="javascript:;" onclick="showWindow('miscreport1463', 'misc.php?mod=report&amp;rtype=post&amp;rid=1463&amp;tid=230&amp;fid=36', 'get', -1);return false;">举报</a>
+</p>
+
+<ul id="mgc_post_1463_menu" class="p_pop mgcmn" style="display: none;">
+</ul>
+<script type="text/javascript" reload="1">checkmgcmn('post_1463')</script>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="post_1464"><table id="pid1464" class="plhin" summary="pid1464" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+<div id="favatar1464" class="pls favatar">
+ <div class="pi">
+<div class="authi"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123" target="_blank" class="xw1">gaochengdu12345</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo1464" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo1464_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123" target="_blank" class="xi2">gaochengdu12345</a></strong>
+<em>当前离线</em>
+</div><dl class="cl">
+<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123&amp;do=profile" target="_blank" class="xi2">20</a></dd>
+</dl><div class="imicn">
+<a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123&amp;do=profile" target="_blank" title="查看详细资料"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/userinfo.gif" alt="查看详细资料"></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo1464')"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123" class="avtm" target="_blank"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/avatar_002.gif"></a></div>
+</div>
+<div class="tns xg2"><table cellspacing="0" cellpadding="0"><tbody><tr><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space" class="xi2">0</a></p>主题</th><th><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space" class="xi2">6</a></p>帖子</th><td><p><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123&amp;do=profile" class="xi2">20</a></p>积分</td></tr></tbody></table></div>
+
+<p><em><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">新手上路</a></em></p>
+
+
+<p><span id="g_up1464" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/star_level1.gif" alt="Rank: 1"></span></p>
+<div id="g_up1464_menu" class="tip tip_4" style="display: none;"><div class="tip_horn"></div><div class="tip_c">新手上路, 积分 20, 距离下一级还需 30 积分</div></div>
+
+
+<p><span class="pbg2" id="upgradeprogress_1464" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!', 'menuid':'g_up1464_menu'});"><span class="pbr2" style="width:40%;"></span></span></p>
+<div id="g_up1464_menu" class="tip tip_4" style="display: none;"><div class="tip_horn"></div><div class="tip_c">新手上路, 积分 20, 距离下一级还需 30 积分</div></div>
+
+<dl class="pil cl">
+	<dt>积分</dt><dd><a href="http://www.topmaker.com.cn/bbs/home.php?mod=space&amp;uid=14123&amp;do=profile" target="_blank" class="xi2">20</a></dd>
+</dl>
+
+<dl class="pil cl"></dl><ul class="xl xl2 o cl">
+<li class="pm2"><a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=pm&amp;op=showmsg&amp;handlekey=showmsg_14123&amp;touid=14123&amp;pmid=0&amp;daterange=2&amp;pid=1464&amp;tid=230" onclick="showWindow('sendpm', this.href);" title="发消息" class="xi2">发消息</a></li>
+</ul>
+</div>
+</td>
+	
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=230&amp;pid=1464" id="postnum1464" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>10</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon1464" src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/online_member.gif">
+<em id="authorposton1464">发表于 2016-3-1 20:48:54</em>
+<span class="pipe">|</span>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;page=1&amp;authorid=14123" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_1464">
+我是新手，最近在做一个小东西，请问楼主可以加我一下好友吗我的扣扣号：873560764<br>
+</td></tr></tbody></table>
+
+
+</div>
+<div id="comment_1464" class="cm">
+</div>
+
+<div id="post_rate_div_1464"></div>
+</div>
+</div>
+
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition1464"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="fastre" href="http://www.topmaker.com.cn/bbs/forum.php?mod=post&amp;action=reply&amp;fid=36&amp;tid=230&amp;repquote=1464&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)">回复</a>
+<a class="replyadd" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=230&amp;pid=1464&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_support_1464').innerHTML ? $('review_support_1464').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_1464"></span></a>
+<a class="replysubtract" href="http://www.topmaker.com.cn/bbs/forum.php?mod=misc&amp;action=postreview&amp;do=against&amp;tid=230&amp;pid=1464&amp;hash=3cb97085" onclick="showWindow('login', this.href)" onmouseover="this.title = ($('review_against_1464').innerHTML ? $('review_against_1464').innerHTML : 0) + ' 人 反对'">反对 <span id="review_against_1464"></span></a>
+</em>
+
+<p>
+<a href="javascript:;" id="mgc_post_1464" onmouseover="showMenu(this.id)" class="showmenu" style="display: none;"></a>
+<a href="javascript:;" onclick="showWindow('miscreport1464', 'misc.php?mod=report&amp;rtype=post&amp;rid=1464&amp;tid=230&amp;fid=36', 'get', -1);return false;">举报</a>
+</p>
+
+<ul id="mgc_post_1464_menu" class="p_pop mgcmn" style="display: none;">
+</ul>
+<script type="text/javascript" reload="1">checkmgcmn('post_1464')</script>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</tbody></table>
+</div><div id="postlistreply" class="pl"><div id="post_new" class="viewthread_table" style="display: none"></div></div>
+</div>
+
+
+<form method="post" autocomplete="off" name="modactions" id="modactions">
+<input name="formhash" value="3cb97085" type="hidden">
+<input name="optgroup" type="hidden">
+<input name="operation" type="hidden">
+<input name="listextra" value="page%3D1" type="hidden">
+<input name="page" value="1" type="hidden">
+</form>
+
+
+<div class="pgbtn"><a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;page=2" hidefocus="true" class="bm_h">下一页 &#187;</a></div>
+
+<div class="pgs mtm mbm cl">
+<div class="pg"><strong>1</strong><a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;extra=page%3D1&amp;page=2">2</a><label><input name="custompage" class="px" size="2" title="输入页码，按回车快速跳转" value="1" onkeydown="if(event.keyCode==13) {window.location='forum.php?mod=viewthread&amp;tid=230&amp;extra=page%3D1&amp;page='+this.value;; doane(event);}" type="text"><span title="共 2 页"> / 2 页</span></label><a href="http://www.topmaker.com.cn/bbs/forum.php?mod=viewthread&amp;tid=230&amp;extra=page%3D1&amp;page=2" class="nxt">下一页</a></div><span class="pgb y"><a href="http://www.topmaker.com.cn/bbs/forum.php?mod=forumdisplay&amp;fid=36&amp;page=1">返回列表</a></span>
+<a id="newspecialtmp" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" onclick="showWindow('newthread', 'forum.php?mod=post&amp;action=newthread&amp;fid=36')" href="javascript:;" title="发新帖"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/pn_post.png" alt="发新帖"></a>
+</div>
+
+<!--[diy=diyfastposttop]--><div id="diyfastposttop" class="area"></div><!--[/diy]-->
+<script type="text/javascript">
+var postminchars = parseInt('0');
+var postmaxchars = parseInt('10000');
+var disablepostctrl = parseInt('0');
+</script>
+
+<div id="f_pst" class="pl bm bmw">
+<form method="post" autocomplete="off" id="fastpostform" action="forum.php?mod=post&amp;action=reply&amp;fid=36&amp;tid=230&amp;extra=page%3D1&amp;replysubmit=yes&amp;infloat=yes&amp;handlekey=fastpost" onsubmit="return fastpostvalidate(this)">
+<table cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls">
+</td>
+<td class="plc">
+
+<span id="fastpostreturn"></span>
+
+
+<div class="cl">
+<div id="fastsmiliesdiv" class="y"><div id="fastsmiliesdiv_data"><div id="fastsmilies"></div></div></div><div class="hasfsl" id="fastposteditor">
+<div class="tedt mtn">
+<div class="bar">
+<span class="y">
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=post&amp;action=reply&amp;fid=36&amp;tid=230" onclick="return switchAdvanceMode(this.href)">高级模式</a>
+</span><script src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/seditor.js" type="text/javascript"></script>
+<div class="fpd">
+<a href="javascript:;" title="文字加粗" class="fbld">B</a>
+<a href="javascript:;" title="设置文字颜色" class="fclr" id="fastpostforecolor">Color</a>
+<a id="fastpostimg" href="javascript:;" title="图片" class="fmg">Image</a>
+<a id="fastposturl" href="javascript:;" title="添加链接" class="flnk">Link</a>
+<a id="fastpostquote" href="javascript:;" title="引用" class="fqt">Quote</a>
+<a id="fastpostcode" href="javascript:;" title="代码" class="fcd">Code</a>
+<a href="javascript:;" class="fsml" id="fastpostsml">Smilies</a>
+</div></div>
+<div class="area">
+<div class="pt hm">
+您需要登录后才可以回帖 <a href="http://www.topmaker.com.cn/bbs/member.php?mod=logging&amp;action=login" onclick="showWindow('login', this.href)" class="xi2">登录</a> | <a href="http://www.topmaker.com.cn/bbs/member.php?mod=register" class="xi2">立即注册</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="seccheck_fastpost">
+</div>
+
+
+<input name="formhash" value="3cb97085" type="hidden">
+<input name="usesig" value="" type="hidden">
+<input name="subject" value="  " type="hidden">
+<p class="ptm pnpost">
+<a href="http://www.topmaker.com.cn/bbs/home.php?mod=spacecp&amp;ac=credit&amp;op=rule&amp;fid=36" class="y" target="_blank">本版积分规则</a>
+<button type="button" onclick="showWindow('login', 'member.php?mod=logging&amp;action=login&amp;guestmessage=yes')" name="replysubmit" id="fastpostsubmit" class="pn pnc vm" value="replysubmit" tabindex="5"><strong>发表回复</strong></button>
+<label for="fastpostrefresh"><input id="fastpostrefresh" class="pc" type="checkbox">回帖后跳转到最后一页</label>
+<script type="text/javascript">if(getcookie('fastpostrefresh') == 1) {$('fastpostrefresh').checked=true;}</script>
+</p>
+</td>
+</tr>
+</tbody></table>
+</form>
+</div>
+
+<script type="text/javascript">
+new lazyload();
+</script>
+<script type="text/javascript">document.onkeyup = function(e){keyPageScroll(e, 0, 1, 'forum.php?mod=viewthread&tid=230', 1);}</script>
+</div>
+
+<div class="wp mtn">
+<!--[diy=diy3]--><div id="diy3" class="area"></div><!--[/diy]-->
+</div>
+
+<script type="text/javascript">
+function succeedhandle_followmod(url, msg, values) {
+var fObj = $('followmod_'+values['fuid']);
+if(values['type'] == 'add') {
+fObj.innerHTML = '不收听';
+fObj.href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid'];
+} else if(values['type'] == 'del') {
+fObj.innerHTML = '收听TA';
+fObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash=3cb97085&fuid='+values['fuid'];
+}
+}
+fixed_avatar([429,451,453,541,542,550,551,569,1463,1464], 1);
+</script>	</div>
+<div id="ft" class="wp cl">
+<div id="flk" class="y">
+<p>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mobile=yes">手机版</a><span class="pipe">|</span><strong><a href="http://www.topmaker.com.cn/" target="_blank">上海极制信息科技有限公司</a></strong>
+( <a href="http://www.miitbeian.gov.cn/" target="_blank">沪ICP备14016067号</a> )&nbsp;<a><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/security.png"></a></p>
+<p class="xs0">
+GMT+8, 2016-12-13 10:45<span id="debuginfo">
+, Processed in 0.134931 second(s), 22 queries
+.
+</span>
+</p>
+</div>
+<div id="frt">
+<p>Powered by <strong><a href="http://www.discuz.net/" target="_blank">Discuz!</a></strong> <em>X3.1</em></p>
+<p class="xs0">&#169; 2001-2013 <a href="http://www.comsenz.com/" target="_blank">Comsenz Inc.</a></p>
+</div></div>
+<script src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/home.php" type="text/javascript"></script>
+<div id="scrolltop" style="left: auto; right: 0px; visibility: hidden;">
+<span><a href="http://www.topmaker.com.cn/bbs/forum.php?mod=post&amp;action=reply&amp;fid=36&amp;tid=230&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" class="replyfast" title="快速回复"><b>快速回复</b></a></span>
+<span hidefocus="true"><a title="返回顶部" onclick="window.scrollTo('0','0')" class="scrolltopa"><b>返回顶部</b></a></span>
+<span>
+<a href="http://www.topmaker.com.cn/bbs/forum.php?mod=forumdisplay&amp;fid=36" hidefocus="true" class="returnlist" title="返回列表"><b>返回列表</b></a>
+</span>
+</div>
+<script type="text/javascript">_attachEvent(window, 'scroll', function () { showTopLink(); });checkBlind();</script>
+
+
+<div class="safe_statu" style="text-decoration:none;display:none;"><div><div class="gj_tri"><img src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/header_tri.png"></div><div><div class="gj_body"><div class="gj_statu"><div style="display:block;float:left;position: relative; top: -3px;"><img id="gj_show_statu" class="gj_ie6png" src="NRF24L01%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9D%97%E6%B5%8B%E8%AF%95-%E5%8F%AF%E7%94%A8_files/a.htm"></div><div class="safe_statu_wording" style="margin-top: 3px;"><span><a id="gj_show_wording" style="text-decoration:none;">safe_statu_wording</a></span></div></div><div style="display:block;clear:both;margin-top:0px;"></div><div id="gj_operate" style="position:relative; top: 4px;"></div></div><div class="gj_bottom"><!-- <div id="gj_show_info">show_info</div> --><div id="gj_show_gj" style="display:block;clear:both;padding-top:3px;">show_gj<a style="text-decoration:none;color:#373737"> 从此上网不被骗！ </a>show_operate</div></div></div></div></div></body></html>
