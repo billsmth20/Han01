@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html class="theme theme-white"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    
+    <meta name="description" content="Cmd Markdown 编辑阅读器，支持实时同步预览，区分写作和阅读模式，支持在线存储，分享文稿网址。">
+    <meta name="author" content="Jiawei Zhang">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <title>Tutorial for ESP8266 Serial WiFi Module - 作业部落 Cmd Markdown 编辑阅读器</title>
+
+
+    <link href="https://www.zybuluo.com/static/img/favicon.png" type="image/x-icon" rel="icon">
+
+    <link href="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/1bc053c8.css" rel="stylesheet" media="screen">
+
+
+    
+    <!-- id="prettify-style" will be used to get the link element below and change href to change prettify code, so it can't be in beginmin/endmin block. -->
+    <link id="prettify-style" href="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/prettify-cmd.css" type="text/css" rel="stylesheet">
+    <!--
+    <link id="mermaid-style" href="https://www.zybuluo.com/static/editor/libs/mermaid/mermaid.forest.css" type="text/css" rel="stylesheet">
+    -->
+    <link href="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/45c7d56d.css" rel="stylesheet" media="screen">
+
+
+    
+
+    <script async="" src="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/analytics.js"></script><script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-44461741-1', 'zybuluo.com');
+      ga('send', 'pageview');
+    </script>
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style></head>
+
+<body class="theme  theme-white pace-done"><div id="MathJax_Message" style="display: none;"></div><div class="pace  pace-inactive"><div class="pace-progress" style="width: 100%;" data-progress-text="100%" data-progress="99">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div>
+
+    <div id="global-prompt-alert" class="hide alert alert-warning">
+        <span id="global-prompt-message"></span>
+        <a id="close-global-prompt-alert" href="">[关闭]</a>
+    </div>
+
+    <!-- zybuluo's body -->
+    
+
+
+
+
+
+
+
+<!-- mdeditor's body -->
+
+
+
+
+
+
+<div id="editor-reader-full" class="editor-reader-full-shown" style="position: static; padding-right: 75px;">
+    <div id="reader-full-topInfo" class="reader-full-topInfo-shown">
+        <span>
+            <code>@kfihihc</code>
+        </span>
+        <code><span class="article-updated-date">2015-01-20 20:19</span></code>
+        <code><span>字数 </span><span class="article-characters">2868</span></code>
+        <code><span>阅读 </span><span class="article-read">77381</span></code>
+    </div>
+    <div id="wmd-preview" class="wmd-preview wmd-preview-full-reader" data-medium-element="true" style="left: 0px;"><div class="md-section-divider"></div>
+
+<div class="md-section-divider"></div>
+
+<h1 data-anchor-id="l24b" id="tutorial-for-esp8266-serial-wifi-module">Tutorial for ESP8266 Serial WiFi Module</h1>
+
+<p data-anchor-id="ijo8">If you want to get any update about ESP8266 
+module, such as new ESP8266 WiFi product, manufacture and etc, please 
+follow us at twitter.</p>
+
+<p data-anchor-id="izim">Twitter: <a target="_blank" href="https://twitter.com/kfihihc">@kfihihc</a></p>
+
+<p data-anchor-id="ig5u">In this tutorial, we'll use a seeeduino to 
+control the ESP8266 WiFi module to request a static page from the 
+internet. This is a basic use of TCP socket, for other usage, please 
+refer to the AT command guide of the module.</p>
+
+<p data-anchor-id="0pgg">Material list:</p>
+
+<ul data-anchor-id="1p26">
+<li><a target="_blank" href="http://www.seeedstudio.com/depot/Seeeduino-V30-Atmega-328P-p-669.html">Seeeduino V3</a> / Arduino Uno</li>
+<li><a target="_blank" href="http://www.seeedstudio.com/depot/WiFi-Serial-Transceiver-Module-w-ESP8266-p-1994.html">ESP8266 Serial WiFi module</a></li>
+<li><a target="_blank" href="http://www.seeedstudio.com/depot/UartSBee-V4-p-688.html">UartSBee v4</a> / other USB to TTL converter</li>
+</ul>
+
+<p data-anchor-id="wcli"><strong>Note：</strong> We used a software 
+serial to print some debugging information as there’s only one hardware 
+serial on seeeduino board. But the limitation of software serial is that
+ it can’t communicate in a higher baud rate than 19200. So part of the 
+output from ESP module will be dropped because the baud rate 57600 of 
+ESP module is higher than that of the software serial. If you have a 
+board with more than one hardware serial (e.g. Arduino Mega 2560), the 
+case will be easier.</p>
+
+<div class="md-section-divider"></div>
+
+<h2 data-anchor-id="stxc" id="step-by-step">Step-By-Step</h2>
+
+<p data-anchor-id="ypay"><code>Step 1:</code> connect module as the following picture</p>
+
+<p data-anchor-id="9eny"><img src="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/800px-Wifi_connection.htm" alt="Connection" title=""></p>
+
+<p data-anchor-id="nbrm"><code>Step 2:</code> Programe the seeeduino board.</p>
+
+<ol data-anchor-id="goqn">
+<li>Open Arduino IDE and create a new sketch;</li>
+<li>Parse the following code into the sketch editor (need modifying the SSID and PASS macros into your own situation);</li>
+</ol>
+
+<div class="md-section-divider"></div>
+
+<pre data-anchor-id="7m61" style="" class="prettyprint linenums prettyprinted"><ol class="linenums"><li class="L0"><code class="language-Arduino"><span class="com">#include</span><span class="pln"> </span><span class="str">&lt;SoftwareSerial.h&gt;</span></code></li><li class="L1"><code class="language-Arduino"></code></li><li class="L2"><code class="language-Arduino"><span class="com">#define</span><span class="pln"> SSID        </span><span class="str">"xxxxxxxx"</span></code></li><li class="L3"><code class="language-Arduino"><span class="com">#define</span><span class="pln"> PASS        </span><span class="str">"xxxxxxxx"</span></code></li><li class="L4"><code class="language-Arduino"><span class="com">#define</span><span class="pln"> DST_IP      </span><span class="str">"220.181.111.85"</span><span class="pln">    </span><span class="com">//baidu.com</span></code></li><li class="L5"><code class="language-Arduino"></code></li><li class="L6"><code class="language-Arduino"><span class="typ">SoftwareSerial</span><span class="pln"> dbgSerial</span><span class="pun">(</span><span class="lit">10</span><span class="pun">,</span><span class="pln"> </span><span class="lit">11</span><span class="pun">);</span><span class="pln"> </span><span class="com">// RX, TX</span></code></li><li class="L7"><code class="language-Arduino"></code></li><li class="L8"><code class="language-Arduino"><span class="kwd">void</span><span class="pln"> setup</span><span class="pun">()</span><span class="pln">  </span></code></li><li class="L9"><code class="language-Arduino"><span class="pun">{</span></code></li><li class="L0"><code class="language-Arduino"><span class="pln">  </span><span class="com">// Open serial communications and wait for port to open:</span></code></li><li class="L1"><code class="language-Arduino"><span class="pln">  </span><span class="typ">Serial</span><span class="pun">.</span><span class="kwd">begin</span><span class="pun">(</span><span class="lit">57600</span><span class="pun">);</span></code></li><li class="L2"><code class="language-Arduino"><span class="pln">  </span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">setTimeout</span><span class="pun">(</span><span class="lit">5000</span><span class="pun">);</span></code></li><li class="L3"><code class="language-Arduino"></code></li><li class="L4"><code class="language-Arduino"><span class="pln">  dbgSerial</span><span class="pun">.</span><span class="kwd">begin</span><span class="pun">(</span><span class="lit">9600</span><span class="pun">);</span><span class="pln">  </span><span class="com">//can't be faster than 19200 for softserial</span></code></li><li class="L5"><code class="language-Arduino"><span class="pln">  dbgSerial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"ESP8266 Demo"</span><span class="pun">);</span></code></li><li class="L6"><code class="language-Arduino"></code></li><li class="L7"><code class="language-Arduino"><span class="pln">  </span><span class="com">//test if the module is ready</span></code></li><li class="L8"><code class="language-Arduino"><span class="pln">  </span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"AT+RST"</span><span class="pun">);</span></code></li><li class="L9"><code class="language-Arduino"><span class="pln">  delay</span><span class="pun">(</span><span class="lit">1000</span><span class="pun">);</span></code></li><li class="L0"><code class="language-Arduino"><span class="pln">  </span><span class="kwd">if</span><span class="pun">(</span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">find</span><span class="pun">(</span><span class="str">"ready"</span><span class="pun">))</span></code></li><li class="L1"><code class="language-Arduino"><span class="pln">  </span><span class="pun">{</span></code></li><li class="L2"><code class="language-Arduino"><span class="pln">    dbgSerial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"Module is ready"</span><span class="pun">);</span></code></li><li class="L3"><code class="language-Arduino"><span class="pln">  </span><span class="pun">}</span></code></li><li class="L4"><code class="language-Arduino"><span class="pln">  </span><span class="kwd">else</span></code></li><li class="L5"><code class="language-Arduino"><span class="pln">  </span><span class="pun">{</span></code></li><li class="L6"><code class="language-Arduino"><span class="pln">    dbgSerial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"Module have no response."</span><span class="pun">);</span></code></li><li class="L7"><code class="language-Arduino"><span class="pln">    </span><span class="kwd">while</span><span class="pun">(</span><span class="lit">1</span><span class="pun">);</span></code></li><li class="L8"><code class="language-Arduino"><span class="pln">  </span><span class="pun">}</span></code></li><li class="L9"><code class="language-Arduino"><span class="pln">  delay</span><span class="pun">(</span><span class="lit">1000</span><span class="pun">);</span></code></li><li class="L0"><code class="language-Arduino"></code></li><li class="L1"><code class="language-Arduino"><span class="pln">  </span><span class="com">//connect to the wifi</span></code></li><li class="L2"><code class="language-Arduino"><span class="pln">  </span><span class="kwd">boolean</span><span class="pln"> connected</span><span class="pun">=</span><span class="kwd">false</span><span class="pun">;</span></code></li><li class="L3"><code class="language-Arduino"><span class="pln">  </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> i</span><span class="pun">=</span><span class="lit">0</span><span class="pun">;</span><span class="pln">i</span><span class="pun">&lt;</span><span class="lit">5</span><span class="pun">;</span><span class="pln">i</span><span class="pun">++)</span></code></li><li class="L4"><code class="language-Arduino"><span class="pln">  </span><span class="pun">{</span></code></li><li class="L5"><code class="language-Arduino"><span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">connectWiFi</span><span class="pun">())</span></code></li><li class="L6"><code class="language-Arduino"><span class="pln">    </span><span class="pun">{</span></code></li><li class="L7"><code class="language-Arduino"><span class="pln">      connected </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></code></li><li class="L8"><code class="language-Arduino"><span class="pln">      </span><span class="kwd">break</span><span class="pun">;</span></code></li><li class="L9"><code class="language-Arduino"><span class="pln">    </span><span class="pun">}</span></code></li><li class="L0"><code class="language-Arduino"><span class="pln">  </span><span class="pun">}</span></code></li><li class="L1"><code class="language-Arduino"><span class="pln">  </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(!</span><span class="pln">connected</span><span class="pun">){</span><span class="kwd">while</span><span class="pun">(</span><span class="lit">1</span><span class="pun">);}</span></code></li><li class="L2"><code class="language-Arduino"><span class="pln">  delay</span><span class="pun">(</span><span class="lit">5000</span><span class="pun">);</span></code></li><li class="L3"><code class="language-Arduino"></code></li><li class="L4"><code class="language-Arduino"><span class="pln">  </span><span class="com">//print the ip addr</span></code></li><li class="L5"><code class="language-Arduino"><span class="pln">  </span><span class="com">/*Serial.println("AT+CIFSR");</span></code></li><li class="L6"><code class="language-Arduino"><span class="com">  dbgSerial.println("ip address:");</span></code></li><li class="L7"><code class="language-Arduino"><span class="com">  while (Serial.available())</span></code></li><li class="L8"><code class="language-Arduino"><span class="com">    dbgSerial.write(Serial.read());*/</span></code></li><li class="L9"><code class="language-Arduino"></code></li><li class="L0"><code class="language-Arduino"><span class="pln">  </span><span class="com">//set the single connection mode</span></code></li><li class="L1"><code class="language-Arduino"><span class="pln">  </span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"AT+CIPMUX=0"</span><span class="pun">);</span></code></li><li class="L2"><code class="language-Arduino"><span class="pun">}</span></code></li><li class="L3"><code class="language-Arduino"></code></li><li class="L4"><code class="language-Arduino"><span class="kwd">void</span><span class="pln"> loop</span><span class="pun">()</span><span class="pln"> </span></code></li><li class="L5"><code class="language-Arduino"><span class="pun">{</span></code></li><li class="L6"><code class="language-Arduino"><span class="pln">  </span><span class="typ">String</span><span class="pln"> cmd </span><span class="pun">=</span><span class="pln"> </span><span class="str">"AT+CIPSTART=\"TCP\",\""</span><span class="pun">;</span></code></li><li class="L7"><code class="language-Arduino"><span class="pln">  cmd </span><span class="pun">+=</span><span class="pln"> DST_IP</span><span class="pun">;</span></code></li><li class="L8"><code class="language-Arduino"><span class="pln">  cmd </span><span class="pun">+=</span><span class="pln"> </span><span class="str">"\",80"</span><span class="pun">;</span></code></li><li class="L9"><code class="language-Arduino"><span class="pln">  </span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">cmd</span><span class="pun">);</span></code></li><li class="L0"><code class="language-Arduino"><span class="pln">  dbgSerial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">cmd</span><span class="pun">);</span></code></li><li class="L1"><code class="language-Arduino"></code></li><li class="L2"><code class="language-Arduino"><span class="pln">  </span><span class="kwd">if</span><span class="pun">(</span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">find</span><span class="pun">(</span><span class="str">"Error"</span><span class="pun">))</span><span class="pln"> </span><span class="kwd">return</span><span class="pun">;</span></code></li><li class="L3"><code class="language-Arduino"></code></li><li class="L4"><code class="language-Arduino"><span class="pln">  cmd </span><span class="pun">=</span><span class="pln"> </span><span class="str">"GET / HTTP/1.0\r\n\r\n"</span><span class="pun">;</span></code></li><li class="L5"><code class="language-Arduino"></code></li><li class="L6"><code class="language-Arduino"><span class="pln">  </span><span class="typ">Serial</span><span class="pun">.</span><span class="kwd">print</span><span class="pun">(</span><span class="str">"AT+CIPSEND="</span><span class="pun">);</span></code></li><li class="L7"><code class="language-Arduino"><span class="pln">  </span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">cmd</span><span class="pun">.</span><span class="pln">length</span><span class="pun">());</span></code></li><li class="L8"><code class="language-Arduino"><span class="pln">  </span><span class="kwd">if</span><span class="pun">(</span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">find</span><span class="pun">(</span><span class="str">"&gt;"</span><span class="pun">))</span></code></li><li class="L9"><code class="language-Arduino"><span class="pln">  </span><span class="pun">{</span></code></li><li class="L0"><code class="language-Arduino"><span class="pln">    dbgSerial</span><span class="pun">.</span><span class="kwd">print</span><span class="pun">(</span><span class="str">"&gt;"</span><span class="pun">);</span></code></li><li class="L1"><code class="language-Arduino"><span class="pln">  </span><span class="pun">}</span><span class="kwd">else</span></code></li><li class="L2"><code class="language-Arduino"><span class="pln">  </span><span class="pun">{</span></code></li><li class="L3"><code class="language-Arduino"><span class="pln">    </span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"AT+CIPCLOSE"</span><span class="pun">);</span></code></li><li class="L4"><code class="language-Arduino"><span class="pln">    dbgSerial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"connect timeout"</span><span class="pun">);</span></code></li><li class="L5"><code class="language-Arduino"><span class="pln">    delay</span><span class="pun">(</span><span class="lit">1000</span><span class="pun">);</span></code></li><li class="L6"><code class="language-Arduino"><span class="pln">    </span><span class="kwd">return</span><span class="pun">;</span></code></li><li class="L7"><code class="language-Arduino"><span class="pln">  </span><span class="pun">}</span></code></li><li class="L8"><code class="language-Arduino"><span class="pln">  </span><span class="typ">Serial</span><span class="pun">.</span><span class="kwd">print</span><span class="pun">(</span><span class="pln">cmd</span><span class="pun">);</span></code></li><li class="L9"><code class="language-Arduino"></code></li><li class="L0"><code class="language-Arduino"><span class="pln">  delay</span><span class="pun">(</span><span class="lit">2000</span><span class="pun">);</span></code></li><li class="L1"><code class="language-Arduino"><span class="pln">  </span><span class="com">//Serial.find("+IPD");</span></code></li><li class="L2"><code class="language-Arduino"><span class="pln">  </span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">available</span><span class="pun">())</span></code></li><li class="L3"><code class="language-Arduino"><span class="pln">  </span><span class="pun">{</span></code></li><li class="L4"><code class="language-Arduino"><span class="pln">    </span><span class="kwd">char</span><span class="pln"> c </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">read</span><span class="pun">();</span></code></li><li class="L5"><code class="language-Arduino"><span class="pln">    dbgSerial</span><span class="pun">.</span><span class="pln">write</span><span class="pun">(</span><span class="pln">c</span><span class="pun">);</span></code></li><li class="L6"><code class="language-Arduino"><span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">c</span><span class="pun">==</span><span class="str">'\r'</span><span class="pun">)</span><span class="pln"> dbgSerial</span><span class="pun">.</span><span class="kwd">print</span><span class="pun">(</span><span class="str">'\n'</span><span class="pun">);</span></code></li><li class="L7"><code class="language-Arduino"><span class="pln">  </span><span class="pun">}</span></code></li><li class="L8"><code class="language-Arduino"></code></li><li class="L9"><code class="language-Arduino"><span class="pln">  dbgSerial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"===="</span><span class="pun">);</span></code></li><li class="L0"><code class="language-Arduino"></code></li><li class="L1"><code class="language-Arduino"><span class="pln">  delay</span><span class="pun">(</span><span class="lit">1000</span><span class="pun">);</span></code></li><li class="L2"><code class="language-Arduino"><span class="pun">}</span></code></li><li class="L3"><code class="language-Arduino"></code></li><li class="L4"><code class="language-Arduino"><span class="kwd">boolean</span><span class="pln"> connectWiFi</span><span class="pun">()</span></code></li><li class="L5"><code class="language-Arduino"><span class="pun">{</span></code></li><li class="L6"><code class="language-Arduino"><span class="pln">  </span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"AT+CWMODE=1"</span><span class="pun">);</span></code></li><li class="L7"><code class="language-Arduino"></code></li><li class="L8"><code class="language-Arduino"><span class="pln">  </span><span class="typ">String</span><span class="pln"> cmd</span><span class="pun">=</span><span class="str">"AT+CWJAP=\""</span><span class="pun">;</span></code></li><li class="L9"><code class="language-Arduino"><span class="pln">  cmd</span><span class="pun">+=</span><span class="pln">SSID</span><span class="pun">;</span></code></li><li class="L0"><code class="language-Arduino"><span class="pln">  cmd</span><span class="pun">+=</span><span class="str">"\",\""</span><span class="pun">;</span></code></li><li class="L1"><code class="language-Arduino"><span class="pln">  cmd</span><span class="pun">+=</span><span class="pln">PASS</span><span class="pun">;</span></code></li><li class="L2"><code class="language-Arduino"><span class="pln">  cmd</span><span class="pun">+=</span><span class="str">"\""</span><span class="pun">;</span></code></li><li class="L3"><code class="language-Arduino"></code></li><li class="L4"><code class="language-Arduino"><span class="pln">  dbgSerial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">cmd</span><span class="pun">);</span></code></li><li class="L5"><code class="language-Arduino"><span class="pln">  </span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">cmd</span><span class="pun">);</span></code></li><li class="L6"><code class="language-Arduino"><span class="pln">  delay</span><span class="pun">(</span><span class="lit">2000</span><span class="pun">);</span></code></li><li class="L7"><code class="language-Arduino"></code></li><li class="L8"><code class="language-Arduino"><span class="pln">  </span><span class="kwd">if</span><span class="pun">(</span><span class="typ">Serial</span><span class="pun">.</span><span class="pln">find</span><span class="pun">(</span><span class="str">"OK"</span><span class="pun">))</span></code></li><li class="L9"><code class="language-Arduino"><span class="pln">  </span><span class="pun">{</span></code></li><li class="L0"><code class="language-Arduino"><span class="pln">    dbgSerial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"OK, Connected to WiFi."</span><span class="pun">);</span></code></li><li class="L1"><code class="language-Arduino"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></code></li><li class="L2"><code class="language-Arduino"><span class="pln">  </span><span class="pun">}</span><span class="kwd">else</span></code></li><li class="L3"><code class="language-Arduino"><span class="pln">  </span><span class="pun">{</span></code></li><li class="L4"><code class="language-Arduino"><span class="pln">    dbgSerial</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"Can not connect to the WiFi."</span><span class="pun">);</span></code></li><li class="L5"><code class="language-Arduino"><span class="pln">    </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span></code></li><li class="L6"><code class="language-Arduino"><span class="pln">  </span><span class="pun">}</span></code></li><li class="L7"><code class="language-Arduino"><span class="pun">}</span></code></li></ol></pre>
+
+<p data-anchor-id="xt33"><code>Step 3:</code> Open Serial Monitor and press the reset button of seeeduino board, you’ll see the output.</p>
+
+<p data-anchor-id="hdtg">At last, Happy Hakcing! :)</p></div>
+    <div class="remark-icons"><div class="remark-icon unselectable remark-icon-empty" style="top: 106.6px; left: 1125.9px; display: none;" data-anchor-id="l24b">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 166.6px; left: 1125.9px; display: none;" data-anchor-id="ijo8">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 240.6px; left: 1125.9px; display: none;" data-anchor-id="izim">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 287.2px; left: 1125.9px; display: none;" data-anchor-id="ig5u">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 388.2px; left: 1125.9px; display: none;" data-anchor-id="0pgg">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 435.2px; left: 1125.9px; display: none;" data-anchor-id="1p26">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 526.2px; left: 1125.9px; display: none;" data-anchor-id="wcli">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 696.2px; left: 1125.9px; display: none;" data-anchor-id="stxc">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 757px; left: 1125.9px; display: none;" data-anchor-id="ypay">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 804.8px; left: 1125.9px; display: none;" data-anchor-id="9eny">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 853.883px; left: 1125.9px; display: none;" data-anchor-id="nbrm">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 903.083px; left: 1125.9px; display: none;" data-anchor-id="goqn">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 994.283px; left: 1125.9px; display: none;" data-anchor-id="7m61">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="xt33">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="hdtg">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div></div>
+</div>
+
+<!--in page preview buttons. -->
+<div class="in-page-preview-buttons in-page-preview-buttons-full-reader">
+    <ul>
+        <li class="in-page-button dropdown" id="preview-toc-button" title="内容目录 Ctrl+Alt+O">
+            <span class="dropdown-toggle icon-list" data-toggle="dropdown" style="color: rgba(102, 128, 153, 0.45);"></span>
+            <div id="toc-list" class="dropdown-menu theme pull-right theme-white"> <!-- Add theme means this element will be changed when apply theme color. -->
+                <h3>内容目录</h3>
+                <hr>
+                <div class="table-of-contents"><div class="toc">
+<ul>
+<li><a href="#tutorial-for-esp8266-serial-wifi-module">Tutorial for ESP8266 Serial WiFi Module</a><ul>
+<li><a href="#step-by-step">Step-By-Step</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div id="reader-full-toolbar" class="reader-full-toolbar-shown" style="padding-top: 0;">
+    <ul id="reader-full-toolbar-home" class="preview-button-row">
+        <li class="preview-button-full-reader" id="preview-editor-button" title="撰写文本 Ctrl+Alt+M">
+            <span class="icon-pencil" style="color: rgb(187, 187, 187);"></span>
+        </li>
+    </ul>
+    <ul id="preview-button-row" class="preview-button-row">
+        <li class="preview-button-full-reader dropdown" id="preview-list-button" title="文本列表 Ctrl+Alt+F">
+            <span class="dropdown-toggle icon-reorder" data-toggle="dropdown" style="color: rgb(187, 187, 187);"></span>
+            <ul id="file-list" class="dropdown-menu theme-black pull-right" role="menu" style="max-height: 564px;">
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="未分类">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">未分类</span></span>
+                            <span class="tag-count pull-right">1</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2014-09-03 11:30:15">
+        <a tabindex="-1" href="https://www.zybuluo.com/kfihihc/note/31135" title="【已发布】 2015-01-20 20:19">
+        <i class="icon-share-sign"></i>
+        <span id="31135" class="whiter-on-black">Tutorial for ESP8266 Serial WiFi Module</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+            </ul>
+            <ul id="file-list-topbar" class="dropdown-menu theme-black pull-right" role="menu">
+                <li id="search-file-bar">
+                    <i class="icon-search icon-large"></i>
+                    <input id="search-file-textbox" placeholder="搜索 kfihihc 的文稿标题， * 显示全部" type="text">
+                    <i class="icon-level-down icon-rotate-90 icon-large"></i>
+                </li>
+                <li id="tag-file-bar">
+                    以下【标签】将用于标记这篇文稿：
+                </li>
+            </ul>
+        </li>
+        <li class="preview-button-full-reader" id="preview-theme-button" title="主题切换 Ctrl+Alt+Y">
+            <span class="icon-adjust" style="color: rgb(187, 187, 187);"></span>
+        </li>
+        <li class="preview-button-full-reader" id="preview-fullscreen-button" title="全屏模式 F11">
+            <span class="icon-fullscreen" style="color: rgb(187, 187, 187);"></span>
+        </li>
+        <li class="preview-button-full-reader wmd-spacer"></li>
+        <li class="preview-button-full-reader dropdown" id="preview-about-button" title="关于本站">
+            <span class="dropdown-toggle icon-info-sign" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="true" style="color: rgb(187, 187, 187);"></span>
+            <ul id="about-menu" class="dropdown-menu theme-black pull-right" role="menu">
+                <li title="下载全平台客户端"><a tabindex="-1" href="https://www.zybuluo.com/cmd" target="_blank"><i class="icon-laptop"></i>下载客户端</a></li>
+                <li title="@ghosert"><a tabindex="-1" href="http://www.weibo.com/ghosert" target="_blank"><i class="icon-weibo"></i>关注开发者</a></li>
+                <li title=""><a tabindex="-1" href="https://github.com/ghosert/cmd-editor/issues" target="_blank"><i class="icon-github-alt"></i>报告问题，建议</a></li>
+                <li title="support@zybuluo.com"><a tabindex="-1" href="mailto:support@zybuluo.com" target="_blank"><i class="icon-envelope"></i>联系我们</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<ul id="reader-full-toolbar-tail" class="reader-full-toolbar-tail-shown">
+    <li class="preview-button-full-reader" id="preview-hidden-button" title="隐藏工具栏 Ctrl+Alt+I">
+        <span class="icon-chevron-sign-right" style="color: rgb(187, 187, 187);"></span>
+    </li>
+</ul>
+
+
+
+
+
+
+<!-- side remark, hidden when loading. -->
+<div class="remark-list side-remark-hidden">
+    <div class="remark-items"></div>
+    <div class="leave-remark unselectable"><span class="icon-plus-sign-alt"></span><span>添加新批注</span></div>
+    <div class="new-remark">
+    <div class="remark-head"><a><img src="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/default-head.jpg" style="width: 32px; height: 32px;"></a></div>
+    <div class="remark-author unselectable"><strong></strong></div>
+    <div class="remark-editor" spellcheck="false" contenteditable="true"></div>
+    <!-- this will be filled up by js.
+    <div class="inline-error">402/400</div> for new remark
+    <div class="inline-error">202/200</div> for new reply
+    -->
+    <div class="remark-footer unselectable">
+        <button class="remark-save btn-link">保存</button>
+        <button class="remark-cancel btn-link">取消</button>
+    </div>
+
+        <!-- clone the template $('.new-remark-reply').html() to here.-->
+        <div class="remark-notice">在作者公开此批注前，只有你和作者可见。</div>
+    </div>
+</div>
+
+<!-- template for new remark/reply -->
+<div class="new-remark-reply side-remark-hidden">
+    <div class="remark-head"><a><img src="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/default-head.jpg"></a></div>
+    <div class="remark-author unselectable"></div>
+    <div class="remark-editor" spellcheck="false" contenteditable="true"></div>
+    <!-- this will be filled up by js.
+    <div class="inline-error">402/400</div> for new remark
+    <div class="inline-error">202/200</div> for new reply
+    -->
+    <div class="remark-footer unselectable">
+        <button class="remark-save btn-link">保存</button>
+        <button class="remark-cancel btn-link">取消</button>
+    </div>
+</div>
+
+<!-- template for .remark-item/.remark-reply -->
+<div class="remark-item-reply side-remark-hidden">
+    <div class="remark-head"><a><img src="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/default-head.jpg"></a></div>
+    <div class="remark-author unselectable"></div>
+    <div class="remark-delete-link unselectable"><span class="icon-remove"></span></div> <!--This is mainly for deleting remark-reply, shown when author/remark hovering on remark-reply.-->
+    <div class="remark-editor" spellcheck="false" contenteditable="true"></div>
+    <!-- this will be filled up by js.
+    <div class="inline-error">402/400</div> for new remark
+    <div class="inline-error">202/200</div> for new reply
+    -->
+    <div class="remark-footer unselectable">
+        <button class="remark-edit btn-link">修改</button>
+        <button class="remark-save btn-link">保存</button>
+        <button class="remark-cancel btn-link">取消</button>
+        <button class="remark-delete btn-link">删除</button>
+    </div>
+</div>
+
+<!-- template for remark-item-->
+<div class="remark-item side-remark-hidden" data-rand-id="" data-version-id="">
+    <div class="remark-published-link unselectable"><span class="icon-link icon-rotate-90"></span></div>
+    <ul class="remark-options theme unselectable theme-white">
+        <li class="remark-private"><span class="icon-eye-close"></span><span>私有</span></li>
+        <li class="remark-public"><span class="icon-group"></span><span>公开</span></li>
+        <li class="remark-delete"><span class="icon-remove"></span><span>删除</span></li>
+    </ul>
+
+    <!-- clone the template $('.remark-item-reply').html() to here.-->
+
+    <button class="remark-reply-view-more btn-link">查看更早的 5 条回复</button>
+    <div class="remark-replies">
+        <!--
+        <div class="remark-reply">
+            clone the template $('.remark-item-reply').html() to here.
+        </div>
+        -->
+    </div>
+
+    <div class="leave-reply unselectable"><span>回复批注</span></div>
+    <div class="new-reply">
+        <!-- clone the template $('.new-remark-reply').html() to here.-->
+    </div>
+</div>
+
+<!-- jiawzhang NOTICE: .remark-icons will be put to mdeditor.mako and user_note.mako, where next to .wmd-preview -->
+<!-- <div class="remark-icons"></div> -->
+
+<!-- template for remark-icon -->
+<div class="remark-icon unselectable side-remark-hidden remark-icon-empty" style="display: none;">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div>
+
+
+<!-- canvas, hidden always, this is used to convert svg to canvas and then convert canvas to png. -->
+<canvas id="svg-canvas-image" class="editor-reader-hidden-always"></canvas>
+
+<!-- This is the image panel to hold enlarged image/svg. -->
+<div id="large-image-panel">
+    <img id="large-image">
+</div>
+
+
+    
+
+
+    <!-- Hidden Popup Modal -->
+    <div id="notification-popup-window" class="modal hide fade theme theme-white" tabindex="-1" role="dialog" aria-labelledby="notification-title" aria-hidden="true">
+        <div class="modal-header theme theme-white">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="notification-title">通知</h3>
+        </div>
+        <div class="modal-body theme theme-white">
+            <p></p>
+        </div>
+        <div class="modal-footer theme theme-white">
+            <button id="notification-cancel" class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+            <button id="notification-confirm" class="btn btn-primary">确认</button>
+        </div>
+    </div>
+
+    <!-- zybuluo's foot -->
+
+    <script src="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/288313bb.js"></script>
+
+    <script>
+        Namespace('com.zybuluo.base');
+        com.zybuluo.base.initData = {
+            globalPromptUrl: "https://www.zybuluo.com/global/prompt",
+        };
+    </script>
+
+    
+    <!--mathjax-->
+    <!--blacker: 1 below means font weight.-->
+    <script type="text/x-mathjax-config;executed=true">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]], processEscapes: true }, TeX: { equationNumbers: { autoNumber: "AMS" } }, messageStyle: "none", SVG: { blacker: 1 }});
+    </script>
+    <script src="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/mathJax.js"></script>
+    <!--mathjax source code is here: https://github.com/mathjax/MathJax.-->
+    <script src="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/MathJax.js"></script>
+
+    <script>
+        Namespace('com.zybuluo.mdeditor.layout');
+        com.zybuluo.mdeditor.layout.initData = {
+            // '' means not logged in, otherwise the logged in username, for mdeditor.mako, this value will be reset in render.js otherwise, for user_note.mako, it's rendered by server side.
+            loggedInUsername: '',
+            isPageOwner: 'False' === 'True' ? true : false,
+            loginComeFromUrl: 'https://www.zybuluo.com/login?return_to=https%3A%2F%2Fwww.zybuluo.com%2Fkfihihc%2Fnote%2F31135',
+            noteRemarksUrl: "https://www.zybuluo.com/note/31135/remarks", 
+            newNoteRemarkUrl: "https://www.zybuluo.com/note/31135/remark/new", 
+            updateNoteRemarkUrl: "https://www.zybuluo.com/note/31135/remark/update", 
+            deleteNoteRemarkUrl: "https://www.zybuluo.com/note/31135/remark/delete", 
+            publishNoteRemarkUrl: "https://www.zybuluo.com/note/31135/remark/publish", 
+            newNoteRemarkReplyUrl: "https://www.zybuluo.com/note/31135/remark_reply/new", 
+            updateNoteRemarkReplyUrl: "https://www.zybuluo.com/note/31135/remark_reply/update", 
+            deleteNoteRemarkReplyUrl: "https://www.zybuluo.com/note/31135/remark_reply/delete", 
+        };
+
+        // BEGIN: pace.js configuration
+        window.paceOptions = {
+            // disable others, enable for ajax call only,
+            ajax: true,
+            document: false,
+            elements: false,
+            eventLag: false,
+        };
+        // jiawzhang NOTICE: to make sure pace.js is working for any ajax call especially the jquery ajax, add 'Pace.restart()' into jquery ajax call like '$.post'
+        // Originally, pace 0.5.6 doesn't support jquery ajax, see details in: https://github.com/HubSpot/pace/issues/29
+        // END: pace.js configuration
+
+    </script>
+
+    <script src="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/7a70106e.js"></script>
+
+    <script src="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/dc648f35.js"></script><div id="medium-editor-toolbar-1" class="medium-editor-toolbar"><ul id="medium-editor-toolbar-actions" class="medium-editor-toolbar-actions clearfix"><li><button data-action="remark" class=" medium-editor-button-first"><i class="icon-comment"></i></button></li><li><button data-action="highlight" class=" medium-editor-button-last"><i class="icon-pencil"></i></button></li></ul></div>
+
+
+
+    
+
+    <!-- https://www.zybuluo.com/static/assets/mdeditor/user_note.lib.min.js -->
+    <!-- -->
+
+    <script>
+        Namespace('com.zybuluo.mdeditor.user_note');
+        com.zybuluo.mdeditor.user_note.initData = {
+            isLoggedIn: 'False',
+            mdeditorUrl: "https://www.zybuluo.com/mdeditor",
+            passwordPassed: 'True' === 'True' ? true : false,
+        };
+    </script>
+
+    <script src="Tutorial%20for%20ESP8266%20Serial%20WiFi%20Module%20-%20%E4%BD%9C%E4%B8%9A%E9%83%A8%E8%90%BD%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8_files/6cd3112e.js"></script>
+
+
+
+
+
+    
+</body></html>
