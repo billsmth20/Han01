@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!--[if IE 6]><html class="ie lt-ie8"><![endif]-->
+<!--[if IE 7]><html class="ie lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="ie ie8"><![endif]-->
+<!--[if IE 9]><html class="ie ie9"><![endif]-->
+<!--[if !IE]><!-->
+<html><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<script type="text/javascript" src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/1255494d3a"></script><script src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/nr-1016.js"></script><script src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/push.js"></script><script async="" src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/analytics.js"></script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"1255494d3a","applicationID":"15702971","transactionName":"e1daR0JWVV9RER9ZWkxdRxxDUVZE","queueTime":2,"applicationTime":838,"agent":""}</script>
+<script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,t,n){function r(n){if(!t[n]){var o=t[n]={exports:{}};e[n][0].call(o.exports,function(t){var o=e[n][1][t];return r(o||t)},o,o.exports)}return t[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({1:[function(e,t,n){function r(){}function o(e,t,n){return function(){return i(e,[(new Date).getTime()].concat(u(arguments)),t?null:this,n),t?void 0:this}}var i=e("handle"),a=e(2),u=e(3),c=e("ee").get("tracer"),f=NREUM;"undefined"==typeof window.newrelic&&(newrelic=f);var s=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",p=l+"ixn-";a(s,function(e,t){f[t]=o(l+t,!0,"api")}),f.addPageAction=o(l+"addPageAction",!0),f.setCurrentRouteName=o(l+"routeName",!0),t.exports=newrelic,f.interaction=function(){return(new r).get()};var d=r.prototype={createTracer:function(e,t){var n={},r=this,o="function"==typeof t;return i(p+"tracer",[Date.now(),e,n],r),function(){if(c.emit((o?"":"no-")+"fn-start",[Date.now(),r,o],n),o)try{return t.apply(this,arguments)}finally{c.emit("fn-end",[Date.now()],n)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,t){d[t]=o(p+t)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,(new Date).getTime()])}},{}],2:[function(e,t,n){function r(e,t){var n=[],r="",i=0;for(r in e)o.call(e,r)&&(n[i]=t(r,e[r]),i+=1);return n}var o=Object.prototype.hasOwnProperty;t.exports=r},{}],3:[function(e,t,n){function r(e,t,n){t||(t=0),"undefined"==typeof n&&(n=e?e.length:0);for(var r=-1,o=n-t||0,i=Array(o<0?0:o);++r<o;)i[r]=e[t+r];return i}t.exports=r},{}],ee:[function(e,t,n){function r(){}function o(e){function t(e){return e&&e instanceof r?e:e?c(e,u,i):i()}function n(n,r,o){if(!p.aborted){e&&e(n,r,o);for(var i=t(o),a=v(n),u=a.length,c=0;c<u;c++)a[c].apply(i,r);var f=s[w[n]];return f&&f.push([y,n,r,i]),i}}function d(e,t){b[e]=v(e).concat(t)}function v(e){return b[e]||[]}function g(e){return l[e]=l[e]||o(n)}function m(e,t){f(e,function(e,n){t=t||"feature",w[n]=t,t in s||(s[t]=[])})}var b={},w={},y={on:d,emit:n,get:g,listeners:v,context:t,buffer:m,abort:a,aborted:!1};return y}function i(){return new r}function a(){(s.api||s.feature)&&(p.aborted=!0,s=p.backlog={})}var u="nr@context",c=e("gos"),f=e(2),s={},l={},p=t.exports=o();p.backlog=s},{}],gos:[function(e,t,n){function r(e,t,n){if(o.call(e,t))return e[t];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,t,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[t]=r,r}var o=Object.prototype.hasOwnProperty;t.exports=r},{}],handle:[function(e,t,n){function r(e,t,n,r){o.buffer([e],r),o.emit(e,t,n)}var o=e("ee").get("handle");t.exports=r,r.ee=o},{}],id:[function(e,t,n){function r(e){var t=typeof e;return!e||"object"!==t&&"function"!==t?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");t.exports=r},{}],loader:[function(e,t,n){function r(){if(!h++){var e=y.info=NREUM.info,t=l.getElementsByTagName("script")[0];if(setTimeout(f.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&t))return f.abort();c(b,function(t,n){e[t]||(e[t]=n)}),u("mark",["onload",a()],null,"api");var n=l.createElement("script");n.src="https://"+e.agent,t.parentNode.insertBefore(n,t)}}function o(){"complete"===l.readyState&&i()}function i(){u("mark",["domContent",a()],null,"api")}function a(){return(new Date).getTime()}var u=e("handle"),c=e(2),f=e("ee"),s=window,l=s.document,p="addEventListener",d="attachEvent",v=s.XMLHttpRequest,g=v&&v.prototype;NREUM.o={ST:setTimeout,CT:clearTimeout,XHR:v,REQ:s.Request,EV:s.Event,PR:s.Promise,MO:s.MutationObserver},e(1);var m=""+location,b={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1016.min.js"},w=v&&g&&g[p]&&!/CriOS/.test(navigator.userAgent),y=t.exports={offset:a(),origin:m,features:{},xhrWrappable:w};l[p]?(l[p]("DOMContentLoaded",i,!1),s[p]("load",r,!1)):(l[d]("onreadystatechange",o),s[d]("onload",r)),u("mark",["firstbyte",a()],null,"api");var h=0},{}]},{},["loader"]);</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="description" content="MQ135空气质量检测模块MQ135主要用于检测空气中的二氧化碳、酒精、苯、氮氧化物、氨等气体的浓度。本文将介绍MQ135的两种使用方法不使用库文件使用别人写好的库文件1.不使用库文件准备材料ArduinoUno*1MQ-135传感器*1跳线*3面包板*1接线接线示意图MQ135ArduinoVCC-&amp;gt;5VAOUT-&amp;gt;A0GND-&amp;gt;GND...">
+  <meta property="wb:webmaster" content="294ec9de89e7fadb">
+  <meta property="qc:admins" content="104102651453316562112116375">
+  <meta property="qc:admins" content="11635613706305617">
+  <meta property="qc:admins" content="1163561616621163056375">
+  <meta name="google-site-verification" content="cV4-qkUJZR6gmFeajx_UyPe47GW9vY6cnCrYtCHYNh4">
+  <meta name="google-site-verification" content="HF7lfF8YEGs1qtCE-kPml8Z469e2RHhGajy6JPVy5XI">
+  <meta http-equiv="mobile-agent" content="format=html5; url=http://www.jianshu.com/p/db2be7aa6659">
+    <!--  Meta for Smart App Banner -->
+  <meta name="apple-itunes-app" content="app-id=888237539, app-argument=jianshu://notes/4519595">
+  <!-- End -->
+
+  <!--  Meta for Twitter Card -->
+  <meta content="summary" property="twitter:card">
+  <meta content="@jianshucom" property="twitter:site">
+  <meta content="【Arduino基础教程】MQ135空气质量检测模块" property="twitter:title">
+  <meta content="MQ135空气质量检测模块MQ135主要用于检测空气中的二氧化碳、酒精、苯、氮氧化物、氨等气体的浓度。本文将介绍MQ135的两种使用方法不使用库文件使用别人写好的库文件1.不使用库文件准备材料ArduinoUno*1MQ-135传感器*1跳线*3面包板*1接线接线示意图MQ135ArduinoVCC-&amp;gt;5VAOUT-&amp;gt;A0GND-&amp;gt;GND..." property="twitter:description">
+  <meta content="http://www.jianshu.com/p/db2be7aa6659" property="twitter:url">
+  <!-- End -->
+
+  <!--  Meta for OpenGraph -->
+  <meta property="fb:app_id" content="865829053512461">
+  <meta property="og:site_name" content="简书">
+  <meta property="og:title" content="【Arduino基础教程】MQ135空气质量检测模块">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="http://www.jianshu.com/p/db2be7aa6659">
+  <meta property="og:description" content="MQ135空气质量检测模块MQ135主要用于检测空气中的二氧化碳、酒精、苯、氮氧化物、氨等气体的浓度。本文将介绍MQ135的两种使用方法不使用库文件使用别人写好的库文件1.不使用库文件准备材料A...">
+  <!-- End -->
+
+  <!--  Meta for Facebook Applinks -->
+  <meta property="al:ios:url" content="jianshu://notes/4519595">
+  <meta property="al:ios:app_store_id" content="888237539">
+  <meta property="al:ios:app_name" content="简书">
+
+  <meta property="al:android:url" content="jianshu://notes/4519595">
+  <meta property="al:android:package" content="com.jianshu.haruki">
+  <meta property="al:android:app_name" content="简书">
+  <!-- End -->
+
+  <title>【Arduino基础教程】MQ135空气质量检测模块 - 简书</title>
+  <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="sSzf0+n1++HPLUiPXIt5+p34QMq4RWtOkYtoQ0doEaDDP5jBH4vY4m2w5FxF+iTo0CBkJ1qNBSeXH7YU+riAhA==">
+  <!--[if lte IE 8]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <link rel="stylesheet" media="all" href="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/web-b8fda5d82dc2e877160d.css">
+  
+  <link rel="stylesheet" media="all" href="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/entry-b8fda5d82dc2e877160d.css">
+  <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+  <!--[if IE 8]><link rel="stylesheet" media="all" href="http://cdn-qn0.jianshu.io/assets/scaffolding/for_ie-7f1c477ffedc13c11315103e8787dc6c.css" /><![endif]-->
+  <!--[if lt IE 9]><link rel="stylesheet" media="all" href="http://cdn-qn0.jianshu.io/assets/scaffolding/for_ie-7f1c477ffedc13c11315103e8787dc6c.css" /><![endif]-->
+  <link href="http://baijii-common.b0.upaiyun.com/icons/favicon.ico" rel="icon">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn-qn0.jianshu.io/apple-touch-icons/57.png" sizes="57x57">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn-qn0.jianshu.io/apple-touch-icons/72.png" sizes="72x72">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn-qn0.jianshu.io/apple-touch-icons/76.png" sizes="76x76">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn-qn0.jianshu.io/apple-touch-icons/114.png" sizes="114x114">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn-qn0.jianshu.io/apple-touch-icons/120.png" sizes="120x120">
+      <link rel="apple-touch-icon-precomposed" href="http://cdn-qn0.jianshu.io/apple-touch-icons/152.png" sizes="152x152">
+</head>
+
+  <body class="reader-black-font" lang="zh-CN">
+    <!-- 全局顶部导航栏 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="width-limit">
+    <!-- 左上方 Logo -->
+    <a class="logo" href="http://www.jianshu.com/"><img src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/logo-58fd04f6f0de908401aa561cda6a0688.png" alt="Logo"></a>
+
+    <!-- 右上角 -->
+      <!-- 未登录显示登录/注册/写文章 -->
+      <a class="btn write-btn" target="_blank" href="http://www.jianshu.com/writer#/">
+        <i class="iconfont ic-write"></i>写文章
+</a>      <a class="btn sign-up" href="http://www.jianshu.com/sign_up">注册</a>
+      <a class="btn log-in" href="http://www.jianshu.com/sign_in">登录</a>
+
+    <!-- 如果用户登录，显示下拉菜单 -->
+
+    <div class="style-mode"><a class="style-mode-btn"><i class="iconfont ic-navigation-mode"></i></a> <div class="popover-modal" style="left: 0px; display: none;"><div class="meta"><i class="iconfont ic-navigation-night"></i><span>夜间模式</span></div> <div class="switch day-night-group"><a class="switch-btn">开</a> <a class="switch-btn active">关</a></div> <hr> <div class="switch font-family-group"><a class="switch-btn font-song">宋体</a> <a class="switch-btn font-hei active">黑体</a></div> <div class="switch"><a class="switch-btn active">简</a> <a class="switch-btn">繁</a></div></div></div>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="nav navbar-nav">
+            <li class="">
+              <a href="http://www.jianshu.com/">
+                <span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+</a>            </li>
+            <li class="">
+              <a class="app-download-btn" href="http://www.jianshu.com/apps"><span class="menu-text">下载App</span><i class="iconfont ic-navigation-download menu-icon"></i></a>
+            </li>
+          <li class="search">
+            <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" value="✓" type="hidden">
+              <input name="q" id="q" placeholder="搜索" class="search-input" type="text">
+              <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+              <!-- <div id="navbar-trending-search"></div> -->
+</form>          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    
+<div class="note">
+  <div class="post">
+    <div class="article">
+        <h1 class="title">【Arduino基础教程】MQ135空气质量检测模块</h1>
+
+        <!-- 作者区域 -->
+        <div class="author">
+          <a class="avatar" href="http://www.jianshu.com/u/67eb7ed414d3">
+            <img src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/79ec8106763c.jpg" alt="144">
+</a>          <div class="info">
+            <span class="tag">作者</span>
+            <span class="name"><a href="http://www.jianshu.com/u/67eb7ed414d3">繁著</a></span>
+            <!-- 关注用户按钮 -->
+            <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
+            <!-- 文章数据信息 -->
+            <div class="meta">
+              <span class="publish-time">2016.06.23 23:45</span>
+              <span class="wordage">字数 710</span>
+            <span class="views-count">阅读 589</span><span class="comments-count">评论 1</span><span class="likes-count">喜欢 4</span></div>
+          </div>
+          <!-- 如果是当前作者，加入编辑按钮 -->
+        </div>
+        <!-- -->
+
+        <!-- 文章内容 -->
+        <div class="show-content">
+          <div class="image-package">
+<img src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/71ydhfTurjL.jpg" data-original-src="https://images-na.ssl-images-amazon.com/images/I/71ydhfTurjL._SX425_.jpg" style="cursor: zoom-in;"><br><div class="image-caption">MQ135空气质量检测模块</div>
+</div>
+<blockquote><p>MQ135主要用于检测空气中的二氧化碳、酒精、苯、氮氧化物、氨等气体的浓度。</p></blockquote>
+<p>本文将介绍MQ135的两种使用方法</p>
+<ol>
+<li>不使用库文件</li>
+<li>使用别人写好的库文件</li>
+</ol>
+<h3>1.不使用库文件</h3>
+<h4>准备材料</h4>
+<ul>
+<li>Arduino Uno *1</li>
+<li>MQ-135 传感器 *1</li>
+<li>跳线 *3</li>
+<li>面包板 *1</li>
+</ul>
+<h4>接线</h4>
+<div class="image-package">
+<img src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/1670644-e52e6781a77614ab.jpg" data-original-src="http://upload-images.jianshu.io/upload_images/1670644-e52e6781a77614ab.jpg?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">接线示意图</div>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">MQ135</th>
+<th style="text-align:center"></th>
+<th style="text-align:center">Arduino</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">VCC</td>
+<td style="text-align:center">-&gt;</td>
+<td style="text-align:center">5V</td>
+</tr>
+<tr>
+<td style="text-align:center">AOUT</td>
+<td style="text-align:center">-&gt;</td>
+<td style="text-align:center">A0</td>
+</tr>
+<tr>
+<td style="text-align:center">GND</td>
+<td style="text-align:center">-&gt;</td>
+<td style="text-align:center">GND</td>
+</tr>
+</tbody>
+</table>
+<h4>示例程序</h4>
+<pre class="hljs arduino"><code class="arduino"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> gasSensor =<span class="hljs-number">0</span>;
+<span class="hljs-keyword">void</span> <span class="hljs-built_in">setup</span>(){
+  <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">begin</span>(<span class="hljs-number">9600</span>);      <span class="hljs-comment">// sets the serial port to 9600</span>
+}
+<span class="hljs-keyword">void</span> <span class="hljs-built_in">loop</span>(){
+  <span class="hljs-keyword">float</span> voltage;
+  voltage = getVoltage(gasSensor);
+
+  <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">println</span>(voltage);
+  <span class="hljs-built_in">delay</span>(<span class="hljs-number">1000</span>);
+}
+
+<span class="hljs-keyword">float</span> getVoltage(<span class="hljs-keyword">int</span> pin){
+  <span class="hljs-built_in">return</span> (<span class="hljs-built_in">analogRead</span>(pin) * <span class="hljs-number">0.004882814</span>);
+  <span class="hljs-comment">// This equation converts the 0 to 1023 value that analogRead()</span>
+  <span class="hljs-comment">// returns, into a 0.0 to 5.0 value that is the true voltage</span>
+  <span class="hljs-comment">// being read at that pin.</span>
+}</code></pre>
+<h3>2.使用&lt;MQ135.h&gt;库</h3>
+<blockquote><p><code>所需材料</code>与<code>接线</code>都与不使用库文件一样。唯一的区别就是需要下载MQ135的库。</p></blockquote>
+<h4>加载库文件</h4>
+<p>到<a href="https://codeload.github.com/GeorgK/MQ135/zip/master" target="_blank">https://codeload.github.com/GeorgK/MQ135/zip/master</a>下载MQ135的库文件，在Arduino IDE中，点击<code>项目</code>-&gt;<code>加载库</code>-&gt;<code>添加一个.zip库</code>，选择下载好的MQ135库文件即可。</p>
+<h4>初始化设置</h4>
+<p>开始使用它之前，你需要将它通电，预热12-24个小时，之后，在20°C/35%空气温度的环境中执行下列程序，读取<code>RZERO</code>的值。</p>
+<pre class="hljs arduino"><code class="arduino"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"MQ135.h"</span></span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ANALOGPIN=<span class="hljs-number">0</span>;
+MQ135 gasSensor = MQ135(ANALOGPIN);
+<span class="hljs-keyword">void</span> <span class="hljs-built_in">setup</span>(){
+  <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">begin</span>(<span class="hljs-number">9600</span>);      <span class="hljs-comment">// sets the serial port to 9600</span>
+}
+<span class="hljs-keyword">void</span> <span class="hljs-built_in">loop</span>(){
+  <span class="hljs-keyword">float</span> rzero = gasSensor.getRZero();
+  <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">println</span>(rzero);
+  <span class="hljs-built_in">delay</span>(<span class="hljs-number">1000</span>);
+}</code></pre>
+<p>将读到的值写入库文件中的<code>MQ135.h</code>文件中。<br>那么问题来了：如何找到<code>MQ135.h</code>文件？</p>
+<ul>
+<li>可以在Arduino IDE中选择<code>文件</code>-&gt;<code>首选项</code>，在弹出的窗口中可以看到<code>项目文件夹位置</code>，eg: <code>d:\Users\weiwe\Documents\Arduino</code>，然后你找到这个文件夹里面的<code>libraries</code>-&gt;<code>MQ135-master</code>-&gt;<code>MQ135.h</code>文件，打开便可以将<code>RZERO</code>的值填进去。<pre class="hljs cpp"><code class="cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RZERO 76.63</span></code></pre>
+</li>
+</ul>
+<h4>开始检测空气质量</h4>
+<pre class="hljs arduino"><code class="arduino"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"MQ135.h"</span></span>
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> ANALOGPIN=<span class="hljs-number">0</span>;
+MQ135 gasSensor = MQ135(ANALOGPIN);
+<span class="hljs-keyword">void</span> <span class="hljs-built_in">setup</span>(){
+  <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">begin</span>(<span class="hljs-number">9600</span>);      <span class="hljs-comment">// sets the serial port to 9600</span>
+}
+<span class="hljs-keyword">void</span> <span class="hljs-built_in">loop</span>(){
+  <span class="hljs-keyword">float</span> ppm = gasSensor.getPPM();
+  <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">println</span>(ppm);
+  <span class="hljs-built_in">delay</span>(<span class="hljs-number">1000</span>);
+}</code></pre>
+<h3>参考文献</h3>
+<p>1.<a href="http://www.hackerscapes.com/2014/11/using-an-air-quality-sensor/" target="_blank">http://www.hackerscapes.com/2014/11/using-an-air-quality-sensor/</a><br>2.<a href="https://hackaday.io/project/3475-sniffing-trinket/log/12363-mq135-arduino-library" target="_blank">https://hackaday.io/project/3475-sniffing-trinket/log/12363-mq135-arduino-library</a></p>
+<h3>小贴士</h3>
+<ul>
+<li>实验表明，MQ-135 可以检测上述提及的气体，但它并不能区别这些气体。如果你想检测某种具体的气体在空气中的含量，那你可能需要寻找其他更好的传感器了~</li>
+<li>MQ-135使用一个加热模块来预热传感器，因此建议使用容量大一点的电源才不会很快就耗尽电量。</li>
+<li>附：室内空气质量对照表<br><div class="image-package">
+<img src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/1670644-d598bd19c1622b1f.jpg" data-original-src="http://upload-images.jianshu.io/upload_images/1670644-d598bd19c1622b1f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2" style="cursor: zoom-in;"><br><div class="image-caption">室内空气质量对照表</div>
+</div>
+</li>
+</ul>
+
+        </div>
+        <!--  -->
+
+        <div class="show-foot">
+          <a class="notebook" href="http://www.jianshu.com/nb/4757291">
+            <i class="iconfont ic-search-notebook"></i> <span>玩转Arduino</span>
+</a>          <div class="copyright" data-toggle="tooltip" data-html="true" data-original-title="转载请联系作者获得授权，并标注“简书作者”。">
+            © 著作权归作者所有
+          </div>
+          <div class="modal-wrap" data-report-note="">
+            <a id="report-modal">举报文章</a>
+          </div>
+        </div>
+    </div>
+
+    <!-- 文章底部作者信息 -->
+        <div class="follow-detail">
+          <div class="info">
+            <a class="avatar" href="http://www.jianshu.com/u/67eb7ed414d3">
+              <img src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/79ec8106763c.jpg" alt="144">
+</a>            <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
+            <a class="title" href="http://www.jianshu.com/u/67eb7ed414d3">繁著</a>
+          <p>写了 18122 字，被 52 人关注，获得了 92 个喜欢</p></div>
+            <div class="signature">
+              <span>伪文青/摄影湿/程序猿/技术宅/极客范/美食控
+个人主页：weiweiblog.cn</span>
+            </div>
+        </div>
+
+      <div class="support-author"><p>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！</p> <div class="btn btn-pay">赞赏支持</div> <!----> <!----> <!----></div>
+
+    <div class="meta-bottom">
+      <div class="like"><div class="btn like-group"><div class="btn-like"><a href="http://www.jianshu.com/sign_in"><i class="iconfont ic-like"></i>喜欢</a></div> <div class="modal-wrap"><a>4</a></div></div> <!----></div>
+      <div class="share-group">
+        <a class="share-circle" data-action="weixin-share" data-toggle="tooltip" data-original-title="分享到微信">
+          <i class="iconfont ic-wechat"></i>
+        </a>
+        <a class="share-circle" data-toggle="tooltip" href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f='http://v.t.sina.com.cn/share/share.php?appkey=1881139527',u=z||d.location,p=['&amp;url=',e(u),'&amp;title=',e(t||d.title),'&amp;source=',e(r),'&amp;sourceUrl=',e(l),'&amp;content=',c||'gb2312','&amp;pic=',e(p||'')].join('');function%20a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=440,height=430,left=',(s.width-440)/2,',top=',(s.height-430)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,'','','http://cwb.assets.jianshu.io/notes/images/4519595/weibo/image_51cfcc7ade33.jpg',%20'%E6%8E%A8%E8%8D%90%20@3%E6%AC%A1%E6%96%B9%E7%9A%84w%20%E7%9A%84%E6%96%87%E7%AB%A0%E3%80%8A%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%E3%80%8B%EF%BC%88%20%E5%88%86%E4%BA%AB%E8%87%AA%20@%E7%AE%80%E4%B9%A6%20%EF%BC%89','http://www.jianshu.com/p/db2be7aa6659?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo','%E9%A1%B5%E9%9D%A2%E7%BC%96%E7%A0%81gb2312|utf-8%E9%BB%98%E8%AE%A4gb2312'));" data-original-title="分享到微博">
+          <i class="iconfont ic-weibo"></i>
+        </a>
+          <a class="share-circle" data-toggle="tooltip" href="http://cwb.assets.jianshu.io/notes/images/4519595/weibo/image_51cfcc7ade33.jpg" target="_blank" data-original-title="下载长微博图片">
+            <i class="iconfont ic-picture"></i>
+          </a>
+        <a class="share-circle more-share" tabindex="0" data-toggle="popover" data-placement="top" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content="
+          &lt;ul class=&quot;share-list&quot;&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+e('http://www.jianshu.com/p/db2be7aa6659?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone')+'&amp;title='+e('推荐 繁著 的文章《【Arduino基础教程】MQ135空气质量检测模块》'),x=function(){if(!window.open(r,'qzone','toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-zone&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到QQ空间&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://twitter.com/share?url='+e('http://www.jianshu.com/p/db2be7aa6659?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter')+'&amp;text='+e('推荐 繁著 的文章《【Arduino基础教程】MQ135空气质量检测模块》（ 分享自 @jianshucom ）')+'&amp;related='+e('jianshucom'),x=function(){if(!window.open(r,'twitter','toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-twitter&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Twitter&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=http://www.jianshu.com/p/db2be7aa6659?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook',x=function(){if(!window.open(r,'facebook','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-facebook&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Facebook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://plus.google.com/share?url='+e('http://www.jianshu.com/p/db2be7aa6659?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus'),x=function(){if(!window.open(r,'google_plus','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-google&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Google+&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e('http://www.jianshu.com/p/db2be7aa6659?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban')+'&amp;title='+e('【Arduino基础教程】MQ135空气质量检测模块')+'&amp;sel='+e(s)+'&amp;v=1',x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r+'&amp;r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-douban&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到豆瓣&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        " data-original-title="" title="">更多分享</a>
+      </div>
+    </div>
+    <div><div id="comment-list" class="comment-list"><div><form class="new-comment"><a class="avatar"><img src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/avatar_default-78d4d1f68984cd6d4379508dd94b4210.png"></a> <div class="sign-container"><a href="http://www.jianshu.com/sign_in" class="btn btn-sign">登录</a> <span>后发表评论</span></div></form></div> <div id="normal-comment-list" class="normal-comment-list"><div><div><div class="top"><span>1条评论</span> <a class="author-only">只看作者</a> <a class="close-btn" style="display: none;">关闭评论</a> <div class="pull-right"><a class="active">按喜欢排序</a><a class="">按时间正序</a><a class="">按时间倒序</a></div></div></div> <!----> <!----> <div id="comment-8192230" class="comment"><div><div class="author"><a href="http://www.jianshu.com/u/1362ad64d034" target="_blank" class="avatar"><img src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/15-a7ac401939dd4df837e3bbf82abaa2a8.jpg"></a> <div class="info"><a href="http://www.jianshu.com/u/1362ad64d034" target="_blank" class="name">Luat开源物联网</a> <!----> <div class="meta"><span>2楼 · 2017.02.21 01:03</span></div></div></div> <div class="comment-wrap"><p>可以关注下Luat开源项目，基于Air200 GPRS模块（价格才12块多），基于Lua开发应用软件，超级容易上手。 而且开发点阵LCD 的UI 非常方便，有丰富的底层库，支持中文很方便。</p> <div class="tool-group"><a><i class="iconfont ic-zan"></i> <span>赞</span></a> <a><i class="iconfont ic-comment"></i> <span>回复</span></a> <!----> <!----></div></div></div> <div class="sub-comment-list hide"><!----> <!----></div></div> <div class="comments-placeholder" style="display: none;"><div class="author"><div class="avatar"></div> <div class="info"><div class="name"></div> <div class="meta"></div></div></div> <div class="text"></div> <div class="text animation-delay"></div> <div class="tool-group"><i class="iconfont ic-zan-active"></i><div class="zan"></div> <i class="iconfont ic-list-comments"></i><div class="zan"></div></div></div></div></div> <!----> <!----></div></div>
+  </div>
+
+  <div class="side-tool">
+    <ul>
+      <li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="回到顶部">
+        <a href="#"><i class="iconfont ic-backtop"></i></a>
+      </li>
+      <li data-share-note="" data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="分享文章">
+        <a tabindex="0" data-toggle="popover" data-placement="left" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content="
+          &lt;ul class=&quot;share-list&quot;&gt;
+            &lt;li&gt;&lt;a class data-action=&quot;weixin-share&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-weixin&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到微信&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f='http://v.t.sina.com.cn/share/share.php?appkey=1881139527',u=z||d.location,p=['&amp;url=',e(u),'&amp;title=',e(t||d.title),'&amp;source=',e(r),'&amp;sourceUrl=',e(l),'&amp;content=',c||'gb2312','&amp;pic=',e(p||'')].join('');function%20a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=440,height=430,left=',(s.width-440)/2,',top=',(s.height-430)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,'','','http://cwb.assets.jianshu.io/notes/images/4519595/weibo/image_51cfcc7ade33.jpg', '推荐 @3次方的w 的文章《【Arduino基础教程】MQ135空气质量检测模块》（ 分享自 @简书 ）','http://www.jianshu.com/p/db2be7aa6659?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo','页面编码gb2312|utf-8默认gb2312'));&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-weibo&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到微博&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href=&quot;http://cwb.assets.jianshu.io/notes/images/4519595/weibo/image_51cfcc7ade33.jpg&quot; target=&quot;_blank&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-picture&quot;&gt;&lt;/i&gt;&lt;span&gt;下载长微博图片&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+e('http://www.jianshu.com/p/db2be7aa6659?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone')+'&amp;title='+e('推荐 繁著 的文章《【Arduino基础教程】MQ135空气质量检测模块》'),x=function(){if(!window.open(r,'qzone','toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-zone&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到QQ空间&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://twitter.com/share?url='+e('http://www.jianshu.com/p/db2be7aa6659?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter')+'&amp;text='+e('推荐 繁著 的文章《【Arduino基础教程】MQ135空气质量检测模块》（ 分享自 @jianshucom ）')+'&amp;related='+e('jianshucom'),x=function(){if(!window.open(r,'twitter','toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-twitter&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Twitter&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=http://www.jianshu.com/p/db2be7aa6659?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook',x=function(){if(!window.open(r,'facebook','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-facebook&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Facebook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://plus.google.com/share?url='+e('http://www.jianshu.com/p/db2be7aa6659?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus'),x=function(){if(!window.open(r,'google_plus','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-google&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到Google+&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e('http://www.jianshu.com/p/db2be7aa6659?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban')+'&amp;title='+e('【Arduino基础教程】MQ135空气质量检测模块')+'&amp;sel='+e(s)+'&amp;v=1',x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r+'&amp;r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()&quot;&gt;&lt;i class=&quot;social-icon-sprite social-icon-douban&quot;&gt;&lt;/i&gt;&lt;span&gt;分享到豆瓣&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        " data-original-title="" title=""><i class="iconfont ic-share"></i></a>
+      </li>
+    </ul>
+  </div>
+</div>
+<!---->
+
+    <script type="application/json" data-name="page-data">{"user_signed_in":false,"locale":"zh-CN","os":"windows","read_mode":"day","read_font":"font2","note_show":{"is_author":false,"is_following_author":false,"is_liked_note":false,"uuid":"ade1f76b-5e8f-4ff3-9770-fceec12cc11b"},"note":{"id":4519595,"slug":"db2be7aa6659","user_id":1670644,"notebook_id":4757291,"commentable":true,"likes_count":4,"views_count":589,"public_wordage":710,"comments_count":1,"author":{"total_wordage":18122,"followers_count":52,"total_likes_count":92}}}</script>
+    
+    <script src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/babel-polyfill-b8fda5d82dc2e877160d.js"></script>
+    <script src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/web-base-b8fda5d82dc2e877160d.js"></script>
+<script src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/web-b8fda5d82dc2e877160d.js"></script>
+    
+    <script src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/entry-b8fda5d82dc2e877160d.js"></script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-35169517-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<div style="display:none">
+  <script src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/z_stat.php" language="JavaScript"></script><script src="%E3%80%90Arduino%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E3%80%91MQ135%E7%A9%BA%E6%B0%94%E8%B4%A8%E9%87%8F%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97%20-%20%E7%AE%80%E4%B9%A6_files/core.php" charset="utf-8" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=1258679142" target="_blank" title="站长统计">站长统计</a>
+</div>
+
+<script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+  
+
+<!----><!----></body></html>
