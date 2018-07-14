@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://www.cnblogs.com/xiaowuyi/p/3554992.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arduino入门笔记（8）：利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/bundle-SimpleBlue.css">
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/bundle-SimpleBlue-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/xiaowuyi/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/xiaowuyi/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/xiaowuyi/wlwmanifest.xml">
+<script async="" src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/analytics.js.下载"></script><script type="text/javascript" src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/encoder.js.下载"></script><script src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/jquery.js.下载" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'xiaowuyi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/xiaowuyi/">小五义</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/xiaowuyi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E5%B0%8F%E4%BA%94%E4%B9%89">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/xiaowuyi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/xiaowuyi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-108&nbsp;
+文章-13&nbsp;
+评论-426&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/xiaowuyi/p/3554992.html">Arduino入门笔记（8）：利用12864和ADXL345学习重力感应控制</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>转载请注明：@小五义 <a href="http://www.cnblogs.com/xiaowuyi">http://www.cnblogs.com/xiaowuyi</a></p>
+<p>欢迎加入讨论群&nbsp;<span id="group_number" class="group_number">64770604</span></p>
+<h4>一、本次实验所需器材</h4>
+<p><strong>1、Arduino UNO板&nbsp;https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-15820725129.16.AtgoEm&amp;id=545093340395</strong></p>
+<p><strong>2、12864显示器（带中文字库）</strong>。</p>
+<p><strong>3、ADXL345加速度传感器：</strong>ADI公司推出的一款小而薄的低功耗3轴加速度计，分辨率高（13位），测量范围达±16g（1g显示数字为256）。数字输出数据为16位二进制补码格式，可通过SPI（3线或4线）或I2C数字接口访问。该系列传感器还有ADXL335、ADXL346等。这种传感器被广泛应用，如用来制作计步器（<a title="http://www.21ic.com/app/control/201011/69048.htm" href="http://www.21ic.com/app/control/201011/69048.htm">http://www.21ic.com/app/control/201011/69048.htm</a>）等。</p>
+<p><strong>4、面包板：</strong>2个</p>
+<p><strong>5、电阻：</strong>1K<strong>Ω</strong>电阻2个。</p>
+<h4>二、硬件连接方法</h4>
+<p>1、arduino与12864液晶SPI连接方式的硬件连接图</p>
+<p><a href="http://images.cnitblog.com/blog/383503/201402/182214128384379.png"><img style="display: inline; border-width: 0px;" title="Untitled Sketch 2_bb" src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/182214142251366.png" alt="Untitled Sketch 2_bb" width="636" height="421" border="0"></a></p>
+<p>2、adxl345的连接方法</p>
+<p><a href="http://images.cnitblog.com/blog/383503/201402/182214148254251.jpg"><img style="display: inline;" title="adxl345" src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/182214156372367.jpg" alt="adxl345" width="640" height="451"></a></p>
+<p><a href="http://images.cnitblog.com/blog/383503/201402/182214162949265.png"><img style="display: inline; border-width: 0px;" title="12864_adxl345_bb" src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/182214170128353.png" alt="12864_adxl345_bb" width="640" height="405" border="0"></a></p>
+<h4><a href="http://images.cnitblog.com/blog/383503/201402/182214178023524.jpg"><img style="display: inline; border-width: 0px;" title="拍大师图片1" src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/182214184941140.jpg" alt="拍大师图片1" width="640" height="480" border="0"></a></h4>
+<h4>三、实验过程</h4>
+<p>1、12864显示文字和图像</p>
+<p>（1）12864在显示汉字时，需要用到汉字的内码，我使用的软件可从这里下载<a title="http://www.kuaipan.cn/file/id_749007936689913.htm?source=1" href="http://www.kuaipan.cn/file/id_749007936689913.htm?source=1">http://www.kuaipan.cn/file/id_749007936689913.htm?source=1</a>。如汉字“开始”对应内码是BFAA和CABC，那么就转换成0xBF,0xAA,0xCA,0xBC。</p>
+<p>（2）12864显示图像时，只能显示位图。一般图片可通过ps转换为位图，具体方法可百度。获取位图后，再利用图片取模软件（<a title="http://www.kuaipan.cn/file/id_749007936689914.htm?source=1" href="http://www.kuaipan.cn/file/id_749007936689914.htm?source=1">http://www.kuaipan.cn/file/id_749007936689914.htm?source=1</a>）进行转化。如图片：</p>
+<p><a href="http://images.cnitblog.com/blog/383503/201402/182214201735683.png"><img style="display: inline; border-width: 0px;" title="9999" src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/182214207072013.png" alt="9999" width="644" height="324" border="0"></a></p>
+<p>打开图片取模软件，首先进行参数设置，转出格式选C语言，输出大小128*64，点参数确认。</p>
+<p><a href="http://images.cnitblog.com/blog/383503/201402/182214212564113.jpg"><img style="display: inline; border-width: 0px;" title="未标题-2 拷贝" src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/182214220353985.jpg" alt="未标题-2 拷贝" width="634" height="480" border="0"></a></p>
+<p>&nbsp;</p>
+<p>然后点载入图片，</p>
+<p><a href="http://images.cnitblog.com/blog/383503/201402/182214228153858.jpg"><img style="display: inline; border-width: 0px;" title="333333" src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/182214237406772.jpg" alt="333333" width="632" height="480" border="0"></a></p>
+<p>点击数据保存，得到C语言文件：</p>
+<div class="cnblogs_code" style="background-color: #f5f5f5; border: #cccccc 1px solid; padding: 5px;"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #808080;">////////////////////////////////////////////////////////////////////////</span><span style="color: #008000;">/</span>
+<span style="color: #008000;">//</span><span style="color: #008000;"> Bitmap点阵数据表                                                    </span><span style="color: #008000;">//</span>
+<span style="color: #008000;">//</span><span style="color: #008000;"> 图片: C:\..\24tttt88.bmp,横向取模左高位,数据排列:从左到右从上到下   </span><span style="color: #008000;">//</span>
+<span style="color: #008000;">//</span><span style="color: #008000;"> 图片尺寸: 128 * 64                                                  </span><span style="color: #008000;">//
+</span><span style="color: #808080;">////////////////////////////////////////////////////////////////////////</span><span style="color: #008000;">/</span>
+unsigned <span style="color: #0000ff;">char</span> code nBitmapDot[] =                  <span style="color: #008000;">//</span><span style="color: #008000;"> 数据表</span>
+<span style="color: #000000;">{
+      </span><span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x18</span>,<span style="color: #800080;">0x61</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0x70</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x60</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x08</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFA</span>,<span style="color: #800080;">0x40</span>,<span style="color: #800080;">0x08</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xDB</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x60</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x60</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xEF</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFC</span>,<span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x60</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x20</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0x4F</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x10</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFC</span>,<span style="color: #800080;">0x10</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x40</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x20</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x7F</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xD0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x70</span>,<span style="color: #800080;">0x18</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC0</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x20</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC3</span>,<span style="color: #800080;">0xBF</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x80</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x58</span>,<span style="color: #800080;">0x5C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xC0</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x20</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC3</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x18</span>,<span style="color: #800080;">0x0C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x18</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0x10</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x60</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x81</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x10</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x60</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xFD</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x30</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0x7D</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x38</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0E</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x31</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0E</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x18</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x30</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x18</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x30</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x08</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x18</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x20</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x30</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x60</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x30</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0B</span>,<span style="color: #800080;">0xA0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xA0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x38</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x05</span>,<span style="color: #800080;">0x7F</span>,<span style="color: #800080;">0x30</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x38</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1E</span>,<span style="color: #800080;">0x7F</span>,<span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3A</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3B</span>,<span style="color: #800080;">0x7F</span>,<span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3D</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x2B</span>,<span style="color: #800080;">0x70</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x08</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1F</span>,<span style="color: #800080;">0x60</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x7E</span>,<span style="color: #800080;">0x3F</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x06</span>,<span style="color: #800080;">0x3C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xB6</span>,<span style="color: #800080;">0x40</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x9E</span>,<span style="color: #800080;">0x3E</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xD7</span>,<span style="color: #800080;">0xF6</span>,<span style="color: #800080;">0x3F</span>,<span style="color: #800080;">0xE7</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x80</span>,<span style="color: #800080;">0xBF</span>,<span style="color: #800080;">0xBC</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x06</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x3F</span>,<span style="color: #800080;">0xE6</span>,<span style="color: #800080;">0x7D</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xB0</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0xEE</span>,<span style="color: #800080;">0x66</span>,<span style="color: #800080;">0x67</span>,<span style="color: #800080;">0x7C</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0xEF</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xC4</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3F</span>,<span style="color: #800080;">0x5E</span>,<span style="color: #800080;">0x7E</span>,<span style="color: #800080;">0xDF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xCF</span>,<span style="color: #800080;">0x3F</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1F</span>,<span style="color: #800080;">0xA0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x69</span>,<span style="color: #800080;">0x7D</span>,<span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x2F</span>,<span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0xE7</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFC</span>,<span style="color: #800080;">0x4F</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFB</span>,<span style="color: #800080;">0x3F</span>,<span style="color: #800080;">0xFC</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0D</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xE5</span>,<span style="color: #800080;">0x3F</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFA</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xBF</span>,<span style="color: #800080;">0xF2</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFB</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0xC8</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xF7</span>,<span style="color: #800080;">0xFC</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3C</span>,<span style="color: #800080;">0xFD</span>,<span style="color: #800080;">0xFA</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xEF</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0xBE</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x05</span>,<span style="color: #800080;">0x2A</span>,<span style="color: #800080;">0xDF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFD</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xF5</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x40</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0x7D</span>,<span style="color: #800080;">0xFE</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x7F</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0xBF</span>,<span style="color: #800080;">0xCF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x08</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x9F</span>,<span style="color: #800080;">0xDF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x02</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x9F</span>,<span style="color: #800080;">0xF3</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xDF</span>,<span style="color: #800080;">0x40</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFD</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x88</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x14</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xDF</span>,<span style="color: #800080;">0xD6</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xF4</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x81</span>,<span style="color: #800080;">0xE6</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xCF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xEC</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFB</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xFD</span>,<span style="color: #800080;">0xFE</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xDF</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xF6</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFE</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0x7F</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xF7</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xF7</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xEE</span>,<span style="color: #800080;">0x20</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x11</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xF6</span>,<span style="color: #800080;">0xBF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x78</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xF9</span>,<span style="color: #800080;">0xBE</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x19</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0xF7</span>,<span style="color: #800080;">0x9F</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x1C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0xBE</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0E</span>,<span style="color: #800080;">0xF7</span>,<span style="color: #800080;">0x8F</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x0C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x05</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x02</span>,<span style="color: #800080;">0x63</span>,<span style="color: #800080;">0x87</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x06</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1E</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x05</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x23</span>,<span style="color: #800080;">0xC3</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x04</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x87</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xCF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x06</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x70</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xE5</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x02</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x02</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x40</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x67</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC3</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x02</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC3</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x06</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xC3</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x06</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0xC0</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xA0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xB0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0x4C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1B</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3F</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3D</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x13</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3D</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x37</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x06</span>,<span style="color: #800080;">0x1F</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1F</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1F</span>,<span style="color: #800080;">0x68</span>,<span style="color: #800080;">0x0B</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x01</span><span style="color: #000000;">
+};</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>这里的数据表，就是图片数据。</p>
+<p>下面用12864显示上面的图片，代码如下：</p>
+<div class="cnblogs_code" style="background-color: #f5f5f5; border: #cccccc 1px solid; padding: 5px;"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>#小五义：<a href="http://www.cnblogs.com/xiaowuyi">http://www.cnblogs.com/xiaowuyi</a></pre>
+<pre>#include &lt;LCD12864RSPI.h&gt;
+    <span style="color: #008000;">/*</span><span style="color: #008000;">
+    LCD  Arduino
+    PIN1 = GND
+    PIN2 = 5V
+    RS(CS) = 8;
+    RW(SID)= 9;
+    EN(CLK) = 3;
+    PIN15 PSB = GND;
+    </span><span style="color: #008000;">*/</span>
+     
+<span style="color: #0000ff;">#define</span> AR_SIZE( a ) sizeof( a ) / sizeof( a[0] )<span style="color: #000000;">
+     
+unsigned </span><span style="color: #0000ff;">char</span> show0[]={<span style="color: #800080;">0xD0</span>,<span style="color: #800080;">0xA1</span>,<span style="color: #800080;">0xCE</span>,<span style="color: #800080;">0xE5</span>,<span style="color: #800080;">0xD2</span>,<span style="color: #800080;">0xE5</span>};<span style="color: #008000;">//</span><span style="color: #008000;">小五义</span>
+unsigned <span style="color: #0000ff;">char</span> show1[]=<span style="color: #800000;">"</span><span style="color: #800000;">http://www.cnblo</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+unsigned </span><span style="color: #0000ff;">char</span> show2[]=<span style="color: #800000;">"</span><span style="color: #800000;">gs.com/xiaowuyi</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+
+
+unsigned </span><span style="color: #0000ff;">char</span> logo0[]=<span style="color: #000000;">{                                         
+      </span><span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x18</span>,<span style="color: #800080;">0x61</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0x70</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x60</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x08</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFA</span>,<span style="color: #800080;">0x40</span>,<span style="color: #800080;">0x08</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xDB</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x60</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x60</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xEF</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFC</span>,<span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x60</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x20</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0x4F</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x10</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFC</span>,<span style="color: #800080;">0x10</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x40</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x20</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x7F</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xD0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x70</span>,<span style="color: #800080;">0x18</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC0</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x20</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC3</span>,<span style="color: #800080;">0xBF</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x80</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x58</span>,<span style="color: #800080;">0x5C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xC0</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x20</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC3</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x18</span>,<span style="color: #800080;">0x0C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x18</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0x10</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x60</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x81</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x10</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x60</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xFD</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x30</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0x7D</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x38</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0E</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x31</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0E</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x18</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x30</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x18</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x30</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x08</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x18</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x20</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x30</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x60</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x30</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0B</span>,<span style="color: #800080;">0xA0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xA0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x38</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x05</span>,<span style="color: #800080;">0x7F</span>,<span style="color: #800080;">0x30</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x38</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1E</span>,<span style="color: #800080;">0x7F</span>,<span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3A</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3B</span>,<span style="color: #800080;">0x7F</span>,<span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3D</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x2B</span>,<span style="color: #800080;">0x70</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x08</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1F</span>,<span style="color: #800080;">0x60</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x7E</span>,<span style="color: #800080;">0x3F</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x06</span>,<span style="color: #800080;">0x3C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xB6</span>,<span style="color: #800080;">0x40</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x9E</span>,<span style="color: #800080;">0x3E</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xD7</span>,<span style="color: #800080;">0xF6</span>,<span style="color: #800080;">0x3F</span>,<span style="color: #800080;">0xE7</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x80</span>,<span style="color: #800080;">0xBF</span>,<span style="color: #800080;">0xBC</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x06</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x3F</span>,<span style="color: #800080;">0xE6</span>,<span style="color: #800080;">0x7D</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xB0</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0xEE</span>,<span style="color: #800080;">0x66</span>,<span style="color: #800080;">0x67</span>,<span style="color: #800080;">0x7C</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0xEF</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xC4</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3F</span>,<span style="color: #800080;">0x5E</span>,<span style="color: #800080;">0x7E</span>,<span style="color: #800080;">0xDF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xCF</span>,<span style="color: #800080;">0x3F</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1F</span>,<span style="color: #800080;">0xA0</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x69</span>,<span style="color: #800080;">0x7D</span>,<span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x2F</span>,<span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0xE7</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFC</span>,<span style="color: #800080;">0x4F</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFB</span>,<span style="color: #800080;">0x3F</span>,<span style="color: #800080;">0xFC</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0D</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xE5</span>,<span style="color: #800080;">0x3F</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFA</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xBF</span>,<span style="color: #800080;">0xF2</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFB</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0xC8</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xF7</span>,<span style="color: #800080;">0xFC</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3C</span>,<span style="color: #800080;">0xFD</span>,<span style="color: #800080;">0xFA</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xEF</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0xBE</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x05</span>,<span style="color: #800080;">0x2A</span>,<span style="color: #800080;">0xDF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFD</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xF5</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x40</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0x7D</span>,<span style="color: #800080;">0xFE</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x7F</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0xBF</span>,<span style="color: #800080;">0xCF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x08</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x9F</span>,<span style="color: #800080;">0xDF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x02</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x9F</span>,<span style="color: #800080;">0xF3</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xDF</span>,<span style="color: #800080;">0x40</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFD</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x88</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x14</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xDF</span>,<span style="color: #800080;">0xD6</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xF4</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x81</span>,<span style="color: #800080;">0xE6</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xCF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xEC</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFB</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xFD</span>,<span style="color: #800080;">0xFE</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xDF</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xF6</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFF</span>,<span style="color: #800080;">0xFE</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xFE</span>,<span style="color: #800080;">0x7F</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xF7</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xF7</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xEE</span>,<span style="color: #800080;">0x20</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x11</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xF6</span>,<span style="color: #800080;">0xBF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x78</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xF9</span>,<span style="color: #800080;">0xBE</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x19</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0xF7</span>,<span style="color: #800080;">0x9F</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x1C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0xBE</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0E</span>,<span style="color: #800080;">0xF7</span>,<span style="color: #800080;">0x8F</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x0C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x05</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x02</span>,<span style="color: #800080;">0x63</span>,<span style="color: #800080;">0x87</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x06</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1E</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x05</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x23</span>,<span style="color: #800080;">0xC3</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x04</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x87</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xCF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x06</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x70</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xE5</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x02</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x02</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x40</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xFF</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x67</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xE0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC3</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x02</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC3</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x06</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xC3</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x06</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x03</span>,<span style="color: #800080;">0xC0</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xA0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x0F</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xB0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0x4C</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1B</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3F</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x01</span>,<span style="color: #800080;">0xF0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3D</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x13</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x3D</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x07</span>,<span style="color: #800080;">0xF8</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x37</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x06</span>,<span style="color: #800080;">0x1F</span>,<span style="color: #800080;">0xC0</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1F</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span><span style="color: #000000;">,
+      </span><span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x00</span>,<span style="color: #800080;">0x1F</span>,<span style="color: #800080;">0x68</span>,<span style="color: #800080;">0x0B</span>,<span style="color: #800080;">0x80</span>,<span style="color: #800080;">0x01</span><span style="color: #000000;">
+    };
+    
+
+ </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> setup()
+    {
+    LCDA.Initialise(); </span><span style="color: #008000;">//</span><span style="color: #008000;"> 屏幕初始化</span>
+    delay(<span style="color: #800080;">100</span><span style="color: #000000;">);
+    }
+     
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> loop()
+    {
+    LCDA.CLEAR();</span><span style="color: #008000;">//</span><span style="color: #008000;">清屏</span>
+    delay(<span style="color: #800080;">100</span><span style="color: #000000;">);
+    LCDA.DisplayString(</span><span style="color: #800080;">0</span>,<span style="color: #800080;">0</span>,show0,AR_SIZE(show0));<span style="color: #008000;">//</span><span style="color: #008000;">第1行第1格开始，显示文字小五义
+    </span><span style="color: #008000;">//</span><span style="color: #008000;">delay(1000);</span>
+    LCDA.DisplayString(<span style="color: #800080;">1</span>,<span style="color: #800080;">0</span>,show1,AR_SIZE(show1));<span style="color: #008000;">//</span><span style="color: #008000;">第2行第1格开始，显示文字www.cnblogs.com/xiaowuyi</span>
+    LCDA.DisplayString(<span style="color: #800080;">2</span>,<span style="color: #800080;">0</span><span style="color: #000000;">,show2,AR_SIZE(show2));
+    delay(</span><span style="color: #800080;">5000</span><span style="color: #000000;">);
+    LCDA.CLEAR();</span><span style="color: #008000;">//</span><span style="color: #008000;">清屏</span>
+    delay(<span style="color: #800080;">100</span><span style="color: #000000;">);
+    LCDA.DrawFullScreen(logo0);
+    delay(</span><span style="color: #800080;">1000</span><span style="color: #000000;">);
+    }</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>这里用的LCD12864RSPI.h这个库是针对1.0以上版本IDE的，下载：<a title="http://www.kuaipan.cn/file/id_749007936689932.htm?source=1" href="http://www.kuaipan.cn/file/id_749007936689932.htm?source=1">http://www.kuaipan.cn/file/id_749007936689932.htm?source=1</a>。</p>
+<p>实现视频：</p>
+<p><object width="480" height="400" align="middle" data="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/v.swf.下载" type="application/x-shockwave-flash"><param name="src" value="http://player.youku.com/player.php/sid/XNjc0NzQ5NTc2/v.swf"><param name="allowfullscreen" value="true"><param name="quality" value="high"><param name="allowscriptaccess" value="always"></object></p>
+<p>&nbsp;</p>
+<p>2、ADXL345获取加速度值</p>
+<p>通过以下代码，12864显示器上会显示出X、Y、Z的值：</p>
+<div class="cnblogs_code" style="background-color: #f5f5f5; border: #cccccc 1px solid; padding: 5px;"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>#小五义：<a href="http://www.cnblogs.com/xiaowuyi">http://www.cnblogs.com/xiaowuyi</a>
+<pre>#include &lt;Wire.h&gt;  <span style="color: #008000;">//</span><span style="color: #008000;">调用arduino自带的I2C库</span>
+#include &lt;LCD12864RSPI.h&gt;
+ 
+<span style="color: #0000ff;">#define</span> Register_ID 0
+<span style="color: #0000ff;">#define</span> Register_2D 0x2D
+<span style="color: #0000ff;">#define</span> Register_X0 0x32
+<span style="color: #0000ff;">#define</span> Register_X1 0x33
+<span style="color: #0000ff;">#define</span> Register_Y0 0x34
+<span style="color: #0000ff;">#define</span> Register_Y1 0x35
+<span style="color: #0000ff;">#define</span> Register_Z0 0x36
+<span style="color: #0000ff;">#define</span> Register_Z1 0x37<span style="color: #000000;">
+
+
+unsigned </span><span style="color: #0000ff;">char</span> showx[]=<span style="color: #800000;">"</span><span style="color: #800000;">X=</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+unsigned </span><span style="color: #0000ff;">char</span> showy[]=<span style="color: #800000;">"</span><span style="color: #800000;">Y=</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+unsigned </span><span style="color: #0000ff;">char</span> showz[]=<span style="color: #800000;">"</span><span style="color: #800000;">Z=</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+
+ 
+</span><span style="color: #0000ff;">int</span> ADXAddress = <span style="color: #800080;">0xA7</span>&gt;&gt;<span style="color: #800080;">1</span>;  <span style="color: #008000;">//</span><span style="color: #008000;">转换为7位地址</span>
+<span style="color: #0000ff;">int</span> reading = <span style="color: #800080;">0</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">int</span> val = <span style="color: #800080;">0</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> X0,X1,X_out;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> Y0,Y1,Y_out;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> Z1,Z0,Z_out;
+</span><span style="color: #0000ff;">double</span><span style="color: #000000;"> Xg,Yg,Zg;
+ 
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> setup()
+{
+  LCDA.Initialise(); </span><span style="color: #008000;">//</span><span style="color: #008000;"> 屏幕初始化</span>
+  delay(<span style="color: #800080;">100</span><span style="color: #000000;">);
+  Wire.begin();  </span><span style="color: #008000;">//</span><span style="color: #008000;">初始化I2C</span>
+  delay(<span style="color: #800080;">100</span><span style="color: #000000;">);
+  Wire.beginTransmission(ADXAddress);
+  Wire.write(Register_2D);
+  Wire.write(</span><span style="color: #800080;">8</span><span style="color: #000000;">);
+  Wire.endTransmission();
+}
+ 
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> loop()
+{
+  </span><span style="color: #0000ff;">double</span> tempx=<span style="color: #800080;">0</span><span style="color: #000000;">;
+  </span><span style="color: #0000ff;">char</span> strx[<span style="color: #800080;">5</span><span style="color: #000000;">];
+  </span><span style="color: #0000ff;">double</span> tempy=<span style="color: #800080;">0</span><span style="color: #000000;">;
+  </span><span style="color: #0000ff;">char</span> stry[<span style="color: #800080;">5</span><span style="color: #000000;">];
+  </span><span style="color: #0000ff;">double</span> tempz=<span style="color: #800080;">0</span><span style="color: #000000;">;
+  </span><span style="color: #0000ff;">char</span> strz[<span style="color: #800080;">5</span><span style="color: #000000;">];
+  
+  Wire.beginTransmission(ADXAddress);
+  Wire.write(Register_X0);
+  Wire.write(Register_X1);
+  Wire.endTransmission();
+  Wire.requestFrom(ADXAddress,</span><span style="color: #800080;">2</span><span style="color: #000000;">);
+  </span><span style="color: #0000ff;">if</span>(Wire.available()&lt;=<span style="color: #800080;">2</span><span style="color: #000000;">);
+  {
+    X0 </span>=<span style="color: #000000;"> Wire.read();
+    X1 </span>=<span style="color: #000000;"> Wire.read();
+    X1 </span>= X1&lt;&lt;<span style="color: #800080;">8</span><span style="color: #000000;">;
+    X_out </span>= X0+<span style="color: #000000;">X1;
+  }
+ 
+  Wire.beginTransmission(ADXAddress);
+  Wire.write(Register_Y0);
+  Wire.write(Register_Y1);
+  Wire.endTransmission();
+  Wire.requestFrom(ADXAddress,</span><span style="color: #800080;">2</span><span style="color: #000000;">);
+  </span><span style="color: #0000ff;">if</span>(Wire.available()&lt;=<span style="color: #800080;">2</span><span style="color: #000000;">);
+  {
+    Y0 </span>=<span style="color: #000000;"> Wire.read();
+    Y1 </span>=<span style="color: #000000;"> Wire.read();
+    Y1 </span>= Y1&lt;&lt;<span style="color: #800080;">8</span><span style="color: #000000;">;
+    Y_out </span>= Y0+<span style="color: #000000;">Y1;
+  }
+ 
+  Wire.beginTransmission(ADXAddress);
+  Wire.write(Register_Z0);
+  Wire.write(Register_Z1);
+  Wire.endTransmission();
+  Wire.requestFrom(ADXAddress,</span><span style="color: #800080;">2</span><span style="color: #000000;">);
+  </span><span style="color: #0000ff;">if</span>(Wire.available()&lt;=<span style="color: #800080;">2</span><span style="color: #000000;">);
+  {
+    Z0 </span>=<span style="color: #000000;"> Wire.read();
+    Z1 </span>=<span style="color: #000000;"> Wire.read();
+    Z1 </span>= Z1&lt;&lt;<span style="color: #800080;">8</span><span style="color: #000000;">;
+    Z_out </span>= Z0+<span style="color: #000000;">Z1;
+  }
+ 
+  Xg </span>= X_out/<span style="color: #800080;">256.00</span>;<span style="color: #008000;">//</span><span style="color: #008000;">把输出结果转换为重力加速度g,精确到小数点后2位。</span>
+  Yg = Y_out/<span style="color: #800080;">256.00</span><span style="color: #000000;">;
+  Zg </span>= Z_out/<span style="color: #800080;">256.00</span><span style="color: #000000;">;
+  LCDA.CLEAR();</span><span style="color: #008000;">//</span><span style="color: #008000;">清屏</span>
+<span style="color: #000000;">  
+  LCDA.DisplayString(</span><span style="color: #800080;">0</span>,<span style="color: #800080;">0</span>,showx,<span style="color: #800080;">2</span>);<span style="color: #008000;">//</span><span style="color: #008000;">使屏幕显示文字X=</span>
+  tempx=<span style="color: #000000;">Xg;
+  dtostrf(tempx,</span><span style="color: #800080;">5</span>,<span style="color: #800080;">2</span><span style="color: #000000;">,strx);
+  LCDA.DisplayString(</span><span style="color: #800080;">0</span>,<span style="color: #800080;">3</span>,(unsigned <span style="color: #0000ff;">char</span> *)strx,<span style="color: #800080;">6</span><span style="color: #000000;">);
+  
+  LCDA.DisplayString(</span><span style="color: #800080;">1</span>,<span style="color: #800080;">0</span>,showy,<span style="color: #800080;">2</span>);<span style="color: #008000;">//</span><span style="color: #008000;">使屏幕显示文字Y=</span>
+  tempy=<span style="color: #000000;">Yg;
+  dtostrf(tempy,</span><span style="color: #800080;">5</span>,<span style="color: #800080;">2</span><span style="color: #000000;">,stry);
+  LCDA.DisplayString(</span><span style="color: #800080;">1</span>,<span style="color: #800080;">3</span>,(unsigned <span style="color: #0000ff;">char</span> *)stry,<span style="color: #800080;">6</span><span style="color: #000000;">);
+
+  LCDA.DisplayString(</span><span style="color: #800080;">2</span>,<span style="color: #800080;">0</span>,showz,<span style="color: #800080;">2</span>);<span style="color: #008000;">//</span><span style="color: #008000;">使屏幕显示文字Z=</span>
+  tempz=<span style="color: #000000;">Zg;
+  dtostrf(tempz,</span><span style="color: #800080;">5</span>,<span style="color: #800080;">2</span><span style="color: #000000;">,strz);
+  LCDA.DisplayString(</span><span style="color: #800080;">2</span>,<span style="color: #800080;">3</span>,(unsigned <span style="color: #0000ff;">char</span> *)strz,<span style="color: #800080;">6</span><span style="color: #000000;">);  
+
+  delay(</span><span style="color: #800080;">300</span>);  <span style="color: #008000;">//</span><span style="color: #008000;">延时0.3秒，刷新频率这里进行调整</span>
+<span style="color: #000000;"> 
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>实现视频效果：</p>
+<p><object width="480" height="400" align="middle" data="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/v.swf(1).下载" type="application/x-shockwave-flash"><param name="src" value="http://player.youku.com/player.php/sid/XNjc0NzU3OTE2/v.swf"><param name="allowfullscreen" value="true"><param name="quality" value="high"><param name="allowscriptaccess" value="always"></object></p>
+<p>&nbsp;</p>
+<p>3、利用ADXL345实现重力感应效果</p>
+<p>实验中，当向某一方向转动ADXL345模块时，12864屏幕会显示转动方向，如果能配合上动画效果会更加明显，这里只是用文字进行了显示。</p>
+<p>代码如下：</p>
+<div class="cnblogs_code" style="background-color: #f5f5f5; border: #cccccc 1px solid; padding: 5px;"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>#小五义：<a href="http://www.cnblogs.com/xiaowuyi">http://www.cnblogs.com/xiaowuyi</a></pre>
+<pre>#include &lt;Wire.h&gt;  <span style="color: #008000;">//</span><span style="color: #008000;">调用arduino自带的I2C库</span>
+#include &lt;LCD12864RSPI.h&gt;
+ 
+<span style="color: #0000ff;">#define</span> Register_ID 0
+<span style="color: #0000ff;">#define</span> Register_2D 0x2D
+<span style="color: #0000ff;">#define</span> Register_X0 0x32
+<span style="color: #0000ff;">#define</span> Register_X1 0x33
+<span style="color: #0000ff;">#define</span> Register_Y0 0x34
+<span style="color: #0000ff;">#define</span> Register_Y1 0x35
+<span style="color: #0000ff;">#define</span> Register_Z0 0x36
+<span style="color: #0000ff;">#define</span> Register_Z1 0x37
+<span style="color: #0000ff;">#define</span> AR_SIZE( a ) sizeof( a ) / sizeof( a[0] )<span style="color: #000000;">
+
+unsigned </span><span style="color: #0000ff;">char</span> show1x[]={<span style="color: #800080;">0xBF</span>,<span style="color: #800080;">0xAA</span>,<span style="color: #800080;">0xCA</span>,<span style="color: #800080;">0xBC</span><span style="color: #000000;">};
+unsigned </span><span style="color: #0000ff;">char</span> logomid[]={<span style="color: #800080;">0xD6</span>,<span style="color: #800080;">0xD0</span>,<span style="color: #800080;">0xD0</span>,<span style="color: #800080;">0xC4</span><span style="color: #000000;">};
+unsigned </span><span style="color: #0000ff;">char</span> logoleft[]={<span style="color: #800080;">0xCF</span>,<span style="color: #800080;">0xF2</span>,<span style="color: #800080;">0xD7</span>,<span style="color: #800080;">0xF3</span><span style="color: #000000;">};
+unsigned </span><span style="color: #0000ff;">char</span> logoright[]={<span style="color: #800080;">0xCF</span>,<span style="color: #800080;">0xF2</span>,<span style="color: #800080;">0xD3</span>,<span style="color: #800080;">0xD2</span><span style="color: #000000;">};
+unsigned </span><span style="color: #0000ff;">char</span> logoup[]={<span style="color: #800080;">0xCF</span>,<span style="color: #800080;">0xF2</span>,<span style="color: #800080;">0xC9</span>,<span style="color: #800080;">0xCF</span><span style="color: #000000;">};
+unsigned </span><span style="color: #0000ff;">char</span> logodown[]={<span style="color: #800080;">0xCF</span>,<span style="color: #800080;">0xF2</span>,<span style="color: #800080;">0xCF</span>,<span style="color: #800080;">0xC2</span><span style="color: #000000;">};
+unsigned </span><span style="color: #0000ff;">char</span> logoleftup[]={<span style="color: #800080;">0xD7</span>,<span style="color: #800080;">0xF3</span>,<span style="color: #800080;">0xC9</span>,<span style="color: #800080;">0xCF</span><span style="color: #000000;">};
+unsigned </span><span style="color: #0000ff;">char</span> logorightup[]={<span style="color: #800080;">0xD3</span>,<span style="color: #800080;">0xD2</span>,<span style="color: #800080;">0xC9</span>,<span style="color: #800080;">0xCF</span><span style="color: #000000;">};
+unsigned </span><span style="color: #0000ff;">char</span> logorightdown[]={<span style="color: #800080;">0xD3</span>,<span style="color: #800080;">0xD2</span>,<span style="color: #800080;">0xCF</span>,<span style="color: #800080;">0xC2</span><span style="color: #000000;">};
+unsigned </span><span style="color: #0000ff;">char</span> logoleftdown[]={<span style="color: #800080;">0xD7</span>,<span style="color: #800080;">0xF3</span>,<span style="color: #800080;">0xCF</span>,<span style="color: #800080;">0xC2</span><span style="color: #000000;">};
+
+ 
+</span><span style="color: #0000ff;">int</span> ADXAddress = <span style="color: #800080;">0xA7</span>&gt;&gt;<span style="color: #800080;">1</span>;  <span style="color: #008000;">//</span><span style="color: #008000;">转换为7位地址</span>
+<span style="color: #0000ff;">int</span> reading = <span style="color: #800080;">0</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">int</span> val = <span style="color: #800080;">0</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> X0,X1,X_out;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> Y0,Y1,Y_out;
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> Z1,Z0,Z_out;
+</span><span style="color: #0000ff;">double</span><span style="color: #000000;"> Xg,Yg,Zg;
+ 
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> setup()
+{
+  Serial.begin(</span><span style="color: #800080;">9600</span>);<span style="color: #008000;">//</span><span style="color: #008000;">串口初始化</span>
+  LCDA.Initialise(); <span style="color: #008000;">//</span><span style="color: #008000;"> 屏幕初始化</span>
+  delay(<span style="color: #800080;">100</span><span style="color: #000000;">);
+  Wire.begin();  </span><span style="color: #008000;">//</span><span style="color: #008000;">初始化I2C</span>
+  delay(<span style="color: #800080;">100</span><span style="color: #000000;">);
+  Wire.beginTransmission(ADXAddress);
+  Wire.write(Register_2D);
+  Wire.write(</span><span style="color: #800080;">8</span><span style="color: #000000;">);
+  Wire.endTransmission();
+  
+}
+ 
+</span><span style="color: #0000ff;">void</span><span style="color: #000000;"> loop()
+{
+
+  </span><span style="color: #0000ff;">double</span> tempx=<span style="color: #800080;">0</span><span style="color: #000000;">;
+  </span><span style="color: #0000ff;">char</span> strx[<span style="color: #800080;">10</span><span style="color: #000000;">];
+  </span><span style="color: #0000ff;">double</span> tempy=<span style="color: #800080;">0</span><span style="color: #000000;">;
+  </span><span style="color: #0000ff;">char</span> stry[<span style="color: #800080;">10</span><span style="color: #000000;">];
+  </span><span style="color: #0000ff;">double</span> tempz=<span style="color: #800080;">0</span><span style="color: #000000;">;
+  </span><span style="color: #0000ff;">char</span> strz[<span style="color: #800080;">10</span><span style="color: #000000;">];
+  
+  LCDA.CLEAR();</span><span style="color: #008000;">//</span><span style="color: #008000;">清屏</span>
+  LCDA.DisplayString(<span style="color: #800080;">2</span>,<span style="color: #800080;">2</span><span style="color: #000000;">,show1x,AR_SIZE(show1x)); 
+  delay(</span><span style="color: #800080;">1000</span><span style="color: #000000;">);
+  </span><span style="color: #0000ff;">while</span>(<span style="color: #800080;">1</span><span style="color: #000000;">)
+  {
+    Wire.beginTransmission(ADXAddress);
+    Wire.write(Register_X0);
+    Wire.write(Register_X1);
+    Wire.endTransmission();
+    Wire.requestFrom(ADXAddress,</span><span style="color: #800080;">2</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">if</span>(Wire.available()&lt;=<span style="color: #800080;">2</span><span style="color: #000000;">);
+    {
+      X0 </span>=<span style="color: #000000;"> Wire.read();
+      X1 </span>=<span style="color: #000000;"> Wire.read();
+      X1 </span>= X1&lt;&lt;<span style="color: #800080;">8</span><span style="color: #000000;">;
+      X_out </span>= X0+<span style="color: #000000;">X1;
+    }
+   
+    Wire.beginTransmission(ADXAddress);
+    Wire.write(Register_Y0);
+    Wire.write(Register_Y1);
+    Wire.endTransmission();
+    Wire.requestFrom(ADXAddress,</span><span style="color: #800080;">2</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">if</span>(Wire.available()&lt;=<span style="color: #800080;">2</span><span style="color: #000000;">);
+    {
+      Y0 </span>=<span style="color: #000000;"> Wire.read();
+      Y1 </span>=<span style="color: #000000;"> Wire.read();
+      Y1 </span>= Y1&lt;&lt;<span style="color: #800080;">8</span><span style="color: #000000;">;
+      Y_out </span>= Y0+<span style="color: #000000;">Y1;
+    }
+   
+    Wire.beginTransmission(ADXAddress);
+    Wire.write(Register_Z0);
+    Wire.write(Register_Z1);
+    Wire.endTransmission();
+    Wire.requestFrom(ADXAddress,</span><span style="color: #800080;">2</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">if</span>(Wire.available()&lt;=<span style="color: #800080;">2</span><span style="color: #000000;">);
+    {
+      Z0 </span>=<span style="color: #000000;"> Wire.read();
+      Z1 </span>=<span style="color: #000000;"> Wire.read();
+      Z1 </span>= Z1&lt;&lt;<span style="color: #800080;">8</span><span style="color: #000000;">;
+      Z_out </span>= Z0+<span style="color: #000000;">Z1;
+    }
+   
+    Xg </span>= X_out/<span style="color: #800080;">256.00</span>;<span style="color: #008000;">//</span><span style="color: #008000;">把输出结果转换为重力加速度g,精确到小数点后2位。</span>
+    Yg = Y_out/<span style="color: #800080;">256.00</span><span style="color: #000000;">;
+    Zg </span>= Z_out/<span style="color: #800080;">256.00</span><span style="color: #000000;">;
+    
+
+    Serial.println(</span><span style="color: #800000;">"</span><span style="color: #800000;">X:</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    Serial.println(Xg);
+    Serial.println(</span><span style="color: #800000;">"</span><span style="color: #800000;">Y:</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    Serial.println(Yg);
+    LCDA.CLEAR();</span><span style="color: #008000;">//</span><span style="color: #008000;">清屏</span>
+
+    <span style="color: #0000ff;">if</span> (Xg&gt;<span style="color: #800080;">0.2</span> and Yg&lt;<span style="color: #800080;">0.2</span> and Yg&gt;-<span style="color: #800080;">0.2</span><span style="color: #000000;">){
+      LCDA.DisplayString(</span><span style="color: #800080;">2</span>,<span style="color: #800080;">2</span><span style="color: #000000;">,logoleft,AR_SIZE(logoleft)); 
+      delay(</span><span style="color: #800080;">500</span><span style="color: #000000;">);
+  </span><span style="color: #008000;">//
+</span><span style="color: #000000;">    }
+    </span><span style="color: #0000ff;">if</span>(Xg&lt;-<span style="color: #800080;">0.2</span> and Yg&lt;<span style="color: #800080;">0.2</span> and Yg&gt;-<span style="color: #800080;">0.2</span><span style="color: #000000;">){
+      LCDA.DisplayString(</span><span style="color: #800080;">2</span>,<span style="color: #800080;">2</span><span style="color: #000000;">,logoright,AR_SIZE(logoright));
+      delay(</span><span style="color: #800080;">500</span><span style="color: #000000;">);
+  
+    }
+    </span><span style="color: #0000ff;">if</span> (Xg&lt;<span style="color: #800080;">0.2</span> and Xg&gt;-<span style="color: #800080;">0.2</span> and Yg&lt;<span style="color: #800080;">0.2</span> and Yg&gt;-<span style="color: #800080;">0.2</span><span style="color: #000000;">){
+        LCDA.DisplayString(</span><span style="color: #800080;">2</span>,<span style="color: #800080;">2</span><span style="color: #000000;">,logomid,AR_SIZE(logomid)); 
+        delay(</span><span style="color: #800080;">500</span><span style="color: #000000;">);
+    }
+    </span><span style="color: #0000ff;">if</span> (Xg&lt;<span style="color: #800080;">0.2</span> and Xg&gt;-<span style="color: #800080;">0.2</span> and Yg&gt;<span style="color: #800080;">0.2</span><span style="color: #000000;">){
+        LCDA.DisplayString(</span><span style="color: #800080;">2</span>,<span style="color: #800080;">2</span><span style="color: #000000;">,logoup,AR_SIZE(logoup)); 
+        delay(</span><span style="color: #800080;">500</span><span style="color: #000000;">);
+    }  
+    </span><span style="color: #0000ff;">if</span> (Xg&lt;<span style="color: #800080;">0.2</span> and Xg&gt;-<span style="color: #800080;">0.2</span> and Yg&lt;-<span style="color: #800080;">0.2</span><span style="color: #000000;">){
+        LCDA.DisplayString(</span><span style="color: #800080;">2</span>,<span style="color: #800080;">2</span><span style="color: #000000;">,logodown,AR_SIZE(logodown)); 
+        delay(</span><span style="color: #800080;">500</span><span style="color: #000000;">);
+    } 
+    </span><span style="color: #0000ff;">if</span> (Xg&gt;<span style="color: #800080;">0.2</span> and Yg&lt;-<span style="color: #800080;">0.2</span><span style="color: #000000;">){
+        LCDA.DisplayString(</span><span style="color: #800080;">2</span>,<span style="color: #800080;">2</span><span style="color: #000000;">,logoleftdown,AR_SIZE(logoleftdown)); 
+        delay(</span><span style="color: #800080;">500</span><span style="color: #000000;">);
+    } 
+    </span><span style="color: #0000ff;">if</span> (Xg&gt;<span style="color: #800080;">0.2</span> and Yg&gt;<span style="color: #800080;">0.2</span><span style="color: #000000;">){
+        LCDA.DisplayString(</span><span style="color: #800080;">2</span>,<span style="color: #800080;">2</span><span style="color: #000000;">,logoleftup,AR_SIZE(logoleftup)); 
+        delay(</span><span style="color: #800080;">500</span><span style="color: #000000;">);
+    }  
+    </span><span style="color: #0000ff;">if</span> (Xg&lt;-<span style="color: #800080;">0.2</span> and Yg&lt;-<span style="color: #800080;">0.2</span><span style="color: #000000;">){
+        LCDA.DisplayString(</span><span style="color: #800080;">2</span>,<span style="color: #800080;">2</span><span style="color: #000000;">,logorightdown,AR_SIZE(logorightdown)); 
+        delay(</span><span style="color: #800080;">500</span><span style="color: #000000;">);
+    }  
+    </span><span style="color: #0000ff;">if</span> (Xg&lt;-<span style="color: #800080;">0.2</span> and Yg&gt;<span style="color: #800080;">0.2</span><span style="color: #000000;">){
+        LCDA.DisplayString(</span><span style="color: #800080;">2</span>,<span style="color: #800080;">2</span><span style="color: #000000;">,logorightup,AR_SIZE(logorightup)); 
+        delay(</span><span style="color: #800080;">500</span><span style="color: #000000;">);
+    }  
+  }
+
+ 
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>实验效果：</p>
+<p><object width="480" height="400" align="middle" data="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/v.swf(2).下载" type="application/x-shockwave-flash"><param name="src" value="http://player.youku.com/player.php/sid/XNjc0NzY1NTMy/v.swf"><param name="allowfullscreen" value="true"><param name="quality" value="high"><param name="allowscriptaccess" value="always"></object></p>
+<p>&nbsp;</p>
+<p>从视频来看，当ADXL345模块平放在桌面时，屏幕显示中心，当向上、下、左、右等八个方向转动时，屏幕会依次显示向上、向下、向左、向右等。</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/xiaowuyi/category/497388.html" target="_blank">Arduino</a></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/xiaowuyi/tag/%E5%BC%80%E6%BA%90%E7%A1%AC%E4%BB%B6/">开源硬件</a>, <a href="http://www.cnblogs.com/xiaowuyi/tag/12864/">12864</a>, <a href="http://www.cnblogs.com/xiaowuyi/tag/ADXL345/">ADXL345</a>, <a href="http://www.cnblogs.com/xiaowuyi/tag/%E9%87%8D%E5%8A%9B%E6%84%9F%E5%BA%94/">重力感应</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(3554992,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;b609db10-0f69-e111-aa3f-842b2b196315&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/xiaowuyi/" target="_blank"><img src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/u383503.jpg" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/xiaowuyi/">小五义</a><br>
+            <a href="http://home.cnblogs.com/u/xiaowuyi/followees">关注 - 8</a><br>
+            <a href="http://home.cnblogs.com/u/xiaowuyi/followers">粉丝 - 386</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;b609db10-0f69-e111-aa3f-842b2b196315&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(3554992,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">1</span>
+    </div>
+    <div class="buryit" onclick="votePost(3554992,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/xiaowuyi/p/3550769.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/xiaowuyi/p/3550769.html" title="发布于2014-02-15 19:23">[转载]]建立隐藏磁盘的一个方法</a><br><a href="http://www.cnblogs.com/xiaowuyi/p/3597371.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/xiaowuyi/p/3597371.html" title="发布于2014-03-12 21:34">Arduino入门笔记（9）：蓝牙模块及第一辆蓝牙遥控小车</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2014-02-18 22:18</span> <a href="http://www.cnblogs.com/xiaowuyi/">小五义</a> 阅读(<span id="post_view_count">10133</span>) 评论(<span id="post_comment_count">4</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=3554992" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/xiaowuyi/p/3554992.html#" onclick="AddToWz(3554992);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=111015,cb_entryId=3554992,cb_blogApp=currentBlogApp,cb_blogUserGuid='b609db10-0f69-e111-aa3f-842b2b196315',cb_entryCreatedDate='2014/2/18 22:18:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<!--done-->
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"></div>
+	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/xiaowuyi/p/3554992.html#2880545" class="layer">#1楼</a><a name="2880545" id="comment_anchor_2880545"></a>  <span class="comment_date">2014-02-22 11:16</span> <a id="a_comment_author_2880545" href="http://home.cnblogs.com/u/606289/" target="_blank">sophor</a> <a href="http://msg.cnblogs.com/send/sophor" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2880545" class="blog_comment_body">感谢小五义的精彩奉送！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2880545,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2880545,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/xiaowuyi/p/3554992.html#2881909" class="layer">#2楼</a><a name="2881909" id="comment_anchor_2881909"></a>[<span class="louzhu">楼主</span>]  <span class="comment_date">2014-02-24 17:48</span> <a id="a_comment_author_2881909" href="http://www.cnblogs.com/xiaowuyi/" target="_blank">小五义</a> <a href="http://msg.cnblogs.com/send/%E5%B0%8F%E4%BA%94%E4%B9%89" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2881909" class="blog_comment_body"><a href="http://www.cnblogs.com/xiaowuyi/p/3554992.html#2880545" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,2880545);">@</a>
+sophor<br>谢谢表扬，大家一起交流</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2881909,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2881909,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_2881909_avatar" style="display:none;">http://pic.cnblogs.com/face/u383503.jpg?id=26222424</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/xiaowuyi/p/3554992.html#2906714" class="layer">#3楼</a><a name="2906714" id="comment_anchor_2906714"></a>  <span class="comment_date">2014-03-28 20:12</span> <a id="a_comment_author_2906714" href="http://www.cnblogs.com/better2better/" target="_blank">赵工</a> <a href="http://msg.cnblogs.com/send/%E8%B5%B5%E5%B7%A5" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2906714" class="blog_comment_body">看了介绍，也想买一块12864显示器。在淘宝搜了一下，非常多，接口好像也好多种，不知道哪种接口的做试验方便些？能给个淘宝链接吗？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2906714,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2906714,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/xiaowuyi/p/3554992.html#2909073" class="layer">#4楼</a><a name="2909073" id="comment_anchor_2909073"></a><span id="comment-maxId" style="display:none;">2909073</span><span id="comment-maxDate" style="display:none;">2014/4/1 16:18:35</span>  <span class="comment_date">2014-04-01 16:18</span> <a id="a_comment_author_2909073" href="http://www.cnblogs.com/better2better/" target="_blank">赵工</a> <a href="http://msg.cnblogs.com/send/%E8%B5%B5%E5%B7%A5" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2909073" class="blog_comment_body">已经自行解决了。一般买的没有排针。有个引脚可以直接设定是并口还是串口。只要注意电源正负极接线就可以了。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2909073,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2909073,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/xiaowuyi/p/3554992.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/xiaowuyi/p/3554992.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://cloud.tencent.com/solution/la?fromSource=gwzcw.485446.485446.485446" target="_blank">【推荐】腾讯云 十分钟定制你的第一个微信小程序</a><br><a href="http://www.gcpowertools.com.cn/products/activereports_overview.htm?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=AR&amp;utm_campaign=community" target="_blank">【推荐】报表开发有捷径：快速设计轻松集成，数据可视化和交互</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="http://activity.huaweicloud.com/devcloud1024/?utm_source=cnblogs&amp;utm_medium=MediaB&amp;utm_campaign=%E5%8D%8E%E4%B8%BA%E4%BA%91-10%E6%9C%88%E5%B9%BF%E5%91%8A%E6%8A%95%E6%94%BE&amp;utm_content=%E5%8D%9A%E5%AE%A2%E5%9B%AD%E5%86%85%E9%A1%B5C1%E7%9F%A9%E5%BD%A2&amp;utm_term=%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%BA%91-1024%E8%AE%BA%E5%9D%9B%E6%B4%BB%E5%8A%A8" target="_blank"><img width="300" height="250" src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/24442-20171015214114324-1153647777.jpg" alt="华为云1016C2"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/580479/" target="_blank">Adobe上调2018财年营收与利润预期 股价盘后大涨8%</a><br> ·  <a href="http://news.cnblogs.com/n/580478/" target="_blank">IBM业绩呈现复苏迹象 股价周三涨幅足以载入史册</a><br> ·  <a href="http://news.cnblogs.com/n/580456/" target="_blank">维珍集团CEO布兰森发博文称自己差点被骗500万美元</a><br> ·  <a href="http://news.cnblogs.com/n/580472/" target="_blank">5000万美元！Google母公司要在多伦多建设高科技社区</a><br> ·  <a href="http://news.cnblogs.com/n/580477/" target="_blank">亚马逊该不该像京东那样建自己的快递员团队</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://click.aliyun.com/m/22446/" target="_blank"><img width="468" height="60" src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/24442-20171001085719794-417760373.jpg" alt="阿里云1001"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/579480/" target="_blank">实用VPC虚拟私有云设计原则</a><br> ·  <a href="http://kb.cnblogs.com/page/576251/" target="_blank">如何阅读计算机科学类的书</a><br> ·  <a href="http://kb.cnblogs.com/page/578103/" target="_blank">Google 及其云智慧</a><br> ·  <a href="http://kb.cnblogs.com/page/575829/" target="_blank">做到这一点，你也可以成为优秀的程序员</a><br> ·  <a href="http://kb.cnblogs.com/page/566880/" target="_blank">写给立志做码农的大学生</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><p>引用本博客内容，请注明出处，谢谢!
+@小五义 http://www.cnblogs.com/xiaowuyi</p>
+<p>
+</p><div>
+欢迎加入QQ群： 64770604  
+<div></div>
+</div>
+<p></p><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/xiaowuyi/">小五义</a><br>园龄：<a href="http://home.cnblogs.com/u/xiaowuyi/" title="入园时间：2012-03-08">5年7个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/xiaowuyi/followers/">386</a><br>关注：<a href="http://home.cnblogs.com/u/xiaowuyi/followees/">8</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;b609db10-0f69-e111-aa3f-842b2b196315&#39;)">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2017/09/01&#39;);return false;">&lt;</a></td><td align="center">2017年10月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2017/11/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">24</td><td class="CalOtherMonthDay" align="center">25</td><td class="CalOtherMonthDay" align="center">26</td><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td></tr><tr><td class="CalWeekendDay" align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">6</td><td class="CalWeekendDay" align="center">7</td></tr><tr><td class="CalWeekendDay" align="center">8</td><td align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center">12</td><td align="center">13</td><td class="CalWeekendDay" align="center">14</td></tr><tr><td class="CalWeekendDay" align="center">15</td><td align="center">16</td><td align="center">17</td><td align="center">18</td><td class="CalTodayDay" align="center">19</td><td align="center">20</td><td class="CalWeekendDay" align="center">21</td></tr><tr><td class="CalWeekendDay" align="center">22</td><td align="center">23</td><td align="center">24</td><td align="center">25</td><td align="center">26</td><td align="center">27</td><td class="CalWeekendDay" align="center">28</td></tr><tr><td class="CalWeekendDay" align="center">29</td><td align="center">30</td><td align="center">31</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/xiaowuyi/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_recentposts" class="sidebar-block">
+<div class="catListEssay">
+<h3 class="catListTitle">最新随笔</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/xiaowuyi/p/7477779.html">1. 利用WHID为隔离主机建立隐秘通道</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/p/7406797.html">2. 国内第一本micropython的书出版《机器人Python极客编程入门与实战》</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/p/7110652.html">3. 邪恶改装2：用单片机实现一次简单的wifi密码欺骗</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/p/7096745.html">4. TPYBoard自制微信远程智能温湿度计</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/p/7092673.html">5. 利用单片机快速实现家庭智能控制平台</a></li>
+</ul>
+</div>
+</div><div id="sidebar_categories">
+<div class="catListPostCategory">
+<h3 class="catListTitle">随笔分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/xiaowuyi/category/361866.html">.NET 学习笔记(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/xiaowuyi/category/454479.html">android(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/xiaowuyi/category/497388.html">Arduino(18)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/xiaowuyi/category/648489.html">opencv-python(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/xiaowuyi/category/426566.html">pygame学习笔记(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/xiaowuyi/category/401225.html">python趣味编程(7)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/xiaowuyi/category/426565.html">python网络编程(16)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/xiaowuyi/category/361149.html">python学习笔记(48)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/xiaowuyi/category/854039.html">TPYBoard-micropython(18)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/xiaowuyi/category/499067.html">ubuntu(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/xiaowuyi/category/786103.html">单片机(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="http://www.cnblogs.com/xiaowuyi/category/611904.html">树莓派(9)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="http://www.cnblogs.com/xiaowuyi/category/544309.html">网络安全(5)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListPostArchive">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/xiaowuyi/archive/2017/09.html">2017年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/xiaowuyi/archive/2017/08.html">2017年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/xiaowuyi/archive/2017/07.html">2017年7月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="http://www.cnblogs.com/xiaowuyi/archive/2017/06.html">2017年6月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="http://www.cnblogs.com/xiaowuyi/archive/2017/03.html">2017年3月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="http://www.cnblogs.com/xiaowuyi/archive/2017/02.html">2017年2月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="http://www.cnblogs.com/xiaowuyi/archive/2017/01.html">2017年1月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="http://www.cnblogs.com/xiaowuyi/archive/2016/07.html">2016年7月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="http://www.cnblogs.com/xiaowuyi/archive/2016/02.html">2016年2月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="http://www.cnblogs.com/xiaowuyi/archive/2016/01.html">2016年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="http://www.cnblogs.com/xiaowuyi/archive/2015/11.html">2015年11月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_11" href="http://www.cnblogs.com/xiaowuyi/archive/2015/09.html">2015年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_12" href="http://www.cnblogs.com/xiaowuyi/archive/2015/03.html">2015年3月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_13" href="http://www.cnblogs.com/xiaowuyi/archive/2015/01.html">2015年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_14" href="http://www.cnblogs.com/xiaowuyi/archive/2014/12.html">2014年12月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_15" href="http://www.cnblogs.com/xiaowuyi/archive/2014/11.html">2014年11月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_16" href="http://www.cnblogs.com/xiaowuyi/archive/2014/10.html">2014年10月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_17" href="http://www.cnblogs.com/xiaowuyi/archive/2014/09.html">2014年9月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_18" href="http://www.cnblogs.com/xiaowuyi/archive/2014/08.html">2014年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_19" href="http://www.cnblogs.com/xiaowuyi/archive/2014/03.html">2014年3月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_20" href="http://www.cnblogs.com/xiaowuyi/archive/2014/02.html">2014年2月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_21" href="http://www.cnblogs.com/xiaowuyi/archive/2013/12.html">2013年12月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_22" href="http://www.cnblogs.com/xiaowuyi/archive/2013/11.html">2013年11月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_23" href="http://www.cnblogs.com/xiaowuyi/archive/2013/10.html">2013年10月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_24" href="http://www.cnblogs.com/xiaowuyi/archive/2013/09.html">2013年9月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_25" href="http://www.cnblogs.com/xiaowuyi/archive/2013/08.html">2013年8月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_26" href="http://www.cnblogs.com/xiaowuyi/archive/2013/07.html">2013年7月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_27" href="http://www.cnblogs.com/xiaowuyi/archive/2013/02.html">2013年2月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_28" href="http://www.cnblogs.com/xiaowuyi/archive/2012/11.html">2012年11月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_29" href="http://www.cnblogs.com/xiaowuyi/archive/2012/10.html">2012年10月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_30" href="http://www.cnblogs.com/xiaowuyi/archive/2012/09.html">2012年9月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_31" href="http://www.cnblogs.com/xiaowuyi/archive/2012/08.html">2012年8月 (6)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_32" href="http://www.cnblogs.com/xiaowuyi/archive/2012/07.html">2012年7月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_33" href="http://www.cnblogs.com/xiaowuyi/archive/2012/06.html">2012年6月 (6)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_34" href="http://www.cnblogs.com/xiaowuyi/archive/2012/05.html">2012年5月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_35" href="http://www.cnblogs.com/xiaowuyi/archive/2012/04.html">2012年4月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_36" href="http://www.cnblogs.com/xiaowuyi/archive/2012/03.html">2012年3月 (14)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListArticleCategory">
+<h3 class="catListTitle">文章分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_2_Link_0" href="http://www.cnblogs.com/xiaowuyi/category/361421.html">python精彩文章收集(12)</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_1" href="http://www.cnblogs.com/xiaowuyi/category/651296.html">树莓派精彩文章收集(1)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListArticleArchive">
+<h3 class="catListTitle">文章档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_3_Link_0" href="http://www.cnblogs.com/xiaowuyi/archives/2015/02.html" rel="nofollow">2015年2月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_1" href="http://www.cnblogs.com/xiaowuyi/archives/2015/01.html" rel="nofollow">2015年1月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_2" href="http://www.cnblogs.com/xiaowuyi/archives/2012/08.html" rel="nofollow">2012年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_3" href="http://www.cnblogs.com/xiaowuyi/archives/2012/06.html" rel="nofollow">2012年6月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_4" href="http://www.cnblogs.com/xiaowuyi/archives/2012/05.html" rel="nofollow">2012年5月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_5" href="http://www.cnblogs.com/xiaowuyi/archives/2012/04.html" rel="nofollow">2012年4月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_3_Link_6" href="http://www.cnblogs.com/xiaowuyi/archives/2012/03.html" rel="nofollow">2012年3月 (4)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catList">
+<h3 class="catListTitle">python相关网址</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_4_Link_0" href="http://eyehere.net/2011/python-pygame-novice-professional-index/" rel="nofollow">eyehere</a> </li>
+<li class="c_b_p_link_desc">pygame学习</li>
+<li><a id="CatList_LinkList_4_Link_1" href="http://www.cnblogs.com/k1two2/" rel="nofollow">k1two2</a> </li>
+<li class="c_b_p_link_desc">http://www.cnblogs.com/k1two2/</li>
+<li><a id="CatList_LinkList_4_Link_2" href="http://sourceforge.net/projects/pyhook" rel="nofollow" target="_blank">pyhook下载</a> </li>
+
+<li><a id="CatList_LinkList_4_Link_3" href="http://www.itlong.com/forum.php" rel="nofollow" target="_blank">python</a> </li>
+<li class="c_b_p_link_desc">python论坛</li>
+<li><a id="CatList_LinkList_4_Link_4" href="http://www.erlang.org/doc/man/wxDatePickerCtrl.html#setValue-2" rel="nofollow">wxpython文档</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_scorerank" class="sidebar-block">
+<div class="catListBlogRank">
+<h3 class="catListTitle">积分与排名</h3>
+<ul>
+	<li class="liScore">
+		积分 -	262054
+	</li>
+	<li class="liRank">
+		排名 -	691
+	</li>
+</ul>
+</div>
+
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/xiaowuyi/p/7477779.html#3802943">1. Re:利用WHID为隔离主机建立隐秘通道</a></li>
+        <li class="recent_comment_body">@Elfsong可以直接用202的，但是202需要再扩展SD卡，需要按Sd模块，我闲麻烦，所以没用...</li>
+        <li class="recent_comment_author">--小五义</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/xiaowuyi/p/7477779.html#3800373">2. Re:利用WHID为隔离主机建立隐秘通道</a></li>
+        <li class="recent_comment_body">您好，麻烦问一下，为什么不直接用TPYBoard v202来完成整个过程，而是要使用TPYBoard v102与TPYBoard v202之间串口通讯的方式来进行呢？</li>
+        <li class="recent_comment_author">--Elfsong</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/xiaowuyi/archive/2012/10/17/2727912.html#3795990">3. Re:python网络编程学习笔记（8）：XML生成与解析（DOM、ElementTree）</a></li>
+        <li class="recent_comment_body">@slowly77我一般的做法是，先取出这个pr来，如果直接用list取不出来，可以用查找字符串的方法，也可以用正则...</li>
+        <li class="recent_comment_author">--小五义</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/xiaowuyi/archive/2012/10/17/2727912.html#3785200">4. Re:python网络编程学习笔记（8）：XML生成与解析（DOM、ElementTree）</a></li>
+        <li class="recent_comment_body">你好。学习您的代码收益匪浅，但是我自己实践遇到了一个问题。 WBTSZ17_0000_0000_00 NIHZSIVNJ 1 Aug 2017 FZM_WCDMA_TRS PR123 ......</li>
+        <li class="recent_comment_author">--slowly77</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/xiaowuyi/p/4051238.html#3784633">5. Re:树莓派学习笔记（5）：成功实现NAS家庭服务器（流媒体播放、文件共享及下载机）</a></li>
+        <li class="recent_comment_body">@Yashon谢谢，非常感谢...</li>
+        <li class="recent_comment_author">--小五义</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/xiaowuyi/archive/2012/03/17/2404015.html">1. python发送各类邮件的主要方法(94093)</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/archive/2012/03/08/2385808.html">2. Python shutil模块(69962)</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/p/4051238.html">3. 树莓派学习笔记（5）：成功实现NAS家庭服务器（流媒体播放、文件共享及下载机）(66543)</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/archive/2012/11/15/2771099.html">4. python网络编程学习笔记（10）：webpy框架(42187)</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/p/4012069.html">5. 树莓派学习笔记（3）：利用VNC远程控制树莓派(41745)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/xiaowuyi/p/7092673.html">1. 利用单片机快速实现家庭智能控制平台(38)</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/archive/2012/03/17/2404015.html">2. python发送各类邮件的主要方法(24)</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/p/4355161.html">3. 利用 ProtoThreads实现Arduino多线程处理（2）(21)</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/p/4051238.html">4. 树莓派学习笔记（5）：成功实现NAS家庭服务器（流媒体播放、文件共享及下载机）(20)</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/archive/2012/11/15/2771099.html">5. python网络编程学习笔记（10）：webpy框架(18)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/xiaowuyi/p/7092673.html">1. 利用单片机快速实现家庭智能控制平台(44)</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/p/6980072.html">2. 邪恶改装：TPYBoard制作廉价WIFI干扰器(9)</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/p/7110652.html">3. 邪恶改装2：用单片机实现一次简单的wifi密码欺骗(7)</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/p/4051238.html">4. 树莓派学习笔记（5）：成功实现NAS家庭服务器（流媒体播放、文件共享及下载机）(7)</a></li><li><a href="http://www.cnblogs.com/xiaowuyi/p/5173931.html">5. 利用51单片机制作廉价盒仔机器人(6)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2017 小五义
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+<!--PageEndHtml Block Begin-->
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fb43f47b101789ba010b16dd6cf82f01b' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/h.js.下载" type="text/javascript"></script><a href="http://tongji.baidu.com/hm-web/welcome/ico?s=b43f47b101789ba010b16dd6cf82f01b" target="_blank"><img border="0" src="./利用12864和ADXL345学习重力感应控制 - 小五义 - 博客园_files/21.gif" width="20" height="20"></a>
+<!--PageEndHtml Block End-->
+
+
+</body></html>
