@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="content-type" content="text/html; charset=gbk">
+</head>
+
+<body id="nv_forum" class="pg_viewthread" onkeydown="if(event.keyCode==27) return false;">
+
+
+<h1 class="ts">
+<span id="thread_subject">Arduino入门教程--第十九课--Arduino中断的使用</span>
+</h1>
+
+
+
+
+
+<div id="post_14453"><table id="pid14453" class="plhin" summary="pid14453" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="pls" rowspan="2">
+
+</td>
+<td class="plc">
+<div class="pi">
+
+
+</div><div class="pct"><style type="text/css">.pcb{margin-right:0}</style><div class="pcb">
+ 
+<div class="t_fsz">
+<table cellspacing="0" cellpadding="0"><tbody><tr><td class="t_f" id="postmessage_14453">
+<font size="4"><strong>中断的基本原理</strong><br>
+<br>
+要搞清楚什么是中断，我们可以从生活中的一个例子了解下。<br>
+<br>
+你正在家里看电视，突然家里座机响了，你起身去接电话，接完电话后继续回来看电视。<br>
+这就是生活中的中断现象，也就是一个正在做的事情被外部的事情打断，当执行完外部事情后，继续做原本的事情。<br>
+<br>
+<strong>什么是中断？</strong><br>
+<br>
+所谓中断，是指CPU在正常运行程序时，由于内部/外部事件或由程序预先安排的事件，引起CPU中断正在运行的程序，而转到为内部/外部事件或为预先安排的事件服务的程序中去，服务完毕，再返回去执行波暂时中断的程序<br>
+<br>
+由于某个事件的发生，CPU暂停当前正在执行的程序，转而执行处理该事件的一个程序。该程序执行完成后，CPU接着执行被暂停的程序。这个过程称为中断。<br>
+根据中断源的位置，有两种类型的中断。有的中断源在CPU的内部，称为内部中断。大多数的中断源在CPU的外部，称为外部中断。<br>
+根据中断引脚的不同，或者CPU响应中断的不同条件，也可以把中断划分为可屏蔽中断和不可屏蔽中断两种。&nbsp;&nbsp;<br>
+ <br>
+<strong>使用中断的好处</strong><br>
+<br>
+1、 实行分时操作 提高 CPU 的效率 只有当服务对象向 CPU 发出中断申请时 才去为它服务 这样 我们就可以利用中断功能同时为多个对象服务 从而大大提高了 CPU 的工作效率 <br>
+2、 实现实时处理<br>
+<br>
+利用中断技术 各个服务对象可以根据需要随时向 CPU 发出中断申请 及时发现和处理中断请求并为<br>
+ <br>
+<font size="4">进入正题</font><br>
+<br>
+我们在本次试验中使用ocrobot mango（Arduino UNO兼容板），IDE使用1.0.1版本。<br>
+<br>
+在OCROBOT MANGO（UNO也一样）中，有两个可以使用的外部中断，0（数字引脚2）和1（数字引脚3），本次例子中我们使用D2引脚作为中断引脚，使用A0引脚控制LED。原理图如下：</font><br>
+<br>
+
+<ignore_js_op>
+
+<img id="aimg_8513" aid="8513" src="Arduino%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B-%E7%AC%AC%E5%8D%81%E4%B9%9D%E8%AF%BE-Arduino%E4%B8%AD%E6%96%AD%E7%9A%84%E4%BD%BF%E7%94%A8_files/161518c4a1rcekcc74k97e.png" zoomfile="http://image.geek-workshop.com/forum/201210/28/161518c4a1rcekcc74k97e.png" file="http://image.geek-workshop.com/forum/201210/28/161518c4a1rcekcc74k97e.png" class="zoom" onclick="zoom(this, this.src, 0, 0, 0)" inpost="1" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" style="" lazyloaded="true" _load="1" initialized="true" width="600">
+
+<div class="tip tip_4 aimg_tip" id="aimg_8513_menu" style="position: absolute; z-index: 301; left: 382.5px; top: 1222.5px; display: none;" disautofocus="true" initialized="true">
+<div class="xs0">
+<p><strong>2012-10-28 13-33-41.png</strong> <em class="xg1">(110.7 KB, 下载次数: 121)</em></p>
+<p>
+<a href="http://www.geek-workshop.com/forum.php?mod=attachment&amp;aid=ODUxM3wzOGIyZmMxYXwxNDc5MDA4MzQyfDB8MTk4Mw%3D%3D&amp;nothumb=yes" target="_blank">下载附件</a>
+
+&nbsp;<a href="javascript:;" onclick="showWindow(this.id, this.getAttribute('url'), 'get', 0);" id="savephoto_8513" url="home.php?mod=spacecp&amp;ac=album&amp;op=saveforumphoto&amp;aid=8513&amp;handlekey=savephoto_8513">保存到相册</a>
+
+</p>
+
+<p class="xg1 y">2012-10-28 16:15 上传</p>
+
+</div>
+<div class="tip_horn"></div>
+</div>
+
+</ignore_js_op>
+<br>
+<br>
+<font size="4"><strong>标准的数字输入与输出--没有中断</strong><br>
+<br>
+如果你按照上面的电路图进行了接线，把下面的代码编译上传进入Arduino。<br>
+<br>
+代码用来读取你输入的值，然后作为条件进行比较，</font><br>
+<br>
+[pre lang="arduino" line="1"]int pbIn = 2;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; // 定义输入信号引脚<br>
+int ledOut = A0;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;// 定义输出指示灯引脚<br>
+int state = LOW;&nbsp; &nbsp;&nbsp; &nbsp; // 定义默认输入状态<br>
+<br>
+void setup()<br>
+{&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; <br>
+&nbsp;&nbsp;// 设置输入信号引脚为输入状态、输出引脚为输出状态<br>
+&nbsp;&nbsp;pinMode(pbIn, INPUT); <br>
+&nbsp;&nbsp;pinMode(ledOut, OUTPUT);<br>
+}<br>
+<br>
+void loop()&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+{<br>
+&nbsp;&nbsp;state = digitalRead(pbIn);&nbsp; &nbsp;&nbsp; &nbsp;//读取微动开关状态<br>
+<br>
+&nbsp;&nbsp;digitalWrite(ledOut, state);&nbsp; &nbsp; //把读取的状态赋予LED指示灯<br>
+<br>
+&nbsp;&nbsp;//模拟一个长的流程或者复杂的任务<br>
+&nbsp;&nbsp;for (int i = 0; i &lt; 100; i++)<br>
+&nbsp;&nbsp;{<br>
+&nbsp; &nbsp; //延时10毫秒<br>
+&nbsp; &nbsp; delay(10); <br>
+&nbsp;&nbsp;}<br>
+}<br>
+[/pre]<br>
+<br>
+<font size="4">下面视频是该代码的实验效果，按下开关，LED状态不会立刻改变，要按住一会儿才能改变。</font><br>
+<font size="4"><strong>使用中断</strong><br>
+<br>
+现在，我们使用相同的电路连接图，然后修改代码以使用硬件中断。然后把下面的代码下载进入控制板中，当按下按钮时，LED的状态就会立刻改变，尽管代码仍然是在主循环中，而且是同样的延时。</font><br>
+<br>
+[pre lang="arduino" line="1"]int pbIn = 0;&nbsp; &nbsp;&nbsp; 
+&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;// 
+定义中断引脚为0，也就是D2引脚<br>
+int ledOut = A0;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; // 定义输出指示灯引脚<br>
+volatile int state = LOW;&nbsp; &nbsp;&nbsp; &nbsp;// 定义默认输入状态<br>
+<br>
+void setup()<br>
+{&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; <br>
+&nbsp;&nbsp;// 置ledOut引脚为输出状态<br>
+&nbsp;&nbsp;pinMode(ledOut, OUTPUT);<br>
+<br>
+&nbsp;&nbsp;// 监视中断输入引脚的变化<br>
+&nbsp;&nbsp;attachInterrupt(pbIn, stateChange, CHANGE);<br>
+}<br>
+<br>
+void loop()&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<br>
+{<br>
+&nbsp;&nbsp;// 模拟长时间运行的进程或复杂的任务。<br>
+&nbsp;&nbsp;for (int i = 0; i &lt; 100; i++)<br>
+&nbsp;&nbsp;{<br>
+&nbsp; &nbsp; // 什么都不做，等待10毫秒<br>
+&nbsp; &nbsp; delay(10); <br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+void stateChange()<br>
+{<br>
+&nbsp;&nbsp;state = !state;<br>
+&nbsp;&nbsp;digitalWrite(ledOut, state);&nbsp;&nbsp;<br>
+}<br>
+[/pre]<br>
+<br>
+<font size="4">下面视频是该代码的实验效果，按下开关，LED状态就会立刻变化。</font><br>
+
+<font size="4"><strong>中断命令语法介绍</strong><br>
+<br>
+attachInterrupt(interrupt, function, mode)<br>
+<br>
+interrupt：中断引脚数 <br>
+function：中断发生时调用的函数，此函数必须不带参数和不返回任何值。该函数有时被称为中断服务程序。 <br>
+mode：定义何时发生中断以下四个contstants预定有效值：<br>
+<br>
+LOW 当引脚为低电平时，触发中断<br>
+CHANGE 当引脚电平发生改变时，触发中断<br>
+RISING 当引脚由低电平变为高电平时，触发中断<br>
+FALLING 当引脚由高电平变为低电平时，触发中断.<br>
+<br>
+当发生外部中断时，调用一个指定函数。当中断发生时，该函数会取代正在执行的程序。大多数的Arduino板有两个外部中断：0（数字引脚2）和1（数字引脚3）。<br>
+<br>
+arduino Mege有四个外部中断：数字2（引脚21），3（20针），4（引脚19），5（引脚18）。<br>
+<br>
+<strong>注意事项</strong><br>
+<br>
+当中断函数发生时，delya()和millis()的数值将不会继续变化。当中断发生时，串口收到的数据可能会丢失。你应该声明一个变量来在未发生中断时储存变量。<br>
+<br>
+<strong>重新分配中断</strong><br>
+中断可以再任何时候通过attachInterrupt()命令进行改变。当重新使用attachInterrupt()时，先前分配的中断就会从对应引脚上移除。<br>
+<br>
+<strong>启用\停止中断</strong><br>
+Arduino也可以忽略所有中断。如果你需要在一段代码中不执行中断，只需要执行 noInterrupts()命令。当这段代码执行完以后，你可以使用 interrupts()命令重新启用中断。<br>
+<br>
+<strong>删除中断</strong><br>
+终端也可以通过detachInterrupt(interrupt_number)命令进行删除。 <br>
+</font></td></tr></tbody></table>
+
+
+</div>
+</div>
+
+</div></td></tr>
+
+</tbody></table>
+
+</div></body></html>
