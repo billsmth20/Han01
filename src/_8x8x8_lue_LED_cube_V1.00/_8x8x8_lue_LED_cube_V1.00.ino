@@ -103,7 +103,8 @@ void loop(void) {
     Rainning(32);
     //呼吸灯，延迟2，重复4
     LedBreath(2,4);
-
+    //旋转
+    LayerRotate(150);
 
 //    CubeAllOff();
 //    Rotate();

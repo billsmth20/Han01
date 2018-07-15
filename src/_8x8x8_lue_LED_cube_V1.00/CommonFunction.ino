@@ -73,13 +73,39 @@ void CubeLeftRight()
   }  
 }
 
+//Draw Layer X，Y，Z, if -1 no draw.
+void DrawXYZLayer(int8_t x, int8_t y, int8_t z){
+  if(x!=-1){
+    for (int8_t z=0; z<8; z++) {
+      for (int8_t y=0; y<8; y++) {
+        bitClear(cube[y][z], x);
+      }
+    }
+  }
+  if(y!=-1){
+    for (int8_t z=0; z<8; z++) {
+      for (int8_t x=0; x<8; x++) {
+        bitClear(cube[y][z], x);
+      }
+    }
+  }
+  if(z!=-1){
+    for (int8_t y=0; y<8; y++) {
+      for (int8_t x=0; x<8; x++) {
+        bitClear(cube[y][z], x);
+      }
+    }
+  }
+}
+
 void SetXPlane(int8_t x)
 {
   x = Wrap(x);
   int8_t xPattern = 1 << x;
   for (int8_t z=0; z<8; z++) {
     for (int8_t y=0; y<8; y++) {
-      cube[y][z] = xPattern;
+//      cube[y][z] = xPattern;
+      bitClear(cube[y][z], xPattern);
     }
   }
 }
