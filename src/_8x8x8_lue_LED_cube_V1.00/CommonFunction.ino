@@ -72,7 +72,24 @@ void CubeLeftRight()
     CubeAllOff();
   }  
 }
-
+//画线 X，Y，Z, 如果是 -1 则是在这个轴上画线.
+void DrawLine(int8_t x, int8_t y, int8_t z){
+  if(x==-1){
+    for (int8_t x=0; x<8; x++) {
+      bitClear(cube[y][z], x);
+    }
+  }
+  if(y==-1){
+    for (int8_t y=0; y<8; y++) {
+      bitClear(cube[y][z], x);
+    }
+  }
+  if(z==-1){
+    for (int8_t z=0; z<8; z++) {
+      bitClear(cube[y][z], x);
+    }
+  }
+}
 //Draw Layer X，Y，Z, if -1 no draw.
 void DrawXYZLayer(int8_t x, int8_t y, int8_t z){
   if(x!=-1){

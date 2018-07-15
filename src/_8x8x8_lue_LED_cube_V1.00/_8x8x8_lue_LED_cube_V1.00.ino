@@ -105,7 +105,9 @@ void loop(void) {
     LedBreath(2,4);
     //旋转
     LayerRotate(150);
-
+    //随机线，15条，间隔300毫秒
+    RandomLine(15,200);
+      
 //    CubeAllOff();
 //    Rotate();
 //    delay(1000);

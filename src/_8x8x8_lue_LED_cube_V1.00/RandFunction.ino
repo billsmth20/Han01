@@ -31,4 +31,19 @@ void RandomClearDot(int delaytime)
         delay(delaytime);
   }  
 }
+// 随机线，cnt:随机线条数，delayTime:间隔时间
+void RandomLine(int cnt, int delayTime){
+  int typeXYZ=0;
+  for(int i=0;i<cnt;i++){
+    typeXYZ=random(3);
+    if(typeXYZ==0){
+      DrawLine(-1,random(8),random(8));
+    }else if(typeXYZ==1){
+      DrawLine(random(8),-1,random(8));
+    }else if(typeXYZ==2){
+      DrawLine(random(8),random(8),-1);
+    }
+    delay(delayTime);
+  }
+}
 
