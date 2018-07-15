@@ -91,10 +91,6 @@ void TestPattern3()
 }
 
 void loop(void) {
-//  CubeAllOff();  delay(1000);
-//  CubeAllOn();  delay(1000);
-
-
     //随机闪烁
     RandomOnorOff(5);
     //显示盒子，延迟500
@@ -125,8 +121,7 @@ void loop(void) {
 //  BottomUp();  delay(1000);
 //  LeftRight();delay(1000);
 //  OneWall();  delay(1000);
-  CubeAllOn();  delay(1000);
-  delay(1000);
+//  CubeAllOn();  delay(1000);
 }
 void BottomUp()
 {
