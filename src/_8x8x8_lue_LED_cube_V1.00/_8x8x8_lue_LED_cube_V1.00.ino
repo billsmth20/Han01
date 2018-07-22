@@ -103,8 +103,12 @@ void loop(void) {
     LayerRotate(150);
     //随机线，15条，间隔300毫秒
     RandomLine(15,200);
+    //随机亮层，重复100次，间隔150毫秒
+    RandomLayer(100,200);
+    
+      delay(1000); 
+      CubeAllOff();
       
-//    CubeAllOff();
 //    Rotate();
 //    delay(1000);
 //  CubeAllOff();

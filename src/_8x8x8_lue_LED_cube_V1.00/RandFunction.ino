@@ -46,4 +46,21 @@ void RandomLine(int cnt, int delayTime){
     delay(delayTime);
   }
 }
+//随机亮层，repeat重复次数，interval间隔毫秒数
+void RandomLayer(int repeat, int interval){
+  int cnt=0;
+  for(int i=0;i<repeat;i++){
+    cnt=random(3);
+    switch(cnt){
+      case 0:
+        DrawXYZLayer(random(7),-1,-1);
+      case 1:
+        DrawXYZLayer(-1,random(7),-1);
+      case 2:
+        DrawXYZLayer(-1,-1,random(7));
+    }
+    delay(interval);
+    CubeAllOff();
+  }
+}
 
