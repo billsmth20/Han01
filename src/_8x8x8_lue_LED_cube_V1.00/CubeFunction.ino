@@ -99,3 +99,15 @@ void ShowCube(int delayTime){
   CubeAllOff();
   delay(delayTime);
 }
+// 从下到上，repitTime:重复次数，delayTime:延迟时间毫秒数,delay时间变化:毫秒数
+void Bottom2Up(int repitTime,int delayTime, int addTime){
+  for(int j=0;j<repitTime;j++){
+    CubeAllOff();
+    for(int i=0;i<8;i++){
+      DrawXYZLayer(i,-1,-1);
+      delay(delayTime);
+    }
+    delayTime=delayTime+addTime;
+  }
+  CubeAllOff();
+}
