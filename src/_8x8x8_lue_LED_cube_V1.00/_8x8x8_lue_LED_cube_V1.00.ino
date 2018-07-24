@@ -91,24 +91,24 @@ void TestPattern3()
 }
 
 void loop(void) {
-    //随机闪烁
-    RandomOnorOff(5);
-    //显示盒子，延迟500
-    ShowCube(500);
-    //下雨，雨滴数量：32
-    Rainning(32);
-    //呼吸灯，延迟2，重复4
-    LedBreath(2,4);
-    //旋转
-    LayerRotate(150);
-    //随机线，15条，间隔300毫秒
-    RandomLine(15,200);
-    //随机亮层，重复25次，间隔200毫秒
-    RandomLayer(25,200);
-    //从下到上，重复3次，延迟100毫秒,递增-25
-    Bottom2Up(3,150,-45);
-      
-      //cube[0][1]=0x0F;
+//    //随机闪烁
+//    RandomOnorOff(5);
+//    //显示盒子，延迟500
+//    ShowCube(500);
+//    //下雨，雨滴数量：32
+//    Rainning(32);
+//    //呼吸灯，延迟2，重复4
+//    LedBreath(2,4);
+//    //旋转
+//    LayerRotate(150);
+//    //随机线，15条，间隔300毫秒
+//    RandomLine(15,200);
+//    //随机亮层，重复25次，间隔200毫秒
+//    RandomLayer(25,200);
+//    //从下到上，重复3次，延迟100毫秒,递增-25
+//    Bottom2Up(3,150,-45);
+
+      Screen01();
       delay(1000); 
       CubeAllOff();
       
