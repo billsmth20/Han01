@@ -1,3 +1,4 @@
+int SCREEN_LENGTH = 28;
 volatile int8_t screen[28][3] = {
   {0, 7}, {0, 6}, {0, 5}, {0, 4}, {0, 3}, {0, 2}, {0, 1},
   {0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0},
@@ -17,31 +18,40 @@ int content_len;
 void Screen01() {
   int yy, zz, suby, subz;
   int m, o, p = 0, q;
-  content_len = 0; //sizeof(content)/sizeof(content[0]);
-  for (int n = 0; n < (28 + content_len); n++) {
+  content_len = sizeof(content) / sizeof(content[0]);
+  for (int n = 0; n <= SCREEN_LENGTH + content_len; n++) {
     o = n;
-    for (int i = 0; i < (28 + content_len); i++) {
+    for (int i = 0; i < SCREEN_LENGTH + content_len; i++) {
       yy = screen[i][0];
       zz = screen[i][1];
       cube[yy][zz] = 0xFF;
     }
 
-    if (o <= 5) {
+    if (o <= content_len) {
       p = 0;
-      for (; o > 0; o--) {
+      for (; o >= 0; o--) {
         yy = screen[o][0];
         zz = screen[o][1];
         cube[yy][zz] = content[p];
         p++;
       }
-    } else {
-      q = o - 5;
+    } else if (o <= SCREEN_LENGTH) {
+      q = o - content_len;
       p = 0;
       for (; o > q; o--) {
         yy = screen[o][0];
         zz = screen[o][1];
         cube[yy][zz] = content[p];
         p++;
+      }
+    } else {
+      o = o - content_len;
+      p = content_len - 1;
+      for (; o < SCREEN_LENGTH; o++) {
+        yy = screen[o][0];
+        zz = screen[o][1];
+        cube[yy][zz] = content[p];
+        p--;
       }
     }
     delay(100);
